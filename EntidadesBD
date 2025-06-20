@@ -1,6 +1,33 @@
-Clientes(CI(INT, PK, AUTO_INCREMENT), Nombre(VARCHAR(25), NOT NULL), Apellido(VARCHAR(25), NOT NULL), Teléfono(VARCHAR(18)), Contraseña(VARCHAR(25), NOT NULL), Fecha_Registro(DATE), Ultimo_Acceso(DATE), Activo(BOOLEAN);
-Organizador(ID(INT, PK, AUTO_INCREMENT), Verificado(BOOLEAN), Nombre(VARCHAR(25), NOT NULL), Apellido(VARCHAR(25),  NOT NULL), Teléfono(VARCHAR(18)), Contraseña(VARCHAR(25), NOT NULL), Num_Fiscal(VARCHAR(11));
-Evento(ID_Evento(INT, PK, AUTO_INCREMENT), Título(VARCHAR(50), NOT NULL), Descripción(VARCHAR(100), NOT NULL), Fecha_Inicio(DATETIME, NOT NULL), Fecha_Fin(DATETIME, NOT NULL),Ubicacion(VARCHAR(50), NOT NULL), Capacidad(INT, UNSIGNED, NOT NUL), Precio(INT, NOT NULL) Creado_Por(VARCHAR(25)), Estado(ENUM('borrador', 'pendiente', 'publicado', 'cancelado', 'completado') DEFAULT 'borrador', NOT NULL), Fecha_Creación(DATETIME DEFAULT CURRENT_TIMESTAMP);
-Administrador(ID_Administrador(INT, PK, AUTO_INCREMENT), Nombre(VARCHAR(25), NOT NULL), Apellido(VARCHAR(25), NOT NULL), Correo(VARCHAR(39), NOT NULL), Contraseña(VARCHAR(25), NOT NULL), Teléfono(VARCHAR(18), NOT NULL), Activo(BOOLEAN);
-Comentario(ID_Comentario(INT, PK, AUTO_INCREMENT),CI(FK),ID_Evento(FK), Texto(VARCHAR(100)), Valoracion(TINYINT CHECK(Valoracion BETWEEN 1 AND 5), Estado(ENUM('borrador', 'pendiente', 'publicado', 'cancelado', 'completado') DEFAULT 'borrador');
-Categoría(ID_Categoría(INT, PK, AUTO_INCREMENT), Nombre(VARCHAR(12), NOT NULL), Descripción(VARCHAR(100));
+CREATE TABLE Cliente(ID_Cliente int AUTO_INCREMENT PRIMARY KEY, Nombre VARCHAR(20) NOT NULL, Apellido VARCHAR(20) NOT NULL, Correo VARCHAR(50) NOT NULL, Contraseña VARCHAR(25) NOT NULL, Registro DATE);
+CREATE TABLE Administradores(ID_Administrador int AUTO_INCREMENT PRIMARY KEY, Teléfono VARCHAR(25), Activo boolean, Nombre VARCHAR(25) NOT NULL, Apellido VARCHAR(25) NOT NULL, Correo VARCHAR(50), Contraseña VARCHAR(35));
+CREATE TABLE Organizadores(Cédula VARCHAR(10) NOT NULL  PRIMARY KEY, RUT VARCHAR(15), Teléfono VARCHAR(20), ID_Cliente int);
+CREATE TABLE Eventos(ID_Evento int AUTO_INCREMENT PRIMARY KEY, Título VARCHAR(50) NOT NULL, Descripción VARCHAR(200) NOT NULL, Creacion_Evento DATE, Ubicacion VARCHAR(50), Cédula VARCHAR(10));
+CREATE TABLE Comentarios(ID_Comentario int AUTO_INCREMENT PRIMARY KEY, ID_Cliente int, ID_Evento int, Valoración TINYINT CHECK (Valoración BETWEEN 1 AND 10), Texto VARCHAR(250), Creación_Comentario DATE);
+CREATE TABLE Administra(Cédula VARCHAR(10), ID_Evento int, ID_Administrador int, Organizador_Verificado boolean, Evento_Verificado boolean);
+ALTER TABLE organizador ADD FOREIGN KEY(ID_Clientes) REFERENCES Clientes(ID_Clientes)
+ALTER TABLE comentarios ADD FOREIGN KEY(ID_Clientes) REFERENCES Clientes(ID_Clientes)
+ALTER TABLE administra ADD FOREIGN KEY(Cédula) REFERENCES organizadores(Cédula)
+ALTER TABLE administra ADD FOREIGN KEY(ID_Evento) REFERENCES eventos(ID_Evento)
+ALTER TABLE administra ADD FOREIGN KEY (ID_Administrador) Refere
+ALTER TABLE comentarios ADD FOREIGN KEY(ID_Organizadores) REFERENCES  organizadores(ID_Organizadores)
+ALTER TABLE eventos ADD FOREIGN KEY(Cédula) REFERENCES organizadores(Cédula)
+INSERT INTO Cliente (Nombre, Apellido, Correo, Contraseña, Registro) VALUES
+('Lucía', 'Pérez', 'lucia.perez@gmail.com', 'lucia123', '2025-06-01'),
+('Carlos', 'Gómez', 'carlos.gomez@gmail.com', 'carlos456', '2025-06-02');
+
+INSERT INTO Administradores (Teléfono, Activo, Nombre, Apellido, Correo, Contraseña) VALUES
+('099123456', true, 'Ana', 'López', 'ana.lopez@gmail.com', 'adminana'),
+('098987654', false, 'Jorge', 'Martínez', 'jorge.martinez@gmail.com', 'adminjorge');
+INSERT INTO Organizadores (Cédula, RUT, Teléfono, ID_Cliente) VALUES
+('12345678', '12345678901', '099111222', 1),
+('87654321', '98765432109', '098222111', 2);
+INSERT INTO Eventos (Título, Descripción, Creacion_Evento, Ubicacion, Cédula) VALUES
+('Feria de Artesanos', 'Evento cultural con productos locales.', '2025-06-10', 'Plaza Artigas', '12345678'),
+('Concierto de Rock', 'Banda local en vivo.', '2025-06-15', 'Teatro Larrañaga', '87654321');
+INSERT INTO Comentarios (ID_Cliente, ID_Evento, Valoración, Texto, Creación_Comentario) VALUES
+(1, 1, 8, 'Muy buen ambiente y productos.', '2025-06-11'),
+(2, 2, 9, 'Excelente sonido y organización.', '2025-06-16');
+INSERT INTO Administra (Cédula, ID_Evento, ID_Administrador, Organizador_Verificado, Evento_Verificado) VALUES
+('12345678', 1, 1, true, true),
+('87654321', 2, 2, false, true);
+

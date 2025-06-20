@@ -1,0 +1,40 @@
+body, html {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center; /* centra horizontalmente */
+    align-items: center;     /* centra verticalmente */
+    background-color: #f0f0f0;
+    background: -o-linear-gradient(left to right, gray, cyan, black);
+}
+
+.contenedor {
+    background: linear-gradient(to bottom, cyan, orange, red);
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, .5) ;
+    
+
+}
+
+.caja {
+    justify-items: center;
+    background-color: aquamarine;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px ;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, .5) ;
+
+}
+
+
+
+input {
+    
+    margin: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    box-sizing: 15px ;
+}

@@ -93,3 +93,33 @@ body {
 .wrapper .register-link p a:hover {
     text-decoration: underline;
   }
+
+@media (max-width: 768px) {
+  .contenedor {
+    width: 90%;
+    padding: 25px 20px;
+  }
+
+  .contenedor h1 {
+    font-size: 28px;
+  }
+
+  .caja input {
+    font-size: 14px;
+    padding: 18px 40px 18px 18px;
+  }
+
+  .caja i {
+    font-size: 18px;
+    right: 15px;
+  }
+
+  .contenedor .crear_cuenta {
+    font-size: 15px;
+    height: 42px;
+  }
+
+  .contenedor .registrar_link {
+    font-size: 13px;
+  }
+}

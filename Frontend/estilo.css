@@ -10,21 +10,25 @@
 body {
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background: url("https://images.unsplash.com/photo-1465101162946-4377e57745c3?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Zm9uZG8lMjBkZSUyMGVzdHJlbGxhfGVufDB8fDB8fHww") no-repeat;
   background-size: cover;
   background-position: center;
 }
 
+.imagen_register {
+  width: 65% ;
+  height: 641px ;
+  padding: 0;
+  margin: 0;
+}
+
 .contenedor {
-    width: 420px;
-    background-color: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    margin-left: auto ;
+    width: 35%;
+    height: 641px;
+    background-color: peru;
     backdrop-filter: blur(15px);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    padding: 30px 40px;
+    padding: 30px 90px;
   }
   
   .contenedor h1 {

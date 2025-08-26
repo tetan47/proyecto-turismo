@@ -4,11 +4,10 @@ $db = 'turismo'; // cambialo por el nombre correcto
 $user = 'root';
 $pass = ''; // contraseña vacía por defecto en XAMPP
 
-$conn = new mysqli($host, $user, $pass, $db);
+$conn = mysqli_connect($host, $user, $pass, $db);
 
-if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
+if (!$conn) {
+    die("Conexión fallida: " . mysqli_connect_error());
 }
 
-i
 ?>

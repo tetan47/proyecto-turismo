@@ -71,7 +71,9 @@
 
                 <div class="footer-comentarios">
                     <h4 class="responder">Responder</h4>
-                    <label class="cora">&#10084;</label>
+                    <label class="cora">&#10084;
+                        <div value="0">0</div>
+                    </label>
                 </div>
             
             
@@ -97,7 +99,10 @@
 
                 <div class="footer-comentarios-responder">
                     <h4 class="responder">Responder</h4>
-                    <label class="cora-responder">&#10084;</label>
+                    <label class="cora-responder">
+                        &#10084;
+                        <div value="0">0</div>
+                    </label>
                 </div>
             
             
@@ -123,7 +128,10 @@
 
                 <div class="footer-comentarios">
                     <h4 class="responder">Responder</h4>
-                    <label class="cora">&#10084;</label>
+                    <label class="cora">
+                        &#10084;
+                        <div value="0">0</div>
+                    </label>
                 </div>
             
             
@@ -170,6 +178,26 @@
             }
 
         })
+
+        //contador de likes
+        document.querySelectorAll('.cora, .cora-responder').forEach((label, idx) => {
+            const key = 'like_' + idx;
+            // Si ya dio like en esta sesión, marca el corazón
+            if (sessionStorage.getItem(key)) {
+            label.classList.add('liked');
+            }
+            label.addEventListener('click', function() {
+            if (sessionStorage.getItem(key)) return; // Solo 1 por sesión
+            const countDiv = this.querySelector('div');
+            let count = parseInt(countDiv.getAttribute('value'));
+            count++;
+            countDiv.setAttribute('value', count);
+            countDiv.textContent = count;
+            sessionStorage.setItem(key, '1');
+            this.classList.add('liked');
+            });
+        });
+
     </script>
    
 </body>

@@ -89,6 +89,9 @@ main h1 {
 
 
 .cora, .cora-responder {
+    display: flex; 
+    align-items: center; 
+    gap: 5px;
     color: #400683;
     font-size: 20px;
     cursor: pointer;

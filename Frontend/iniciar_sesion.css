@@ -16,7 +16,7 @@ body {
   overflow: hidden;
 }
 
-.imagen_register {
+.imagen_inicio_sesion {
   width: 65% ;
   height: 100vh ;
   padding: 0;
@@ -24,7 +24,7 @@ body {
 }
 
 .contenedor {
-    margin-right: auto ;
+    margin-left: auto ;
     width: 35%;
     height: 100vh;
     background: linear-gradient(rgb(105, 0, 167), rgb(15, 0, 36));
@@ -78,7 +78,7 @@ input:focus {
   box-shadow: 0 0 10px 2px rgba(0, 224, 206, 0.4);
 }
 
-.crear_cuenta {
+.iniciar_sesion {
     width: 100%;
     height: 45px;
     background: #fff;
@@ -102,7 +102,7 @@ input:focus {
   }
 
 .contenedor .registrar_link p a {
-    color: white;
+    color: #fff;
     text-decoration: none;
     font-weight: 600;
   }
@@ -150,13 +150,15 @@ button:hover {
   transform: scale(1.01);
   background-color:rgb(55, 0, 87);
   color: white;
+  animation: infinite,;
 }
+
 
 @media (max-width: 768px) {
   body {
     flex-direction: column;
   }
-  .imagen_register {
+  .imagen_inicio_sesion {
     width: 100%;
     height: 0;
   }
@@ -181,7 +183,7 @@ button:hover {
     right: 15px;
   }
 
-  .contenedor .crear_cuenta {
+  .contenedor .iniciar_sesion {
     font-size: 15px;
     height: 42px;
   }

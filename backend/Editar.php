@@ -7,7 +7,7 @@ $result = mysqli_query($conn, "SELECT * FROM clientes WHERE ID_Cliente = '$ID_Cl
 $usuario = mysqli_fetch_assoc($result);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $Nombre = myslqi_real_escape_string($conn, $_POST['Nombre']);
+    $Nombre = mysqli_real_escape_string($conn, $_POST['Nombre']);
     $Apellido = mysqli_real_escape_string($conn, $_POST['Apellido']);
     $Contraseña = mysqli_real_escape_string($conn, $_POST['Contraseña']);
     $Correo = mysqli_real_escape_string($conn, $_POST['Correo']);

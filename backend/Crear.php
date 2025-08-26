@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "INSERT INTO cliente (nombre, apellido, contraseña, correo) VALUES ('$nombre', '$apellido', '$contraseña', '$correo')";
         
         if (mysqli_query($conn, $sql)) {
-            echo "Registado con éxito";
+            echo "Registrado con éxito";
         } else {
             echo "Error: " . mysqli_error($conn);
         }

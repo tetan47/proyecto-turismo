@@ -8,7 +8,7 @@ ALTER TABLE organizador ADD FOREIGN KEY(ID_Clientes) REFERENCES Clientes(ID_Clie
 ALTER TABLE comentarios ADD FOREIGN KEY(ID_Clientes) REFERENCES Clientes(ID_Clientes)
 ALTER TABLE administra ADD FOREIGN KEY(Cédula) REFERENCES organizadores(Cédula)
 ALTER TABLE administra ADD FOREIGN KEY(ID_Evento) REFERENCES eventos(ID_Evento)
-ALTER TABLE administra ADD FOREIGN KEY (ID_Administrador) Refere
+ALTER TABLE administra ADD FOREIGN KEY (ID_Administrador) REFERENCES administradores(ID_Administrador)
 ALTER TABLE comentarios ADD FOREIGN KEY(ID_Organizadores) REFERENCES  organizadores(ID_Organizadores)
 ALTER TABLE eventos ADD FOREIGN KEY(Cédula) REFERENCES organizadores(Cédula)
 INSERT INTO Cliente (Nombre, Apellido, Correo, Contraseña, Registro) VALUES

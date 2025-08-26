@@ -7,9 +7,7 @@
 
 main{
     width: 100%;
-    max-width: 1200px;
-    margin-top: 20px;
-    margin: 60px;
+    padding: 20px;
 }
 
 main h1 {
@@ -19,6 +17,7 @@ main h1 {
 
 .linea {
     width: 100%;
+    text-align: center;
     height: 2px;
     border-style: none;
     background-color: #400683;
@@ -26,7 +25,7 @@ main h1 {
 
 .container-comentarios, .container-comentarios-responder {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     margin-top: 20px;
 }
@@ -186,7 +185,6 @@ textarea {
 
 @media (max-width: 1024px) {
   main {
-    margin: 20px;
     max-width: 100%;
   }
   .container-comentarios-responder {
@@ -195,9 +193,14 @@ textarea {
 }
 
 @media (max-width: 600px) {
+
+.evento-detalles{
+    grid-template-columns: 1fr;
+    max-width: 100%;
+}
+
   main {
-    margin: 5px;
-    padding: 0;
+    padding: 2px;
   }
   .container-comentarios,
   .container-comentarios-responder {
@@ -205,11 +208,13 @@ textarea {
     margin-left: 0;
     padding: 0 5px;
   }
+
   .comentarios,
   .comentarios-responder {
     flex-direction: column;
     align-items: flex-start;
   }
+
   .foto-perfil,
   .foto-perfil-responder {
     margin-right: 0;
@@ -220,4 +225,7 @@ textarea {
     width: 100%;
     padding: 10px;
   }
+
+
+
 }

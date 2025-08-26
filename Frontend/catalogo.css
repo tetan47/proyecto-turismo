@@ -68,6 +68,7 @@
   .evento img {
     max-width: 100%;
     border-radius: 6px;
+    height: auto;
   }
 
   .evento h3 {

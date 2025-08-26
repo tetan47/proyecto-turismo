@@ -17,11 +17,19 @@
         </div>    
         <h1>Visualizar Evento</h1>
         <div class="perfil">
-            <img src="https://cdn-icons-png.flaticon.com/512/6378/6378141.png">
-            <p>&nbsp;</p>
+            <img src="https://cdn-icons-png.flaticon.com/512/6378/6378141.png"> 
             <p>Usuario</p>
-            <p>&nbsp;</p>
-            <button type="button">Perfil</button>
+       
+            <div>
+                <button class="menu-btn">&#9776;</button>
+                <div class="menu">
+                    <a href="">Perfil</a>
+                    <a href="">Inicio</a>   
+                    <a href="">Configuración</a>
+                    <a href="">Cerrar Sesión</a>
+                    <a href="">Ayuda</a>
+                </div>    
+             </div>
         </div>
     </header>
 
@@ -152,6 +160,16 @@
           .then(data => {
             document.body.insertAdjacentHTML('beforeend', data);
           });
+        
+        document.querySelector('.menu-btn').addEventListener('click', function() {
+            const menu = document.querySelector(".menu"); 
+            if(menu.style.display === "flex") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "flex";
+            }
+
+        })
     </script>
    
 </body>

@@ -1,4 +1,4 @@
-  * {
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -10,27 +10,46 @@
   }
 
   nav {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    text-align: left;
-    margin: 5px;
-    margin-bottom: 20px;
+    width: 100%;
+    background: #fff;
+    padding: 20px 0 10px 0;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
 
   .busqueda-eventos {
     display: flex;
-    align-items: center;
-    margin-bottom: 20px;
+    flex-wrap: wrap;
     gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    background: transparent;
+    padding: 0 10px;
   }
 
-  .busqueda-eventos input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: text;
+  .busqueda-eventos input[type="text"],
+  .busqueda-eventos input[type="date"],
+  .busqueda-eventos input[type="time"],
+  .busqueda-eventos select {
+    width: auto;
+    min-width: 150px;
+    max-width: 200px;
+    flex: 1 1 150px;
+  }
+
+  .busqueda-eventos button {
+    padding: 8px 20px;
+    min-width: 120px;
+    background: #0097A7;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .busqueda-eventos button:hover {
+    background: #007c91;
   }
 
   #filtros {
@@ -52,9 +71,13 @@
   }
 
   .catalogo {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 10px 0 30px 0;
   }
 
   .evento {
@@ -66,7 +89,7 @@
   }
 
   .evento img {
-    max-width: 100%;
+    max-width: 250px;
     border-radius: 6px;
     height: auto;
   }
@@ -84,6 +107,19 @@
     .catalogo {
       grid-template-columns: repeat(2, 1fr);
     }
+
+    .busqueda-eventos {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+    .busqueda-eventos input,
+    .busqueda-eventos select,
+    .busqueda-eventos button {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
+    }
   }
 
   @media (max-width: 600px) {
@@ -98,5 +134,18 @@
 
     #filtros p {
       margin-bottom: 30px;
+    }
+
+    .busqueda-eventos {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+    .busqueda-eventos input,
+    .busqueda-eventos select,
+    .busqueda-eventos button {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
     }
   }

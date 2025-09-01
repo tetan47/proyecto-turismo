@@ -1,3 +1,5 @@
+<?php 
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,6 +13,7 @@
 </head>
 <body>
 
+    <!--HEADER-->
     <header>
         <div class="logo">
             <img id="logo123" src="../Images/Logo-que-viaje.png">
@@ -24,7 +27,7 @@
                 <button class="menu-btn">&#9776;</button>
                 <div class="menu">
                     <a href="">Perfil</a>
-                    <a href="">Inicio</a>   
+                    <a href="Index.php">Inicio</a>   
                     <a href="">Configuración</a>
                     <a href="">Cerrar Sesión</a>
                     <a href="">Ayuda</a>
@@ -32,6 +35,8 @@
              </div>
         </div>
     </header>
+
+    <!---INFO--->
 
     <section class="evento-detalles">
         <div class="imag-evento">
@@ -42,14 +47,15 @@
         </div>
         <div class="detalles-evento">
         <h2>Gran Apertura</h2>
-        <p><strong>Fecha:</strong> 25 de diciembre de 2025</p>
+        <p><strong>Fecha Inicio:</strong> 25 de diciembre de 2025</p>
+        <p><strong>Fecha Final</strong>27 de diciembre de 2025</p>
         <p><strong>Hora:</strong> 18:00 - 21:00</p>
         <p><strong>Lugar:</strong> Auditorio Principal, Ciudad</p>
         <p><strong>Categoría:</strong> Música</p>
         </div>
     </section>
 
-
+    <!---COMENTARIOS--->
     <main>
     <h1>Comentarios</h5>
     <hr class="linea">
@@ -71,8 +77,9 @@
 
                 <div class="footer-comentarios">
                     <h4 class="responder">Responder</h4>
-                    <label class="cora">&#10084;
-                        <div value="0">0</div>
+                    <label class="cora">
+                        &#10084;
+                        <div class="likes" value="0">0</div>
                     </label>
                 </div>
             
@@ -99,9 +106,9 @@
 
                 <div class="footer-comentarios-responder">
                     <h4 class="responder">Responder</h4>
-                    <label class="cora-responder">
+                    <label class="cora">
                         &#10084;
-                        <div value="0">0</div>
+                        <div class="likes" value="0">0</div>
                     </label>
                 </div>
             
@@ -130,7 +137,7 @@
                     <h4 class="responder">Responder</h4>
                     <label class="cora">
                         &#10084;
-                        <div value="0">0</div>
+                        <div class="likes" value="0">0</div>
                     </label>
                 </div>
             
@@ -140,6 +147,7 @@
     </div>
 </main>
 
+    <!--COMENTAR-->
 <div class="container-data">
     <div class="foto-input">
         <div class="perfil-foto">
@@ -163,41 +171,33 @@
 <div class="comentarios-lista"></div>
 
     <script>    
-        fetch('footer.html')
-          .then(response => response.text())
-          .then(data => {
-            document.body.insertAdjacentHTML('beforeend', data);
-          });
         
-        document.querySelector('.menu-btn').addEventListener('click', function() {
-            const menu = document.querySelector(".menu"); 
-            if(menu.style.display === "flex") {
-                menu.style.display = "none";
-            } else {
-                menu.style.display = "flex";
-            }
+     //LIKES
+        document.querySelectorAll('.cora').forEach((btnCorazon, indice) => {
+        const idComentario = 'comentario_' + indice;
+        const claveLikes = 'likes_' + idComentario;
+        const claveLikeado = 'likeado_' + idComentario;
+        const divLikes = btnCorazon.querySelector('.likes');
+        let cantidadLikes = parseInt(localStorage.getItem(claveLikes)) || 0;
+        let likeado = localStorage.getItem(claveLikeado) === '1';
 
-        })
+        divLikes.textContent = cantidadLikes;
+        if (likeado) btnCorazon.classList.add('liked');
 
-        //contador de likes
-        document.querySelectorAll('.cora, .cora-responder').forEach((label, idx) => {
-            const key = 'like_' + idx;
-            // Si ya dio like en esta sesión, marca el corazón
-            if (sessionStorage.getItem(key)) {
-            label.classList.add('liked');
-            }
-            label.addEventListener('click', function() {
-            if (sessionStorage.getItem(key)) return; // Solo 1 por sesión
-            const countDiv = this.querySelector('div');
-            let count = parseInt(countDiv.getAttribute('value'));
-            count++;
-            countDiv.setAttribute('value', count);
-            countDiv.textContent = count;
-            sessionStorage.setItem(key, '1');
-            this.classList.add('liked');
-            });
-        });
+        btnCorazon.onclick = () => {
+            likeado = !likeado;
+            btnCorazon.classList.toggle('liked', likeado);
+            cantidadLikes += likeado ? 1 : -1;
+            divLikes.textContent = cantidadLikes;
+            localStorage.setItem(claveLikes, cantidadLikes);
+            localStorage.setItem(claveLikeado, likeado ? '1' : '');
+        };
+    });
 
+    
+
+        
+        
     </script>
    
 </body>

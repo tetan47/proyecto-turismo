@@ -1,0 +1,34 @@
+<link rel="stylesheet" href="header.css">
+<header>
+        <div class="logo">
+            <img id="logo123" src="../Images/Logo-que-viaje.png">
+        </div>    
+        <h1>Visualizar Evento</h1>
+        <div class="perfil">
+            <img src="https://cdn-icons-png.flaticon.com/512/6378/6378141.png"> 
+            <p>Usuario</p>
+       
+            <div class="container-menu">
+                <button class="menu-btn">&#9776;</button>
+                <div class="menu">
+                    <a href="">Perfil</a>
+                    <a href="Index.php">Inicio</a>   
+                    <a href="">Configuración</a>
+                    <a href="">Cerrar Sesión</a>
+                    <a href="">Ayuda</a>
+                </div>    
+            </div>
+        </div>
+</header>
+
+<script>
+    document.querySelector('.menu-btn').addEventListener('click', function() {
+            const menu = document.querySelector(".menu"); 
+            if(menu.style.display === "grid") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "grid";
+            }
+
+        })
+</script>

@@ -1,8 +1,5 @@
 <?php
 session_start();
-
-// Si el usuario ya inició sesión
-$usuario = isset($_SESSION['usuario']) ? $_SESSION['usuario'] : null;
 ?>
 <!DOCTYPE html>
 <html lang="es">

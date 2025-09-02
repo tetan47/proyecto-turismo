@@ -5,8 +5,9 @@
         font-family: Arial, sans-serif;
     }
 
-    
-    
+    body {
+        background-color: cadetblue;
+    }
 
     .evento-detalles {
         padding: 20px;
@@ -17,13 +18,26 @@
         margin: auto;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         display: grid;
-        grid-template-columns: repeat(2,1fr);
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .detalles-evento {
+         justify-items: center;
+        text-align: center;
+        margin: 10px;
+        padding: 10px;
+    }
+
+    .detalles-evento p {
+        padding-bottom: 15px;
     }
 
     .imag-evento {
+        justify-items: center;
         text-align: center;
         margin: 10px;
     }
+
     .imagen {
         max-width: 100%;
         border: 4px solid #400683;
@@ -45,4 +59,13 @@
         background-color: #fff;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 1024px) {
+        .evento-detalles {
+            grid-template-columns: 1fr 1fr;
+            text-align: center;
+        }
+
+        
     }

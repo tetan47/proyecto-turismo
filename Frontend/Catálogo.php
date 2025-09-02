@@ -1,3 +1,5 @@
+<?php session_start(); ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -5,12 +7,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo de Eventos</title>
   <link rel="stylesheet" href="catalogo.css">
-  <link rel="stylesheet" href="header.css">
   <?php include ('../backend/conexion.php'); ?>
+
 </head>
 <body>
-  <?php include("header.html") ?>
-  
+  <?php include("header.php") ?>
+
+  <div class="contenedor_nav">
   <nav>
     <form id="form-filtros" class="busqueda-eventos" autocomplete="off">
       <input type="text" name="Busqueda" placeholder="Buscar eventos..." minlength="3">
@@ -32,6 +35,7 @@
       <button type="submit">Buscar</button>
     </form>
   </nav>
+  </div>
 
   <section class="catalogo" id="catalogo-eventos">
     <!-- Aquí se cargarán los eventos filtrados -->
@@ -40,7 +44,7 @@
   <?php include("footer.html") ?>
 
   <script>
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() { 
     const form = document.getElementById('form-filtros');
     const catalogo = document.getElementById('catalogo-eventos');
     const mostrarFiltros = document.getElementById('mostrar-filtros');

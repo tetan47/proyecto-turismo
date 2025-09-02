@@ -134,6 +134,7 @@ if ($evento_id > 0) {
 </body>
 </html>
 <?php
+
 // Si no se encuentra el evento mostrar...
     } else {
         echo "Evento no encontrado.";
@@ -141,7 +142,9 @@ if ($evento_id > 0) {
     $stmt->close();
 } else {
     echo "ID de evento no válido.";
-    
+    catch (Exception $e) {
+    echo "Error: " . $e->getMessage();
     $conn->close();
+}
 }
 ?>

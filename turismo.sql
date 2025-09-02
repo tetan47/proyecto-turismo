@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-08-2025 a las 00:23:53
+-- Tiempo de generación: 02-09-2025 a las 15:44:42
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -79,16 +79,17 @@ CREATE TABLE `cliente` (
   `Apellido` varchar(20) NOT NULL,
   `Correo` varchar(50) NOT NULL,
   `Contraseña` varchar(25) NOT NULL,
-  `Registro` date DEFAULT NULL
+  `Registro` date DEFAULT current_timestamp(),
+  `imag_perfil` varchar(255) DEFAULT 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`ID_Cliente`, `Nombre`, `Apellido`, `Correo`, `Contraseña`, `Registro`) VALUES
-(1, 'Lucía', 'Pérez', 'lucia.perez@gmail.com', 'lucia123', '2025-06-01'),
-(2, 'Carlos', 'Gómez', 'carlos.gomez@gmail.com', 'carlos456', '2025-06-02');
+INSERT INTO `cliente` (`ID_Cliente`, `Nombre`, `Apellido`, `Correo`, `Contraseña`, `Registro`, `imag_perfil`) VALUES
+(1, 'Lucía', 'Pérez', 'lucia.perez@gmail.com', 'lucia123', '2025-06-01', NULL),
+(2, 'Carlos', 'Gómez', 'carlos.gomez@gmail.com', 'carlos456', '2025-06-02', NULL);
 
 -- --------------------------------------------------------
 
@@ -124,19 +125,24 @@ CREATE TABLE `eventos` (
   `ID_Evento` int(11) NOT NULL,
   `Título` varchar(50) NOT NULL,
   `Descripción` varchar(200) NOT NULL,
-  `Creacion_Evento` date DEFAULT NULL,
+  `Creacion_Evento` date DEFAULT current_timestamp(),
   `Ubicacion` varchar(50) DEFAULT NULL,
   `Cédula` varchar(10) DEFAULT NULL,
-  `Hora` time DEFAULT NULL
+  `Hora` time DEFAULT NULL,
+  `imagen` varchar(255) NOT NULL DEFAULT 'https://upload.wikimedia.org/wikipedia/commons/0/0e/DefaultImage.png',
+  `categoria` varchar(25) DEFAULT NULL,
+  `Fecha_Inicio` date DEFAULT NULL,
+  `Fecha_Fin` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `eventos`
 --
 
-INSERT INTO `eventos` (`ID_Evento`, `Título`, `Descripción`, `Creacion_Evento`, `Ubicacion`, `Cédula`, `Hora`) VALUES
-(1, 'Feria de Artesanos', 'Evento cultural con productos locales.', '2025-06-10', 'Plaza Artigas', '12345678', NULL),
-(2, 'Concierto de Rock', 'Banda local en vivo.', '2025-06-15', 'Teatro Larrañaga', '87654321', NULL);
+INSERT INTO `eventos` (`ID_Evento`, `Título`, `Descripción`, `Creacion_Evento`, `Ubicacion`, `Cédula`, `Hora`, `imagen`, `categoria`, `Fecha_Inicio`, `Fecha_Fin`) VALUES
+(1, 'Feria de Artesanos', 'Evento cultural con productos locales.', '2025-06-10', 'Plaza Artigas', '12345678', '12:00:00', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQZeYDEJsUpT3ezV087qItQsAA6AK-5sRm4Q&s', 'Otros', '2025-08-30', NULL),
+(2, 'Concierto de Rock', 'Banda local en vivo.', '2025-06-15', 'Teatro Larrañaga', '87654321', '21:30:00', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzNOofyD4Mr6H45aMbkOV9nVoykLczluR1Pw&s', 'Música', '2026-01-02', NULL),
+(3, 'Fiesta de Aaron', 'Festejamos el cumple de Aaron', '2025-08-29', 'Casa de Aaron', '12345678', '00:00:00', 'https://upload.wikimedia.org/wikipedia/commons/0/0e/DefaultImage.png', 'Otros', '2025-09-10', NULL);
 
 -- --------------------------------------------------------
 
@@ -223,7 +229,7 @@ ALTER TABLE `administradores`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `ID_Cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_Cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `comentarios`
@@ -235,7 +241,7 @@ ALTER TABLE `comentarios`
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Restricciones para tablas volcadas

@@ -1,5 +1,6 @@
 <?php 
-include("Conexion.php");
+
+include('../Conexion.php');
 
 $busqueda = isset($_POST['Busqueda']) ? trim($_POST['Busqueda']) : '';
 $fecha = isset($_POST['Fecha_Inicio']) ? $_POST['Fecha_Inicio'] : '';

@@ -1,8 +1,11 @@
 <?php
 include('../backend/Conexion.php');
 
+session_start();
+
 // Obtener el ID del evento desde la URL
 $evento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
+$usuario_logueado = isset($_SESSION['ID_Cliente']);
 
 if ($evento_id > 0) {
     // Consultar el evento específico
@@ -64,30 +67,13 @@ if ($evento_id > 0) {
         
         <!-- Aquí irían los comentarios dinámicos (x cada evento) -->
         <div class="container-comentarios">
-            <div class="comentarios">
-                <div class="foto-perfil">
-                    <img src="https://cdn-icons-png.flaticon.com/512/6378/6378141.png">
-                </div>
-                <div class="info-comentarios">
-                    <div class="header">
-                        <h3>José Torres</h3>
-                        <h4>18/08/25</h4>
-                    </div>
-                    <p><strong>Creador:</strong> <?php echo htmlspecialchars($comentario['texto']); ?></p>
-                    <div class="footer-comentarios">
-                        <h4 class="responder">Responder</h4>
-                        <label class="cora">
-                            &#10084;
-                            <div class="likes" value="0">0</div>
-                        </label>
-                    </div>
-                </div>
-            </div>
+            
         </div>
     </main>
 
     <!--COMENTAR-->
-    <div class="container-data">
+    <div class="container-data">        
+    <?php if ($usuarioLogueado && $datosUsuario): ?>
         <div class="foto-input">
             <div class="perfil-foto">
                 <img id="img-perfil-usuario" src="https://cdn-icons-png.flaticon.com/512/6378/6378141.png" alt="Perfil">
@@ -103,12 +89,77 @@ if ($evento_id > 0) {
 
         <div class="mensaje" contenteditable="true" style="border:1px solid #ccc; min-height:60px; padding:10px; margin-top:10px;"></div>
         <button class="btn-comentar">Enviar</button>
+        </div>
+    <?php else: ?>
+        <div style="text-align : center; padding: 20px;">
+        <a href="Inicio_sesion.html" style="text-decoration: none; color: black;">Inicia Sesión para poder comentar</a>
+        </div>
+    <?php endif; ?>
     </div>
+    
+
+
 
     <?php include("footer.html") ?>
 
-    <script>    
-        //LIKES
+  <script>
+// Variable global para estado de login
+const usuarioLogueado = <?php echo $usuario_logueado ? 'true' : 'false'; ?>;
+
+function engancharLikes() {
+    document.querySelectorAll('.cora').forEach(cora => {
+        // Si no está logueado, prevenir acción de like
+        if (cora.classList.contains('disabled')) {
+            cora.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('Debes iniciar sesión para dar like');
+            });
+            return;
+        }
+
+        cora.addEventListener('click', () => {
+            const idComentario = cora.getAttribute('data-id');
+
+            fetch('../backend/Comentarios/like.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ idComentario: idComentario })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+                cora.querySelector('.likes').textContent = data.likes;
+                cora.classList.toggle('liked', data.liked);
+            })
+            .catch(err => console.error(err));
+        });
+    });
+}
+
+function cargarComentarios() {
+    fetch('../backend/Comentarios/listaCOM.php?id_evento=<?php echo $evento_id; ?>')
+        .then(res => res.text())
+        .then(html => {
+            document.querySelector('.container-comentarios').innerHTML = html;
+            engancharLikes();
+        });
+}
+
+document.addEventListener('DOMContentLoaded', cargarComentarios);
+
+// Formato de texto
+document.querySelectorAll('.formato-btn').forEach(boton => {
+    boton.addEventListener('click', () => {
+        const comando = boton.getAttribute('data-comando');
+        document.execCommand(comando, false, null);
+    });
+});
+
+    
+       /* //LIKES antiguo (localStorage)
         document.querySelectorAll('.cora').forEach((btnCorazon, indice) => {
             const idComentario = 'comentario_' + indice;
             const claveLikes = 'likes_' + idComentario;
@@ -128,7 +179,20 @@ if ($evento_id > 0) {
                 localStorage.setItem(claveLikes, cantidadLikes);
                 localStorage.setItem(claveLikeado, likeado ? '1' : '');
             };
+        });*/
+
+
+        //opciones de formato italicas, negritas, subrayado
+        document.querySelectorAll('.formato-btn').forEach(boton => {
+            boton.addEventListener('click', () => {
+                const comando = boton.getAttribute('data-comando');
+                document.execCommand(comando, false, null);
+            });
         });
+
+
+
+        
     </script>
    
 </body>
@@ -139,12 +203,16 @@ if ($evento_id > 0) {
     } else {
         echo "Evento no encontrado.";
     }
-    $stmt->close();
+    $stmt->close();    
 } else {
-    echo "ID de evento no válido.";
-    catch (Exception $e) {
-    echo "Error: " . $e->getMessage();
-    $conn->close();
-}
+    try {
+        // Aquí va tu lógica de código que podría lanzar una excepción
+        echo "ID de evento no válido.";
+    } catch (Exception $e) {
+        echo "Error: " . $e->getMessage();
+    } finally {
+        // Asegurándote de cerrar la conexión, sin importar si hubo un error o no
+        $conn->close();
+    }
 }
 ?>

@@ -1,41 +1,83 @@
-  * {
-    box-sizing: border-box;
+* {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
+    box-sizing: border-box;
   }
 
   body {
-    background-color: #666;
+    background-color:cadetblue;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+  main {
+    flex: 1;
+  }
+
+  .contenedor_nav {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
   }
 
   nav {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-    text-align: left;
-    margin: 5px;
-    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 85%;
+    background: #fff;
+    padding: 20px 0 10px 0;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
   }
+
+
 
   .busqueda-eventos {
     display: flex;
-    align-items: center;
-    margin-bottom: 20px;
     gap: 10px;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    padding: 0 10px;
   }
 
-  .busqueda-eventos input {
-    width: 100%;
-    padding: 8px;
+  .busqueda-eventos input[type="text"],
+  .busqueda-eventos input[type="date"],
+  .busqueda-eventos input[type="time"],
+  .busqueda-eventos select {
+    padding: 6px 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    cursor: text;
+    max-width: 200px;
+    gap: 10px;
+    transition: border-color 0.2s;
+    
+   
+  }
+
+
+  .busqueda-eventos button {
+    padding: 8px 20px;
+    min-width: 120px;
+    background: #0097A7;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .busqueda-eventos button:hover {
+    background: #007c91;
   }
 
   #filtros {
     display: none;
-    margin-bottom: 20px;
   }
 
   #filtros p {
@@ -52,12 +94,17 @@
   }
 
   .catalogo {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
+    justify-content: center;
+    padding: 10px 0 30px 0;
   }
 
   .evento {
+    display: grid;
+    grid-template-rows: 1fr auto;
     background-color: #f5f5f5;
     padding: 15px;
     border-radius: 8px;
@@ -66,7 +113,7 @@
   }
 
   .evento img {
-    max-width: 100%;
+    max-width: 250px;
     border-radius: 6px;
     height: auto;
   }
@@ -76,13 +123,84 @@
   }
 
   .evento p {
-    color: #666;
+    color: #555;
     font-size: 14px;
   }
+
+  .info-evento {
+    margin-top: auto;
+    padding: 10px 0;
+    
+  }
+
+  .img-evento {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+.boton-ver-detalles {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #0097A7;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.boton-ver-detalles:hover {
+    background-color: #0097A7;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.boton-volver {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #6c757d;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            border: 2px solid #6c757d;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+        }
+        
+.boton-volver:hover {
+            background-color: #545b62;
+            border-color: #545b62;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(108, 117, 125, 0.3);
+}
+
+ 
+
 
   @media (max-width: 1024px) {
     .catalogo {
       grid-template-columns: repeat(2, 1fr);
+    }
+
+    .busqueda-eventos {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+    .busqueda-eventos input,
+    .busqueda-eventos select,
+    .busqueda-eventos button {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
     }
   }
 
@@ -98,5 +216,18 @@
 
     #filtros p {
       margin-bottom: 30px;
+    }
+
+    .busqueda-eventos {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+    .busqueda-eventos input,
+    .busqueda-eventos select,
+    .busqueda-eventos button {
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
     }
   }

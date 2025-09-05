@@ -1,0 +1,148 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #0ea7ee 60%, #f7b42c 100%);
+    margin: 0;
+    min-height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+    margin-top: 32px;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.grid-eventos {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 32px;
+    max-width: 950px;
+    margin: 40px auto;
+    background: rgba(255,255,255,0.95);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px rgba(14,167,238,0.15), 0 2px 8px rgba(247,180,44,0.10);
+    padding: 36px 28px;
+}
+
+.evento {
+    border-bottom: 2px solid #0ea7ee33;
+    padding-bottom: 22px;
+    margin-bottom: 22px;
+    transition: background 0.2s;
+}
+
+.evento:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.evento-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #0ea7ee;
+    font-weight: bold;
+    transition: color 0.2s;
+}
+
+.evento-header:hover {
+    color: #f7b42c;
+}
+
+.flecha {
+    font-size: 1.7rem;
+    margin-right: 14px;
+    color: #f7b42c;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.evento-info {
+    display: none;
+    margin-top: 12px;
+    background: linear-gradient(90deg, #e3f6fd 70%, #fffbe6 100%);
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(14,167,238,0.07);
+    color: #333;
+}
+
+.evento-info a {
+    color: #0ea7ee;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.botones {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+    margin-top: 14px;
+}
+
+.botones button {
+    padding: 10px 22px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.08rem;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(14,167,238,0.10);
+    transition: background 0.2s, color 0.2s;
+}
+
+.validar {
+    background: linear-gradient(90deg, #0ea7ee 70%, #4CAF50 100%);
+    color: #fff;
+}
+
+.validar:hover {
+    background: linear-gradient(90deg, #4CAF50 70%, #0ea7ee 100%);
+}
+
+.descartar {
+    background: linear-gradient(90deg, #e53935 70%, #f7b42c 100%);
+    color: #fff;
+}
+
+.descartar:hover {
+    background: linear-gradient(90deg, #f7b42c 70%, #e53935 100%);
+}
+
+.razon {
+    width: 100%;
+    padding: 9px;
+    border-radius: 8px;
+    border: 1.5px solid #0ea7ee88;
+    margin-top: 8px;
+    font-size: 1rem;
+    background: #e3f6fd;
+    transition: border-color 0.2s;
+}
+
+.razon:focus {
+    border-color: #f7b42c;
+    outline: none;
+}
+
+.mensaje {
+    color: #e53935;
+    font-size: 1rem;
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+@media (max-width: 700px) {
+    .grid-eventos {
+        grid-template-columns: 1fr;
+        gap: 0;
+        padding: 16px 6px;
+    }
+    h1 {
+        font-size: 2rem;
+    }
+}

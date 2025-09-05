@@ -1,0 +1,49 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.formulario {
+    width: 70%;
+    height: 150vh;
+    background: rgba(245, 245, 245, 0.8);
+    border: 2px solid rgba(28, 28, 28, 0.1);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 40px;
+    display: flex;
+    margin: auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 50px;
+}
+
+h1 {
+    margin-bottom: 50px;
+    margin-top: 0;
+    color: #1C1C1C;
+}
+
+input, textarea, select {
+    width: 95%;
+    outline: none;
+    padding: 10px;
+}
+
+button {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 2px 0 30px;
+    gap: 10px;
+    width: 15%;
+    margin: auto;
+}
+
+#titulo {
+    width: 50%;
+}

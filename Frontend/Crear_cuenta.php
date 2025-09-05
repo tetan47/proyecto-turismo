@@ -33,7 +33,7 @@
         <button type="submit" class="crear_cuenta">Crear Cuenta</button>
       </form>
       <div class="registrar_link">
-        <p>¿Ya tienes una cuenta? <a href="Inicio_sesion.html">Inicia sesión</a></p>
+        <p>¿Ya tienes una cuenta? <a href="Inicio_sesion.php">Inicia sesión</a></p>
       </div>
       <div class="separador">
         <hr><span>O</span><hr>

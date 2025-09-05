@@ -1,0 +1,28 @@
+body{
+    background-color: #a7a7a7;
+    color: #1C1C1C;
+}
+
+input, textarea, select {
+    background: #F5F5F5;
+    border: 2px solid rgba(28, 28, 28, 0.2);
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+button {
+    background: #2979FF;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
+    background-color: #1C1C1C;
+    color: #FFFFFF;
+}

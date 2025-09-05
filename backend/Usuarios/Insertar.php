@@ -28,7 +28,7 @@ if (!filter_var($correo, FILTER_VALIDATE_EMAIL) || empty($correo)) { // Validar 
     exit;
 }
 
-if (strlen($contraseña) < 8 || empty($contraseña)) { // Validar que la contraseña tenga al menos 6 caracteres
+if (strlen($contraseña) < 8 || empty($contraseña)) { // Validar que la contraseña tenga al menos 8 caracteres
     echo "Contraseña inválida. Debe tener al menos 8 caracteres. Serás redirigido en 5 segundos...";
     header("Refresh: 5; URL=../Frontend/crear_cuenta.php");
     exit;

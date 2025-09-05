@@ -101,16 +101,9 @@ $conn->close();
             
         <?php else: ?>
             <!-- Anónimo (NO logueado) -->
-            <img src="https://cdn-icons-png.flaticon.com/512/3177/3177440.png" alt="Invitado"> 
-            <p>Anónimo</p>
-            
             <div class="container-menu">
-                <button class="menu-btn">&#9776;</button>
-                <div class="menu">
-                    <a href="Inicio_sesion.html"> Iniciar Sesión</a> <!-- SI -->
-                    <a href="crear_cuenta.html"> Crear Cuenta</a> <!-- SI -->
-                    <a href="ayuda.php"> Ayuda</a>
-                </div>    
+                    <a class="btn-inicio-sesion" href="Inicio_sesion.php"> Iniciar Sesión</a>
+                    <a class="btn-registrarse" href="crear_cuenta.php">Registrarse</a>
             </div>
         <?php endif; ?>
     </div>
@@ -129,7 +122,7 @@ $conn->close();
 
     function cerrarSesion() {
         if (confirm("¿Estás seguro de que deseas cerrar sesión?")) {
-            window.location.href = '../backend/cerrar_sesion.php';
+            window.location.href = '../backend/Usuarios/cerrar_sesion.php';
         }
     } 
 </script>   

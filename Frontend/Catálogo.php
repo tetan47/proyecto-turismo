@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Catálogo de Eventos</title>
   <link rel="stylesheet" href="catalogo.css">
-  <?php include ('../backend/conexion.php'); ?>
+  <?php include ('../backend/Conexion.php'); ?>
 
 </head>
 <body>
@@ -57,7 +57,7 @@
 
     function cargarEventos() {
       const datos = new FormData(form);
-      fetch('../backend/Filtrar.php', {
+      fetch("../backend/eventos/Filtrar.php", {
         method: 'POST',
         body: datos
       })

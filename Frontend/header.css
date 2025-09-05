@@ -1,4 +1,5 @@
 header {
+    max-height: 20VH;
     background-color: #02b3c7;
     color: white;
     padding: 10px 20px;
@@ -6,7 +7,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: relative; 
+    position: relative;
 }
 
 h1 {
@@ -15,28 +16,27 @@ h1 {
     text-align: center;
 }
 
-#logo123 {
-    width: 100%;
-    height: auto;
-    max-width: 150px;
-}
-
 .logo {
     display: flex;
     align-items: center;
-    width: 150px;
+
+}
+
+#logo123 {
+    width: 60px;
+    height: auto;
 }
 
 .perfil {
     display: flex;
     align-items: center;
     gap: 15px;
-    position: relative; 
+    position: relative;
 }
 
 .perfil img {
-    height: 60px;
-    width: 60px;
+    height: 40px;
+    width: auto;
     border-radius: 50%;
     background: #fff;
     object-fit: cover;
@@ -48,10 +48,12 @@ h1 {
 }
 
 .container-menu {
+    flex-direction: row;
     position: relative;
 }
 
 .menu-btn {
+    width:  30px;
     font-size: 24px;
     cursor: pointer;
     background: none;
@@ -75,7 +77,7 @@ h1 {
 
 .menu a, .btn-cerrar {
     color: white;
-    background:none;
+    background: none;
     border: none;
     cursor: pointer;
     text-decoration: none;
@@ -90,3 +92,36 @@ h1 {
     border-radius: 4px;
 }
 
+a {
+    text-decoration: none;
+    color: white;
+}
+
+
+.btn-inicio-sesion {
+    color: #000;
+    font-size: 17px;
+    cursor: pointer;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.btn-inicio-sesion:hover {
+    text-decoration: underline;
+}
+
+.btn-registrarse {
+    background: #fff;
+    border: 1.5px solid #0078d4;
+    color: #0078d4;
+    font-size: 17px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.btn-registrarse:hover {
+    background: #0078d4;
+    color: #fff;
+}

@@ -1,15 +1,15 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, sans-serif;
 }
 
-main{
-    background-color: aliceblue ;
+main {
+    background-color: aliceblue;
     width: 100%;
     padding: 20px;
-    margin: 30px 0px 30px 0px;
+    margin: 30px 0;
 }
 
 main h1 {
@@ -19,55 +19,67 @@ main h1 {
 
 .linea {
     width: 100%;
-    text-align: center;
     height: 2px;
-    border-style: none;
+    border: none;
     background-color: #400683;
 }
 
-.container-comentarios, .container-comentarios-responder {
+
+.container-comentarios, 
+.container-comentarios-responder {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
+    align-items: flex-start;
 }
 
 .container-comentarios-responder {
     margin-left: 100px;
 }
 
-.comentarios, .comentarios-responder {
-    display: flex;
-}
 
-.foto-perfil{
-    max-width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    margin-right: 20px;
-    border: 2px solid #400683;
-}
-
-.foto-perfil-responder{
-    max-width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    margin-right: 20px;
-    border: 2px solid #400683;
-}
-
-.foto-perfil img{
+.comentarios,
+.comentarios-responder {
+    display: flex;              
+    align-items: flex-start;
     width: 100%;
-    height: auto;
+    padding: 20px;
+    border-bottom: 2px solid #ddd;
+    gap: 20px;
 }
 
-.info-comentarios, .info-comentarios-responder {
+.foto-perfil,
+.foto-perfil-responder {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-right: 20px;
+    border: 2px solid #400683;
+    overflow: hidden;
+    flex-shrink: 0; 
+}
+
+.foto-perfil img,
+.foto-perfil-responder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.info-comentarios,
+.info-comentarios-responder {
     display: flex;
     flex-direction: column;
     background: #e7e7e7;
+    padding: 20px;
+    flex: 1; 
 }
 
-.info-comentarios .header, .info-comentarios-responder .header {
+.info-comentarios .header,
+.info-comentarios-responder .header {
     display: flex;
     justify-content: space-between;
     padding: 10px;
@@ -75,22 +87,18 @@ main h1 {
     color: white;
 }
 
-.info-comentarios, .info-comentarios-responder {
-    padding: 20px;
-    
-}
-
-.footer-comentarios, .footer-comentarios-responder {
+.footer-comentarios,
+.footer-comentarios-responder {
     width: 100%;
     padding: 10px;
     display: flex;
-    color: #504e4e;
-    display: flex;
     justify-content: space-between;
+    color: #504e4e;
 }
 
 
-.cora, .cora-responder {
+.cora, 
+.cora-responder {
     display: flex; 
     align-items: center; 
     gap: 5px;
@@ -100,13 +108,12 @@ main h1 {
     transition: color 0.3s ease;
 }
 
-.cora:hover, .cora-responder:hover {
+.cora:hover, 
+.cora-responder:hover {
     color: #6a0dad;
     cursor: pointer;
 }
- 
 
-/*contenedor para comentarios*/
 
 .container-data {
     position: relative;
@@ -114,63 +121,38 @@ main h1 {
     padding: 20px;
 }
 
-.foto-input{
+.foto-input {
     display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.perfil-foto{
-    max-width: 60px;
+.perfil-foto img {
+    width: 60px;
     height: 60px;
     border-radius: 50%;
-    margin-right: 20px;
     border: 2px solid #400683;
+    object-fit: cover;
 }
 
-.perfil-foto img{
-    
-    width: 100%;
-    height: auto;
+#nombre-usuario {
+    font-weight: bold;
+    color: #400683;
 }
 
-.foto-input input{
-    display: flex;
-    width: 100%;
-    height: 20px;
-    padding: 8px;
-    background:none;
-    border-style: none;
-    outline: 0px;
-    border-bottom: 2px solid #400683;
-    margin-top: 50px;
-    margin-left: 20px;
-    font-size: 16px;
 
-}
-
-textarea {
+.mensaje {
     width: 100%;
-    min-height: 100px;
-    padding: 10px;
-    border-radius: 8px;
-    border: 2px solid #4a0c92;
-    resize: none;
-    margin-top: 10px;
-    font-size: 16px;
-}
-
-.mensaje{
-    width: 100%;
-    max-width: 100%;
-    min-width: 100%;
-    max-height: 300px;
     min-height: 100px;
     margin-top: 20px;
     padding: 20px;
     font-size: 16px;
+    border: 2px solid #4a0c92;
+    border-radius: 8px;
+    resize: none;
 }
 
 .btn-comentario {
-    position: absolute;
     background-color: #400683;
     color: white;
     padding: 10px 20px;
@@ -181,56 +163,33 @@ textarea {
     transition: background-color 0.3s ease;
 }
 
-#nombre-usuario {
-    margin: auto;
-    width: 100%;
-    font-weight: bold;
-    color: #400683;
+.btn-comentario:hover {
+    background-color: #6a0dad;
 }
 
+
 @media (max-width: 1024px) {
-  main {
-    max-width: 100%;
-  }
-  .container-comentarios-responder {
-    margin-left: 40px;
-  }
+    .container-comentarios-responder {
+        margin-left: 40px;
+    }
 }
 
 @media (max-width: 600px) {
+    .comentarios,
+    .comentarios-responder {
+        flex-direction: column; 
+        align-items: flex-start;
+    }
 
-.evento-detalles{
-    grid-template-columns: 1fr;
-    max-width: 100%;
-}
+    .foto-perfil,
+    .foto-perfil-responder {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
 
-  main {
-    padding: 2px;
-  }
-  .container-comentarios,
-  .container-comentarios-responder {
-    margin-top: 10px;
-    margin-left: 0;
-    padding: 0 5px;
-  }
-
-  .comentarios,
-  .comentarios-responder {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .foto-perfil,
-  .foto-perfil-responder {
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
-  .info-comentarios,
-  .info-comentarios-responder {
-    width: 100%;
-    padding: 10px;
-  }
-
-
-
+    .info-comentarios,
+    .info-comentarios-responder {
+        width: 100%;
+        padding: 10px;
+    }
 }

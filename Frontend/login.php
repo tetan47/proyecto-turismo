@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="css/login.css">
     <title>iniciar sesion</title>
 </head>
 <body>
 
     <div class="contenedor">
-      <form method="post" action="index.php">
       <h1>iniciar sesion</h1>
+  
+      <form method="post" action="index.php">
       
       <?php
-        include("Conexion.php");
+        include("../backend/Conexion.php");
         include("controlador_login.php");
       ?>
 
@@ -28,7 +29,7 @@
         <button type="submit" class="iniciar_sesion">iniciar sesion</button>
       </form>
       <div class="registrar_link">
-        <p>¿No tienes una cuenta? <a href="Crear_cuenta.html">Registrarse</a></p>
+        <p>¿No tienes una cuenta? <a href="register.php">Registrarse</a></p>
       </div>
       <div class="separador">
         <hr><span>O</span><hr>

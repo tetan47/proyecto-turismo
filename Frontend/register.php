@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/Crear_cuenta.css">
+    <link rel="stylesheet" href="css/register.css">
     <title>Crear_cuenta</title>
 </head>
 <body>
@@ -33,7 +33,7 @@
         <button type="submit" class="crear_cuenta">Crear Cuenta</button>
       </form>
       <div class="registrar_link">
-        <p>¿Ya tienes una cuenta? <a href="Inicio_sesion.html">Inicia sesión</a></p>
+        <p>¿Ya tienes una cuenta? <a href="login.php">Inicia sesión</a></p>
       </div>
       <div class="separador">
         <hr><span>O</span><hr>

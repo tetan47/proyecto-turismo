@@ -1,7 +1,7 @@
 <?php
 include 'conexion.php';
 
-$result = myslql_query($conn, "SELECT * FROM cliente");
+$result = mysqli_query($conn, "SELECT * FROM cliente");
 ?>
 
 <h2>Lista de Usuarios</h2>

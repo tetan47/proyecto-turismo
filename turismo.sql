@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-09-2025 a las 15:44:42
+-- Tiempo de generación: 05-09-2025 a las 17:09:32
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -80,16 +80,17 @@ CREATE TABLE `cliente` (
   `Correo` varchar(50) NOT NULL,
   `Contraseña` varchar(25) NOT NULL,
   `Registro` date DEFAULT current_timestamp(),
-  `imag_perfil` varchar(255) DEFAULT 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png'
+  `imag_perfil` varchar(255) DEFAULT 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png',
+  `bloquear` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`ID_Cliente`, `Nombre`, `Apellido`, `Correo`, `Contraseña`, `Registro`, `imag_perfil`) VALUES
-(1, 'Lucía', 'Pérez', 'lucia.perez@gmail.com', 'lucia123', '2025-06-01', NULL),
-(2, 'Carlos', 'Gómez', 'carlos.gomez@gmail.com', 'carlos456', '2025-06-02', NULL);
+INSERT INTO `cliente` (`ID_Cliente`, `Nombre`, `Apellido`, `Correo`, `Contraseña`, `Registro`, `imag_perfil`, `bloquear`) VALUES
+(1, 'Lucía', 'Pérez', 'lucia.perez@gmail.com', 'lucia123', '2025-06-01', 'https://images.pexels.com/photos/29026195/pexels-photo-29026195/free-photo-of-mujer-serena-relajandose-junto-al-rio.jpeg', 0),
+(2, 'Carlos', 'Gómez', 'carlos.gomez@gmail.com', 'carlos456', '2025-06-02', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -99,21 +100,27 @@ INSERT INTO `cliente` (`ID_Cliente`, `Nombre`, `Apellido`, `Correo`, `Contraseñ
 
 CREATE TABLE `comentarios` (
   `ID_Comentario` int(11) NOT NULL,
-  `ID_Cliente` int(11) DEFAULT NULL,
+  `ID_Cliente` int(11) NOT NULL,
   `ID_Evento` int(11) DEFAULT NULL,
-  `Valoración` tinyint(4) DEFAULT NULL CHECK (`Valoración` between 1 and 10),
+  `LIKES` int(4) DEFAULT 0,
   `Texto` varchar(250) DEFAULT NULL,
-  `Creación_Comentario` date DEFAULT NULL,
-  `Cédula` varchar(10) DEFAULT NULL
+  `Creación_Comentario` datetime DEFAULT current_timestamp(),
+  `Cédula` varchar(10) DEFAULT NULL,
+  `comentario_responder` text NOT NULL,
+  `usuarios_like` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `comentarios`
 --
 
-INSERT INTO `comentarios` (`ID_Comentario`, `ID_Cliente`, `ID_Evento`, `Valoración`, `Texto`, `Creación_Comentario`, `Cédula`) VALUES
-(1, 1, 1, 8, 'Muy buen ambiente y productos.', '2025-06-11', NULL),
-(2, 2, 2, 9, 'Excelente sonido y organización.', '2025-06-16', NULL);
+INSERT INTO `comentarios` (`ID_Comentario`, `ID_Cliente`, `ID_Evento`, `LIKES`, `Texto`, `Creación_Comentario`, `Cédula`, `comentario_responder`, `usuarios_like`) VALUES
+(1, 1, 1, 12, 'Muy buen ambiente y productos.', '2025-06-11 00:00:00', NULL, '', NULL),
+(2, 2, 2, 9, 'Excelente sonido y organización.', '2025-06-16 00:00:00', NULL, '', NULL),
+(3, 2, 1, 9, 'Muy limpio y ordenado', '2025-09-27 00:00:00', NULL, '', NULL),
+(6, 1, 5, NULL, 'Primer comentario', '2025-09-03 19:27:06', NULL, '', NULL),
+(8, 1, 5, NULL, 'Primer comentario', '2025-09-03 19:29:14', NULL, '', NULL),
+(9, 1, 5, NULL, 'Segundo comentario', '2025-09-03 19:29:14', NULL, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -195,10 +202,10 @@ ALTER TABLE `cliente`
 --
 ALTER TABLE `comentarios`
   ADD PRIMARY KEY (`ID_Comentario`),
-  ADD UNIQUE KEY `ID_Evento` (`ID_Evento`),
   ADD KEY `ID_Cliente` (`ID_Cliente`),
   ADD KEY `Cédula` (`Cédula`),
-  ADD KEY `ID_Evento_2` (`ID_Evento`);
+  ADD KEY `ID_Evento_2` (`ID_Evento`),
+  ADD KEY `idx_evento` (`ID_Evento`);
 
 --
 -- Indices de la tabla `eventos`
@@ -235,7 +242,7 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `ID_Comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID_Comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `eventos`

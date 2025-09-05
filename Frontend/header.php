@@ -122,7 +122,7 @@ $conn->close();
 
     function cerrarSesion() {
         if (confirm("¿Estás seguro de que deseas cerrar sesión?")) {
-            window.location.href = '../backend/cerrar_sesion.php';
+            window.location.href = '../backend/Usuarios/cerrar_sesion.php';
         }
     } 
 </script>   

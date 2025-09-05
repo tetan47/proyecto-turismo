@@ -190,6 +190,11 @@ document.querySelectorAll('.formato-btn').forEach(boton => {
             });
         });
 
+        document.querySelectorAll('.btn-comentar').forEach(boton => {
+        boton.addEventListener('click', () => {
+                fetch('../backend/Comentarios/Comentar.php?id_evento=<?php echo $evento_id; ?>')
+            })
+        })
 
 
         

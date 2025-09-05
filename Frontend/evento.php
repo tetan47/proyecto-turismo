@@ -65,10 +65,10 @@ if ($evento_id > 0) {
     <div class="container-data">
         <?php if ($usuario_logueado): ?>
             <div class="foto-input">
-                <div class="perfil-foto">
-                    <img id="img-perfil-usuario" src="https://cdn-icons-png.flaticon.com/512/6378/6378141.png" alt="Perfil">
-                </div>
-                <span id="nombre-usuario">Usuario</span>
+                <div class="perfil-foto"> 
+                <img src="<?php echo !empty($datosUsuario['imag_perfil']) ? $datosUsuario['imag_perfil'] : 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png'; ?>">
+            </div>
+                <span id="nombre-usuario"><?php echo htmlspecialchars($datosUsuario['Nombre']); ?>"</span>
             </div>
 
             <div class="formato-toolbar">
@@ -79,16 +79,17 @@ if ($evento_id > 0) {
 
             <textarea id="texto-comentario" style="width:100%; border:1px solid #ccc; min-height:60px; padding:10px; margin-top:10px;"></textarea>
             <button id="btn-comentar" data-evento="<?php echo $evento_id; ?>">Enviar</button>
+
         <?php else: ?>
             <div style="text-align:center; padding: 20px;">
-                <a href="Inicio_sesion.html" style="text-decoration: none; color: black;">Inicia Sesión para poder comentar</a>
+                <a href="Inicio_sesion.php" style="text-decoration: none; color: black;">Inicia Sesión para poder comentar</a>
             </div>
         <?php endif; ?>
     </div>
 
     <?php include("footer.html") ?>
 
-    <script>
+<script>
     // Enganchar likes
     function engancharLikes() {
         document.querySelectorAll('.cora').forEach(cora => {

@@ -2,23 +2,21 @@
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    /* Elimina bottom: 0 de aquí */
 }
 
 body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding-bottom: 0; /* Elimina este padding */
+    padding-bottom: 0;
 }
 
 footer {
     background-color: rgb(12, 11, 11) !important;
     text-align: center;
-    padding: 20px 0; /* Añade padding */
+    padding: 20px 0;
     width: 100%;
-    margin-top: auto; /* Esto empuja el footer abajo */
-    /* ELIMINA position: fixed y height: 0px */
+    margin-top: auto;
 }
 
 .social {

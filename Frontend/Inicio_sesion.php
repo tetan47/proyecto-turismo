@@ -24,7 +24,7 @@
         <button type="submit" class="iniciar_sesion">iniciar sesion</button>
       </form>
       <div class="registrar_link">
-        <p>¿No tienes una cuenta? <a href="Crear_cuenta.html">Registrarse</a></p>
+        <p>¿No tienes una cuenta? <a href="Crear_cuenta.php">Registrarse</a></p>
       </div>
       <div class="separador">
         <hr><span>O</span><hr>

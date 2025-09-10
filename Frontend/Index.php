@@ -11,61 +11,31 @@
 <body>
 
   <!-- HEADER -->
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
   <?php
     include('header.php');
   ?>
-  <header>
-    <div class="logo">
-      <img src="../Images/Logo-que-viaje.png" alt="Logo Qué Viaje">
-    </div>
-    <nav>
-      <select class="idioma">
-        <option>ES</option>
-        <option>EN</option>
-        <option>PR</option> 
-      </select>
-      <a href="#" class="perfil"><i class="fas fa-user"></i> Perfil</a>
-    </nav>
-  </header>
-=======
-  <?php include ("header.php") ?>
->>>>>>> Stashed changes
-=======
-  <?php include ("header.php") ?>
->>>>>>> Stashed changes
-=======
-  <?php include ("header.php") ?>
->>>>>>> Stashed changes
 
   <!-- SECCIÓN EVENTOS -->
-  <section class="eventos"> 
-    <h2>¡Descubre los eventos más interesantes!</h2>
-    <div id="img" class="carrusel">
-      <div class="elemento">
-        <img src="../Images/museo.webp" alt="imagen 1" loading="lazy">
-      </div>
-      <div class="elemento">
-        <img src="../Images/artigas.webp" alt="imagen 2" loading="lazy">
-      </div>
-      <div class="elemento">
-        <img src="../Images/plaza33.webp" alt="imagen 3" loading="lazy">
-      </div>
-      <div class="elemento">
-        <img src="../Images/arapey.webp" alt="imagen 4" loading="lazy">
-      </div>
-      <div class="elemento">
-        <img src="../Images/calleuy.webp" alt="imagen 5" loading="lazy">
-      </div>
+<section class="eventos"> 
+  <h2>¡Descubre los eventos más interesantes!</h2>
+  <div class="carrusel-container">
+    <button class="prev"><i class="fas fa-chevron-left"></i></button>
+    
+    <div id="carrusel" class="carrusel">
+      <div class="elemento"><img src="../Images/museo.webp" alt="imagen 1" loading="lazy"></div>
+      <div class="elemento"><img src="../Images/artigas.webp" alt="imagen 2" loading="lazy"></div>
+      <div class="elemento"><img src="../Images/plaza33.webp" alt="imagen 3" loading="lazy"></div>
+      <div class="elemento"><img src="../Images/arapey.webp" alt="imagen 4" loading="lazy"></div>
+      <div class="elemento"><img src="../Images/calleuy.webp" alt="imagen 5" loading="lazy"></div>
     </div>
-  </section>
+
+    <button class="next"><i class="fas fa-chevron-right"></i></button>
+  </div>
+</section>
 
   <!-- BOTONES PRINCIPALES -->
   <section class="botones">
-    <a href="catalogo.php" class="btn">Ver Eventos</a>
+    <a href="Catálogo.php" class="btn">Ver Eventos</a>
     <a href="#" class="btn">Lugares Turísticos</a>
   </section>
 
@@ -121,6 +91,44 @@
       <a href="mailto:Vivalagrasa@mail.com">Contacto</a>
     </div>
   </footer>
+
+
+
+
+<script>
+  const carrusel = document.querySelector(".carrusel");
+  const elementos = document.querySelectorAll(".elemento");
+  const prev = document.querySelector(".prev");
+  const next = document.querySelector(".next");
+
+  let index = 0;
+
+  function mostrarSlide(n) {
+    if (n < 0) {
+      index = elementos.length - 1;
+    } else if (n >= elementos.length) {
+      index = 0;
+    }
+    carrusel.style.transform = `translateX(${-index * 100}%)`;
+  }
+
+  prev.addEventListener("click", () => {
+    index--;
+    mostrarSlide(index);
+  });
+
+  next.addEventListener("click", () => {
+    index++;
+    mostrarSlide(index);
+  });
+
+  // Loop automático cada 5 segundos
+  setInterval(() => {
+    index++;
+    mostrarSlide(index);
+  }, 5000);
+</script>
+
 
 </body>
 </html>

@@ -47,7 +47,7 @@ $esAdmin = $usuarioLogueado ? esAdmin($conn) : false; // Es admin? S/N
 $conn->close();
 ?>
 
-<link rel="stylesheet" href="header.css">
+<link rel="stylesheet" href="css/header.css">
 
 <header>
     <div class="logo">

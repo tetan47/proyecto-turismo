@@ -24,10 +24,9 @@ if ($evento_id > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title><?php echo htmlspecialchars($evento['Título']); ?></title>
-    <link rel="stylesheet" href="evento.css">
-    <link rel="stylesheet" href="header.css">
-    <link rel="stylesheet" href="comentarios.css">
-    <link rel="stylesheet" href="catalogo.css">
+    <link rel="stylesheet" href="css/evento.css">
+    <link rel="stylesheet" href="css/comentarios.css">
+    <link rel="stylesheet" href="css/catalogo.css">
 </head>
 <body>
     <?php include("header.php") ?>

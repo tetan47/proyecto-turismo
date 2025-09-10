@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Administradores - Validar Eventos</title>
-    <link rel="stylesheet" href="estiloadmin.css">
+    <link rel="stylesheet" href="css/estiloadmin.css">
 </head>
 <body>
     <h1>Validar Eventos</h1>

@@ -54,7 +54,7 @@ $conn->close();
         <a href="index.php">
             <img id="logo123" src="../Images/Logo-que-viaje.png" alt="Inicio">
         </a>
-    </div>    
+    </div>
     
     <div class="perfil">
 
@@ -83,7 +83,6 @@ $conn->close();
                         <a href="gestionar-eventos.php"> Gestionar Eventos</a> <!-- Mitad hecha, solo existe la validacion -->
 
                      <?php else: ?>
-
                         <!-- Usuario común -->
                         <a href="convertirse-organizador.php"> Convertirse en Organizador</a>
 

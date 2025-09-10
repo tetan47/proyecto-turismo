@@ -8,7 +8,7 @@
 <body>
     <h1>Validar Eventos</h1>
     <div class="grid-eventos" id="lista-eventos">
-        <!-- Los eventos se generan aquí -->
+        <!-- Los eventos se generan aca -->
     </div>
 
     <script>

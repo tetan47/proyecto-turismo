@@ -11,9 +11,13 @@
 <body>
 
   <!-- HEADER -->
+
+  <?php
+    include('header.php');
+  ?>
   <header>
     <div class="logo">
-      <img src="/img/Logo-que-viaje.png" alt="Logo Qué Viaje">
+      <img src="../Images/Logo-que-viaje.png" alt="Logo Qué Viaje">
     </div>
     <nav>
       <select class="idioma">
@@ -26,14 +30,24 @@
   </header>
 
   <!-- SECCIÓN EVENTOS -->
-  <section class="eventos">
+  <section class="eventos"> 
     <h2>¡Descubre los eventos más interesantes!</h2>
-    <div class="carrusel">
-      <div class="elemento"></div>
-      <div class="elemento"></div>
-      <div class="elemento"></div>
-      <div class="elemento"></div>
-      <div class="elemento"></div>
+    <div id="img" class="carrusel">
+      <div class="elemento">
+        <img src="../Images/museo.webp" alt="imagen 1" loading="lazy">
+      </div>
+      <div class="elemento">
+        <img src="../Images/artigas.webp" alt="imagen 2" loading="lazy">
+      </div>
+      <div class="elemento">
+        <img src="../Images/plaza33.webp" alt="imagen 3" loading="lazy">
+      </div>
+      <div class="elemento">
+        <img src="../Images/arapey.webp" alt="imagen 4" loading="lazy">
+      </div>
+      <div class="elemento">
+        <img src="../Images/calleuy.webp" alt="imagen 5" loading="lazy">
+      </div>
     </div>
   </section>
 

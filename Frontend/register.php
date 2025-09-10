@@ -12,7 +12,7 @@
     <div class="contenedor">
       <h1>Crear Cuenta</h1>
   
-      <form method="POST" action="controlador_register1.php">
+      <form method="POST" action="../backend/Usuarios/Insertar.php">
   
         <div class="caja">
           <input type="text" id=nombre name="nombre" placeholder="Nombre" required>

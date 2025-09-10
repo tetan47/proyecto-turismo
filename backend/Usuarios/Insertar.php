@@ -23,7 +23,7 @@ if (!preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ' -]+$/u", $apellido) || e
 }
 
 if (!filter_var($correo, FILTER_VALIDATE_EMAIL) || empty($correo)) { // Validar formato de correo electrónico
-    echo "Correo inválido. Serás redirigido en 5 segundos...";
+    echo '<div class="alert alert-danger">"Correo inválido. Serás redirigido en 5 segundos..." </div>';
     header("Refresh: 5; URL=../Frontend/crear_cuenta.php");
     exit;
 }
@@ -35,10 +35,32 @@ if (strlen($contraseña) < 8 || empty($contraseña)) { // Validar que la contras
 }
 
 if ($stmt->execute()) {
-    echo "Datos guardados correctamente.";
+     // Iniciar sesión automáticamente
+        session_start();
+        $_SESSION['usuario'] = $correo;
+
+        header("Location: ../Frontend/index.php");
+        echo "Datos guardados correctamente.";
+        exit;
 } else {
     echo "Error al guardar: " . $stmt->error;
 }
+
+ $hashed_password = password_hash($contraseña, PASSWORD_BCRYPT);
+
+
+ // Verificar si el correo ya existe
+    $check = $conn->prepare("SELECT id_cliente FROM cliente WHERE correo = ?");
+    $check->bind_param("s", $correo);
+    $check->execute();
+    $check->store_result();
+
+    if ($check->num_rows > 0) {
+        $check->close();
+        die("Este correo ya está registrado. <a href='../Frontend/crear_cuenta.php'>Volver</a>");
+    }
+    $check->close();
+
 
 $stmt->close();
 $conn->close();

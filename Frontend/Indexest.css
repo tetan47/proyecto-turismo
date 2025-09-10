@@ -131,7 +131,14 @@ footer {
   z-index: 10;
 }
 
-
+img {
+  height: 350px;
+  width: 350px;
+  border-radius: 10px;
+  object-fit: cover;
+  filter: saturate(175%);
+  box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.5);
+}
 
 .botones {
   display: flex;

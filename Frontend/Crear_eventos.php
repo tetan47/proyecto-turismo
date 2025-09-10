@@ -43,9 +43,32 @@
     <label for="capacidad">Capacidad</label><br />
     <input type="number" id="capacidad" name="capacidad" min="1" required /><br /><br />
 
+    <label for="imagen">Imagen del evento</label><br />
+    <input type="file" id="imagen" name="imagen" accept="image/*" /><br />
+    <img id="preview" alt="Vista previa de la imagen" /><br /><br />
+
     <button type="submit">subir</button>
   </form>
 </div>
+
+<script>
+  document.getElementById("imagen").addEventListener("change", function(event) {
+    const file = event.target.files[0];
+    const preview = document.getElementById("preview");
+
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        preview.src = e.target.result;
+        preview.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+    } else {
+      preview.style.display = "none";
+      preview.src = "";
+    }
+  });
+</script>
 <?php include("footer.html") ?>
 </body>
 </html>

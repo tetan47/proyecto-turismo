@@ -101,8 +101,8 @@ $conn->close();
         <?php else: ?>
             <!-- Anónimo (NO logueado) -->
             <div class="container-menu">
-                    <a class="btn-inicio-sesion" href="Inicio_sesion.php"> Iniciar Sesión</a>
-                    <a class="btn-registrarse" href="crear_cuenta.php">Registrarse</a>
+                    <a class="btn-inicio-sesion" href="login.php"> Iniciar Sesión</a>
+                    <a class="btn-registrarse" href="register.php">Registrarse</a>
             </div>
         <?php endif; ?>
     </div>

@@ -11,6 +11,7 @@
 <body>
 
   <!-- HEADER -->
+<<<<<<< Updated upstream
 
   <?php
     include('header.php');
@@ -28,6 +29,9 @@
       <a href="#" class="perfil"><i class="fas fa-user"></i> Perfil</a>
     </nav>
   </header>
+=======
+  <?php include ("header.php") ?>
+>>>>>>> Stashed changes
 
   <!-- SECCIÓN EVENTOS -->
   <section class="eventos"> 

@@ -2,6 +2,8 @@
 
 include('../Conexion.php');
 
+session_start();
+
 $busqueda = isset($_POST['Busqueda']) ? trim($_POST['Busqueda']) : '';
 $fecha = isset($_POST['Fecha_Inicio']) ? $_POST['Fecha_Inicio'] : '';
 $hora = isset($_POST['hora']) ? $_POST['hora'] : '';

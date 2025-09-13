@@ -36,7 +36,7 @@
   <!-- BOTONES PRINCIPALES -->
   <section class="botones">
     <a href="Catálogo.php" class="btn">Ver Eventos</a>
-    <a href="#" class="btn">Lugares Turísticos</a>
+    <a href="sitios_turisitcos.php" class="btn">Lugares Turísticos</a>
   </section>
 
   <!-- INFO -->

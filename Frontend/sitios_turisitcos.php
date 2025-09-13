@@ -1,20 +1,18 @@
-<?php session_start(); ?>
-
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Catálogo de Eventos</title>
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="css/catalogo.css">
-  <?php include ('../backend/Conexion.php'); ?>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+     <link rel="stylesheet" href="css/catalogo.css">
+    <title>Document</title>
 </head>
 <body>
-  <?php include("header.php") ?>
+    <?php
+    include('header.php');    
+    ?>
 
-  <div class="contenedor_nav">
+    <div class="contenedor_nav">
   <nav>
     <form id="form-filtros" class="busqueda-eventos" autocomplete="off">
       <input type="text" name="Busqueda" placeholder="Buscar eventos..." minlength="3">
@@ -38,11 +36,6 @@
   </nav>
   </div>
 
-  <section class="catalogo" id="catalogo-eventos">
-    <!-- Aquí se cargarán los eventos filtrados -->
-  </section>
-
-  <?php include("footer.html") ?>
 
   <script>
   document.addEventListener('DOMContentLoaded', function() { 
@@ -59,7 +52,7 @@
     function cargarEventos() {
       const datos = new FormData(form);
       fetch("../backend/eventos/Filtrar.php", {
-        method: 'POST',
+        method: 'POST', 
         body: datos
       })
       .then(res => res.text())
@@ -78,5 +71,11 @@
     });
   });
   </script>
+
+  
+  <?php
+    include('footer.html');
+  ?>
+
 </body>
 </html>

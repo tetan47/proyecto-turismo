@@ -1,5 +1,6 @@
 <?php
 include('../backend/Conexion.php');
+
 session_start();
 
 // Obtener datos del usuario si está logueado
@@ -39,7 +40,9 @@ if ($evento_id > 0) {
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/evento.css">
     <link rel="stylesheet" href="css/comentarios.css">
+    <link rel="stylesheet" href="css/estructura_fundamental.css">
     <link rel="stylesheet" href="css/catalogo.css">
+    
 </head>
 <body>
     <?php include("header.php") ?>
@@ -83,25 +86,25 @@ if ($evento_id > 0) {
                 <span id="nombre-usuario"><?php echo htmlspecialchars($datosUsuario['Nombre']); ?></span>
             </div>
 
-            <div class="formato-toolbar">
+            <!---<div class="formato-toolbar">
                 <button type="button" class="formato-btn" data-comando="bold"><b>B</b></button>
                 <button type="button" class="formato-btn" data-comando="italic"><i>I</i></button>
                 <button type="button" class="formato-btn" data-comando="underline"><u>U</u></button>
-            </div>
+            </div>--->
 
             <textarea id="texto-comentario" style="width:100%; border:1px solid #ccc; min-height:60px; padding:10px; margin-top:10px;"></textarea>
             <button id="btn-comentar" data-evento="<?php echo $evento_id; ?>">Enviar</button>
 
         <?php else: ?>
             <div style="text-align:center; padding: 20px;">
-                <a href="Inicio_sesion.php" style="text-decoration: none; color: black;">Inicia Sesión para poder comentar</a>
+                <a href="login.php" style="text-decoration: none; color: black;">Inicia Sesión para poder comentar</a>
             </div>
         <?php endif; ?>
     </div>
 
     <?php include("footer.html") ?>
 
-    <script>
+<script>
     // Enganchar likes
     function engancharLikes() {
         document.querySelectorAll('.cora').forEach(cora => {
@@ -135,13 +138,47 @@ if ($evento_id > 0) {
         });
     }
 
+    function engancharLikesRespuestas() {
+    document.querySelectorAll('.cora-respuesta').forEach(cora => {
+        if (cora.classList.contains('disabled')) {
+            cora.addEventListener('click', e => {
+                e.preventDefault();
+                alert('Debes iniciar sesión para dar like');
+            });
+            return;
+        }
+        cora.addEventListener('click', () => {
+            const idRespuesta = cora.dataset.id;
+            const liked = cora.classList.contains('liked');
+            const action = liked ? 'dislike' : 'like';
+
+            fetch('../backend/Comentarios/like_respuesta.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ idRespuesta, action })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+                cora.querySelector('.likes').textContent = data.likes;
+                cora.classList.toggle('liked', data.liked);
+            })
+            .catch(console.error);
+        });
+    });
+}
+
     // Cargar comentarios dinámicamente
     function cargarComentarios() {
         fetch('../backend/Comentarios/listaCOM.php?id_evento=<?php echo $evento_id; ?>')
             .then(res => res.text())
             .then(html => {
                 document.querySelector('#lista-comentarios').innerHTML = html;
-                engancharLikes();
+                engancharLikes(); 
+                engancharLikesRespuestas();  
             });
     }
 
@@ -164,11 +201,11 @@ if ($evento_id > 0) {
                 const id_evento = btnComentar.dataset.evento;
 
                 if (texto === "") {
-                    alert("Por favor escribe un comentario.");
+                    alert('Por favor escribe un comentario');
                     return;
                 }
 
-                fetch(`../backend/Comentarios/comentar.php?id_evento=${id_evento}`, {
+                fetch(`../backend/Comentarios/Comentar.php?id_evento=${id_evento}`, {
                     method: "POST",
                     body: new URLSearchParams({ Texto: texto }),
                     headers: { "Content-Type": "application/x-www-form-urlencoded" }
@@ -185,8 +222,24 @@ if ($evento_id > 0) {
     });
 
     function mostrarFormularioRespuesta(idComentario) {
+        <?php if ($usuario_logueado): ?>
+            // Usuario LOGUEADO - mostrar formulario de respuesta
+            const formulario = document.getElementById(`form_respuesta_${idComentario}`);
+            if (formulario) {
+                formulario.style.display = 'block';
+            }
+        <?php else: ?>
+            // Usuario NO LOGUEADO - redirigir al login
+            alert('Debes iniciar sesión para responder');
+            window.location.href = 'login.php';
+        <?php endif; ?>
+    }
+
+    function ocultarFormularioRespuesta(idComentario) {
         const formulario = document.getElementById(`form_respuesta_${idComentario}`);
-        formulario.style.display = 'block';
+        if (formulario) {
+            formulario.style.display = 'none';
+        }
     }
 
     function enviarRespuesta(idComentario) {
@@ -212,7 +265,8 @@ if ($evento_id > 0) {
         })
         .catch(err => console.error("Error:", err));
     }
-    </script>
+</script>
+
 </body>
 </html>
 

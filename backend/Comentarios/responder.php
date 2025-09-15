@@ -1,8 +1,9 @@
 <?php
-session_start();
-include('../backend/Conexion.php'); // Asegúrate de usar la misma conexión
 
-header('Content-Type: application/json'); // Mejor usar JSON para respuestas
+include('../Conexion.php');
+session_start();
+
+header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_SESSION['ID_Cliente'])) {
@@ -25,8 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $idUsuario = $_SESSION['ID_Cliente'];
 
-    // Insertar respuesta usando consultas preparadas
-    $sql = "INSERT INTO respondercomentarios (ID_Comentario, ID_Cliente, Texto) VALUES (?, ?, ?)";
+    // Insertar respuesta usando consultas preparadas (CAMPO respuesta)
+    $sql = "INSERT INTO respondercomentario (ID_Comentario, ID_Cliente, respuesta) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('iis', $idComentario, $idUsuario, $texto);
 
@@ -35,10 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo json_encode(['error' => 'Error al guardar la respuesta.']);
     }
-    
-    $stmt->close();
-} else {
-    echo json_encode(['error' => 'Método no permitido.']);
+
 }
 
 $conn->close();

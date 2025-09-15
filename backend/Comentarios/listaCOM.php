@@ -1,15 +1,14 @@
 <?php
-$ruta_base = dirname(__DIR__);
-include($ruta_base . '/Conexion.php');
+
+include('../Conexion.php');
 session_start();
 
 $evento_id = isset($_GET['id_evento']) ? intval($_GET['id_evento']) : 0;
 $idUsuario = $_SESSION['ID_Cliente'] ?? 0;
 $usuario_logueado = ($idUsuario > 0);
 
-
 if ($evento_id > 0) {
-    $sql = "SELECT c.ID_Comentario, c.texto, c.LIKES, c.Creación_Comentario, 
+    $sql = "SELECT c.ID_Comentario, c.Texto, c.LIKES, c.Creación_Comentario, 
                    cl.Nombre, cl.imag_perfil, c.usuarios_like
             FROM comentarios c 
             JOIN cliente cl ON c.ID_Cliente = cl.ID_Cliente 
@@ -36,11 +35,10 @@ if ($evento_id > 0) {
                         <h3><?php echo htmlspecialchars($row['Nombre']); ?></h3>
                         <h4><?php echo htmlspecialchars($row['Creación_Comentario']); ?></h4>
                     </div>
-                    <p><?php echo htmlspecialchars($row['texto']); ?></p>
+                    <p><?php echo htmlspecialchars($row['Texto']); ?></p>
                     <div class="footer-comentarios">
-                        <?php if ($usuario_logueado): ?>
-                            <button type="button" class="responder" onclick="mostrarFormularioRespuesta(<?php echo $row['ID_Comentario']; ?>)">Responder</button>
-                        <?php endif; ?>
+                        <!-- BOTÓN RESPONDER VISIBLE PARA TODOS -->
+                        <button type="button" class="responder" onclick="mostrarFormularioRespuesta(<?php echo $row['ID_Comentario']; ?>)">Responder</button>
 
                         <label class="cora <?php echo ($liked ? "liked" : ""); echo (!$usuario_logueado ? " disabled" : ""); ?>" 
                                data-id="<?php echo $row['ID_Comentario']; ?>">
@@ -49,14 +47,15 @@ if ($evento_id > 0) {
                         </label>
                     </div>
 
-                    <!-- Respuestas a...-->
-                    <div id="respuestas_<?php echo $row['ID_Comentario']; ?>" class="respuestas">
-                        <?php
-                        $sql_respuestas = "SELECT r.respuesta, r.Creación_Respuesta, cl.Nombre, cl.imag_perfil 
-                                           FROM respondercomentario r
-                                           JOIN cliente cl ON r.ID_Cliente = cl.ID_Cliente
-                                           WHERE r.ID_Comentario = ?
-                                           ORDER BY r.Creación_Respuesta ASC";
+    <!-- Respuestas a...-->
+        <div id="respuestas_<?php echo $row['ID_Comentario']; ?>" class="respuestas">
+         <?php
+             $sql_respuestas = "SELECT r.comentario_responder, r.respuesta, r.Creación_Respuesta, 
+                                     r.LIKESRES, r.usuarios_like_res, cl.Nombre, cl.imag_perfil
+                                FROM respondercomentario r
+                                JOIN cliente cl ON r.ID_Cliente = cl.ID_Cliente
+                                WHERE r.ID_Comentario = ?
+                                ORDER BY r.Creación_Respuesta ASC";
 
                         $stmt_respuestas = $conn->prepare($sql_respuestas);
                         $stmt_respuestas->bind_param("i", $row['ID_Comentario']);
@@ -64,17 +63,34 @@ if ($evento_id > 0) {
                         $respuestas_result = $stmt_respuestas->get_result();
 
                         while ($respuesta = $respuestas_result->fetch_assoc()) {
+                            $usuarios_like_res = $respuesta['usuarios_like_res'] ? explode(',', $respuesta['usuarios_like_res']) : []; 
+                            
+                            $liked_respuesta = ($idUsuario && in_array($idUsuario, $usuarios_like_res));
+
                         ?>
-                            <div class="respuesta">
+                        
+                            <div class="comentarios">
                                 <div class="foto-perfil">
                                     <img src="<?php echo htmlspecialchars($respuesta['imag_perfil']); ?>" alt="Foto de Perfil" />
                                 </div>
-                                <div class="info-respuesta">
+                                <div class="info-comentarios">
                                     <div class="header">
                                         <h4><?php echo htmlspecialchars($respuesta['Nombre']); ?></h4>
                                         <h5><?php echo htmlspecialchars($respuesta['Creación_Respuesta']); ?></h5>
                                     </div>
-                                    <p><?php echo htmlspecialchars($respuesta['Texto']); ?></p>
+                                    <p><?php echo htmlspecialchars($respuesta['respuesta']); ?></p>
+                                    
+                                    <!-- LIKES PARA RESPUESTAS -->
+                                    <div class="footer-comentarios">
+                                        <label class="cora-respuesta
+                                                <?php echo $liked_respuesta ? 'liked' : ''; ?>
+                                                <?php echo !$usuario_logueado ? ' disabled' : ''; ?>"
+                                            data-id="<?php echo $respuesta['comentario_responder']; ?>">
+                                                    &#10084;
+                                            <div class="likes"><?php echo htmlspecialchars($respuesta['LIKESRES']); ?></div>
+                                        </label>
+
+                                    </div>
                                 </div>
                             </div>
                         <?php } 

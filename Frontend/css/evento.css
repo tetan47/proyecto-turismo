@@ -6,7 +6,7 @@
     }
 
     body {
-        background-color: cadetblue;
+        background-color: cadetblue !important;
     }
 
     .evento-detalles {

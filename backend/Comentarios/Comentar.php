@@ -1,8 +1,8 @@
 <?php
 session_start();
-include('../backend/Conexion.php'); // Asegúrate de usar la misma conexión
+include('../Conexion.php');
 
-header('Content-Type: application/json'); // Mejor usar JSON para respuestas
+header('Content-Type: application/json'); 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!isset($_SESSION['ID_Cliente'])) {
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Insertar comentario usando consultas preparadas
+    
     $sql = "INSERT INTO Comentarios (Texto, ID_Cliente, ID_Evento) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('sii', $texto, $idUsuario, $id_evento);
@@ -34,6 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         echo json_encode(['error' => 'Error al guardar el comentario.']);
     }
+
+    
     
     $stmt->close();
 } else {

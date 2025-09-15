@@ -19,6 +19,7 @@ button {
     font-weight: 500;
     color: white;
     transition: transform 0.3s ease, background 0.3s ease;
+    padding: 3px;
 }
 
 button:hover {

@@ -1,7 +1,9 @@
 <?php
 include('../backend/Conexion.php');
 
-
+if (!isset($_SESSION['ID_Cliente'])) {
+    $_SESSION['ID_Cliente'] = 1; // Reemplaza con un ID real ej: Lucia 
+}
 
 function esUsuario() {
     return isset($_SESSION['ID_Cliente']);
@@ -19,11 +21,12 @@ function esOrganizador($conn) {
 function esAdmin($conn) {
     if (!esUsuario()) return false;
     
-    $stmt = $conn->prepare("SELECT ID_Admin FROM admin WHERE ID_Administrador = ?");
+    $stmt = $conn->prepare("SELECT ID_Administrador FROM administradores WHERE ID_Administrador = ?");
     $stmt->bind_param('i', $_SESSION['ID_Administrador']);
     $stmt->execute();
     return $stmt->get_result()->num_rows > 0;
 }
+
 
 // Obtener datos del usuario de forma más sencilla en vez de muchos IFs en el HTML
 function obtenerDatosUsuario($conn) {
@@ -61,8 +64,10 @@ $conn->close();
         <?php if ($usuarioLogueado && $datosUsuario): ?>
 
             <!-- Si está logeado -->
+             <div class="espacioimg">
             <img src="<?php echo !empty($datosUsuario['imag_perfil']) ? $datosUsuario['imag_perfil'] : 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png'; ?>" 
                  alt="Perfil de <?php echo htmlspecialchars($datosUsuario['Nombre']); ?>"> 
+            </div>
             <p><?php echo htmlspecialchars($datosUsuario['Nombre']); ?></p>
             
             <div class="container-menu">

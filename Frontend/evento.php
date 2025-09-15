@@ -2,6 +2,18 @@
 include('../backend/Conexion.php');
 session_start();
 
+// Obtener datos del usuario si está logueado
+if (isset($_SESSION['ID_Cliente'])) {
+    $usuario_id = $_SESSION['ID_Cliente'];
+    $sql_usuario = "SELECT Nombre, imag_perfil FROM cliente WHERE ID_Cliente = ?";
+    $stmt_usuario = $conn->prepare($sql_usuario);
+    $stmt_usuario->bind_param('i', $usuario_id);
+    $stmt_usuario->execute();
+    $result_usuario = $stmt_usuario->get_result();
+    $datosUsuario = $result_usuario->fetch_assoc();
+    $stmt_usuario->close();
+}
+
 // Obtener el ID del evento desde la URL
 $evento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 $usuario_logueado = isset($_SESSION['ID_Cliente']);
@@ -63,12 +75,12 @@ if ($evento_id > 0) {
 
     <!---COMENTAR--->
     <div class="container-data">
-        <?php if ($usuario_logueado): ?>
+        <?php if ($usuario_logueado && isset($datosUsuario)): ?>
             <div class="foto-input">
                 <div class="perfil-foto"> 
-                <img src="<?php echo !empty($datosUsuario['imag_perfil']) ? $datosUsuario['imag_perfil'] : 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png'; ?>">
-            </div>
-                <span id="nombre-usuario"><?php echo htmlspecialchars($datosUsuario['Nombre']); ?>"</span>
+                    <img src="<?php echo !empty($datosUsuario['imag_perfil']) ? htmlspecialchars($datosUsuario['imag_perfil']) : 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png'; ?>" alt="Foto de perfil">
+                </div>
+                <span id="nombre-usuario"><?php echo htmlspecialchars($datosUsuario['Nombre']); ?></span>
             </div>
 
             <div class="formato-toolbar">
@@ -89,7 +101,7 @@ if ($evento_id > 0) {
 
     <?php include("footer.html") ?>
 
-<script>
+    <script>
     // Enganchar likes
     function engancharLikes() {
         document.querySelectorAll('.cora').forEach(cora => {
@@ -156,7 +168,7 @@ if ($evento_id > 0) {
                     return;
                 }
 
-                fetch(`comentar.php?id_evento=${id_evento}`, {
+                fetch(`../backend/Comentarios/comentar.php?id_evento=${id_evento}`, {
                     method: "POST",
                     body: new URLSearchParams({ Texto: texto }),
                     headers: { "Content-Type": "application/x-www-form-urlencoded" }
@@ -171,6 +183,35 @@ if ($evento_id > 0) {
             });
         }
     });
+
+    function mostrarFormularioRespuesta(idComentario) {
+        const formulario = document.getElementById(`form_respuesta_${idComentario}`);
+        formulario.style.display = 'block';
+    }
+
+    function enviarRespuesta(idComentario) {
+        const texto = document.getElementById(`texto_respuesta_${idComentario}`).value.trim();
+
+        if (texto === "") {
+            alert("Por favor escribe una respuesta.");
+            return;
+        }
+
+        fetch('../backend/Comentarios/responder.php', {
+            method: "POST",
+            body: new URLSearchParams({
+                id_comentario: idComentario,
+                texto: texto
+            }),
+            headers: { "Content-Type": "application/x-www-form-urlencoded" }
+        })
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+            cargarComentarios(); // Recargar comentarios y respuestas
+        })
+        .catch(err => console.error("Error:", err));
+    }
     </script>
 </body>
 </html>
@@ -178,12 +219,14 @@ if ($evento_id > 0) {
 <?php
     } else {
         echo "Evento no encontrado.";
+        $conn->close();
     }
     $stmt->close();    
 } else {
     echo "ID de evento no válido.";
+    $conn->close();
 
 }
 
-//$conn->close();
 ?>
+

@@ -1,31 +1,44 @@
 <?php
 session_start();
-include('../backend/conexion.php');
+include('../backend/Conexion.php'); // Asegúrate de usar la misma conexión
+
+header('Content-Type: application/json'); // Mejor usar JSON para respuestas
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Verificar sesión
     if (!isset($_SESSION['ID_Cliente'])) {
-        echo "Debes iniciar sesión para comentar.";
+        echo json_encode(['error' => 'Debes iniciar sesión para comentar.']);
         exit;
     }
 
     $idUsuario = $_SESSION['ID_Cliente'];
     $id_evento = isset($_GET['id_evento']) ? intval($_GET['id_evento']) : 0;
-    $texto = mysqli_real_escape_string($conn, $_POST['Texto'] ?? '');
+    $texto = trim($_POST['Texto'] ?? '');
 
     if (empty($texto)) {
-        echo "Por favor escribe un comentario.";
+        echo json_encode(['error' => 'Por favor escribe un comentario.']);
         exit;
     }
 
-    // Insertar comentario
-    $sql = "INSERT INTO Comentarios (Texto, ID_Cliente, ID_Evento) 
-            VALUES ('$texto', '$idUsuario', '$id_evento')";
-    
-    if (mysqli_query($conn, $sql)) {
-        echo "Comentario enviado correctamente.";
-    } else {
-        echo "Error al guardar: " . mysqli_error($conn);
+    if ($id_evento <= 0) {
+        echo json_encode(['error' => 'Evento no válido.']);
+        exit;
     }
+
+    // Insertar comentario usando consultas preparadas
+    $sql = "INSERT INTO Comentarios (Texto, ID_Cliente, ID_Evento) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param('sii', $texto, $idUsuario, $id_evento);
+    
+    if ($stmt->execute()) {
+        echo json_encode(['success' => 'Comentario enviado correctamente.']);
+    } else {
+        echo json_encode(['error' => 'Error al guardar el comentario.']);
+    }
+    
+    $stmt->close();
+} else {
+    echo json_encode(['error' => 'Método no permitido.']);
 }
+
+$conn->close();
 ?>

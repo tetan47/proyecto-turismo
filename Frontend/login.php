@@ -1,3 +1,10 @@
+<?php 
+session_start();
+include("../backend/Conexion.php");
+include("../backend/Usuarios/controlador_login.php");
+?>
+
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,10 +20,7 @@
   
       <form method="post" action="index.php">
       
-      <?php
-        include("../backend/Conexion.php");
-        include("../backend/Usuarios/controlador_login.php");
-      ?>
+      
 
         <div class="caja">
           <input type="email" id=Correo name="correo" placeholder="Correo" required>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-09-2025 a las 15:23:22
+-- Tiempo de generación: 26-09-2025 a las 16:39:41
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -114,13 +114,14 @@ CREATE TABLE `comentarios` (
 --
 
 INSERT INTO `comentarios` (`ID_Comentario`, `ID_Cliente`, `ID_Evento`, `LIKES`, `Texto`, `Creación_Comentario`, `Cédula`, `usuarios_like`) VALUES
-(1, 1, 1, 12, 'Muy buen ambiente y productos.', '2025-06-11 00:00:00', NULL, NULL),
+(1, 1, 1, 12, 'Muy buen ambiente y productos.', '2025-06-11 00:00:00', NULL, ''),
 (2, 2, 2, 9, 'Excelente sonido y organización.', '2025-06-16 00:00:00', NULL, NULL),
-(3, 2, 1, 10, 'Muy limpio y ordenado', '2025-09-27 00:00:00', NULL, '1'),
+(3, 2, 1, 9, 'Muy limpio y ordenado', '2025-09-27 00:00:00', NULL, ''),
 (6, 1, 5, NULL, 'Primer comentario', '2025-09-03 19:27:06', NULL, NULL),
 (8, 1, 5, NULL, 'Primer comentario', '2025-09-03 19:29:14', NULL, NULL),
 (9, 1, 5, NULL, 'Segundo comentario', '2025-09-03 19:29:14', NULL, NULL),
-(10, 1, 1, 0, 'me gustó mucho xd', '2025-09-15 16:33:19', NULL, '');
+(10, 1, 1, 0, 'me gustó mucho xd', '2025-09-15 16:33:19', NULL, ''),
+(12, 1, 1, 0, 'pruebas', '2025-09-17 10:55:35', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -193,11 +194,10 @@ CREATE TABLE `respondercomentario` (
 --
 
 INSERT INTO `respondercomentario` (`comentario_responder`, `respuesta`, `ID_Comentario`, `Creación_Respuesta`, `ID_Cliente`, `LIKESRES`, `usuarios_like_res`) VALUES
-(1, 'n', 1, '2025-09-15 16:32:27', 1, 0, NULL),
-(2, 'CUALQUIERAs', 3, '2025-09-15 16:45:00', 1, 1, '1'),
-(3, 'waow', 1, '2025-09-15 17:36:15', 1, 3, '1'),
-(4, 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Culpa eligendi animi repellat deserunt libero dolor voluptas nesciunt, nihil quis doloribus ducimus reiciendis cum magni corporis facere ratione recusandae cumque dolores.', 1, '2025-09-15 17:37:02', 1, 0, NULL),
-(5, 'quien sos lucia?? que haces comentando la pagina de mi noviO?', 1, '2025-09-16 09:37:45', 1, 1, '1');
+(2, 'JS.', 3, '2025-09-15 16:45:00', 1, 0, ''),
+(3, 'pruebienda', 1, '2025-09-15 17:36:15', 1, 3, '1'),
+(5, 'quien sos lucia?? que haces comentando la pagina de mi noviO?', 1, '2025-09-16 09:37:45', 1, 1, '1'),
+(8, 'prueba 1', 12, '2025-09-18 08:43:55', 1, 1, '1');
 
 --
 -- Índices para tablas volcadas
@@ -277,7 +277,7 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `ID_Comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ID_Comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `eventos`
@@ -289,7 +289,7 @@ ALTER TABLE `eventos`
 -- AUTO_INCREMENT de la tabla `respondercomentario`
 --
 ALTER TABLE `respondercomentario`
-  MODIFY `comentario_responder` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `comentario_responder` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restricciones para tablas volcadas

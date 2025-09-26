@@ -1,9 +1,9 @@
 <?php
 include('../backend/Conexion.php');
 
-/*if (!isset($_SESSION['ID_Cliente'])) {
+if (!isset($_SESSION['ID_Cliente'])) {
     $_SESSION['ID_Cliente'] = 1; // Reemplaza con un ID real ej: Lucia 
-}*/
+}
 
 function esUsuario() {
     return isset($_SESSION['ID_Cliente']);

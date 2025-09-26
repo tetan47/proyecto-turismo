@@ -1,43 +1,42 @@
 <?php
-
 include('../Conexion.php');
 session_start();
 
 header('Content-Type: application/json');
+$response = ['success' => false, 'message' => ''];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (!isset($_SESSION['ID_Cliente'])) {
-        echo json_encode(['error' => 'Debes iniciar sesión para responder.']);
+    $id_comentario = intval($_POST['id_comentario']);
+    $texto = trim($_POST['texto']);
+    $usuario = $_SESSION['ID_Cliente'] ?? 0;
+
+    if (!$usuario) {
+        $response['message'] = 'Usuario no autenticado';
+        echo json_encode($response);
         exit;
     }
-
-    $idComentario = isset($_POST['id_comentario']) ? intval($_POST['id_comentario']) : 0;
-    $texto = trim($_POST['texto'] ?? '');
 
     if (empty($texto)) {
-        echo json_encode(['error' => 'Por favor escribe una respuesta.']);
+        $response['message'] = 'La respuesta no puede estar vacía';
+        echo json_encode($response);
         exit;
     }
 
-    if ($idComentario <= 0) {
-        echo json_encode(['error' => 'Comentario no válido.']);
-        exit;
-    }
-
-    $idUsuario = $_SESSION['ID_Cliente'];
-
-    // Insertar respuesta usando consultas preparadas (CAMPO respuesta)
     $sql = "INSERT INTO respondercomentario (ID_Comentario, ID_Cliente, respuesta) VALUES (?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('iis', $idComentario, $idUsuario, $texto);
-
+    $stmt->bind_param("iis", $id_comentario, $usuario, $texto);
+    
     if ($stmt->execute()) {
-        echo json_encode(['success' => 'Respuesta enviada correctamente.']);
+        $response['success'] = true;
+        $response['message'] = 'Respuesta enviada correctamente';
     } else {
-        echo json_encode(['error' => 'Error al guardar la respuesta.']);
+        $response['message'] = 'Error al enviar la respuesta';
     }
-
+    $stmt->close();
+} else {
+    $response['message'] = 'Método no permitido';
 }
 
-$conn->close();
+echo json_encode($response);
+exit;
 ?>

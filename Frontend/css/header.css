@@ -42,6 +42,11 @@ h1 {
     border-radius: 50%;
 }
 
+.selector-idioma {
+    margin-right: 15px;
+    display: inline-block;
+}
+
 .espacioimg {
     width: 10vmin;
     height: 10vmin;

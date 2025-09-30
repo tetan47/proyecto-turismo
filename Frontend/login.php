@@ -18,7 +18,7 @@ include("../backend/Usuarios/controlador_login.php");
     <div class="contenedor">
       <h1>iniciar sesion</h1>
   
-      <form method="post" action="index.php">
+      <form method="POST" action="index.php">
       
       
 

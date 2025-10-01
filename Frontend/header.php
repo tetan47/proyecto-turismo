@@ -1,7 +1,17 @@
 <?php
 
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
+}
+
+if (!isset($_SESSION['ID_Cliente'])) {
+    $_SESSION['ID_Cliente'] = 1; // Reemplaza con un ID real ej: Lucia 
+}
+
+function esUsuario() {
+    return isset($_SESSION['ID_Cliente']);
+
 }
 
 
@@ -55,14 +65,14 @@ if (!empty($_SESSION['usuario_id']) && !empty($_SESSION['rol'])) {
     </div>
 
     <div class="selector-idioma">
-                <form method="GET" style="display:inline;">
-                    <select name="lang" onchange="this.form.submit()" style="font-size:14px;">
-                        <option value="es" <?php echo (!isset($_GET['lang']) || $_GET['lang'] === 'es') ? 'selected' : ''; ?>>ES</option>
-                        <option value="en" <?php echo (isset($_GET['lang']) && $_GET['lang'] === 'en') ? 'selected' : ''; ?>>EN</option>
-                        <option value="pt" <?php echo (isset($_GET['lang']) && $_GET['lang'] === 'pt') ? 'selected' : ''; ?>>PT</option>
-                    </select>
-                </form>
-            </div> 
+         <form method="GET" style="display:inline;">
+             <select name="lang" onchange="this.form.submit()" style="font-size:14px;">
+                 <option value="es" <?php echo (!isset($_GET['lang']) || $_GET['lang'] === 'es') ? 'selected' : ''; ?>>ES</option>
+                 <option value="en" <?php echo (isset($_GET['lang']) && $_GET['lang'] === 'en') ? 'selected' : ''; ?>>EN</option>
+                  <option value="pt" <?php echo (isset($_GET['lang']) && $_GET['lang'] === 'pt') ? 'selected' : ''; ?>>PT</option>
+            </select>
+    </form>
+    </div> 
     
     <div class="perfil">
         <?php if ($usuarioLogueado && $datosCargados): ?>

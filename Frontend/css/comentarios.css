@@ -15,6 +15,7 @@ main {
 main h1 {
     text-align: center;
     font-size: 24px;
+    color: #400683;
 }
 
 .linea {
@@ -22,8 +23,8 @@ main h1 {
     height: 2px;
     border: none;
     background-color: #400683;
+    margin: 10px 0 20px;
 }
-
 
 .container-comentarios, 
 .container-comentarios-responder {
@@ -39,7 +40,6 @@ main h1 {
     margin-left: 100px;
 }
 
-
 .comentarios,
 .comentarios-responder {
     display: flex;              
@@ -48,6 +48,7 @@ main h1 {
     padding: 20px;
     border-bottom: 2px solid #ddd;
     gap: 20px;
+    position: relative;
 }
 
 .foto-perfil,
@@ -83,7 +84,6 @@ main h1 {
     gap: 20px;
 }
 
-
 .info-comentarios,
 .info-comentarios-responder {
     display: flex;
@@ -91,26 +91,55 @@ main h1 {
     background: #e7e7e7;
     padding: 20px;
     flex: 1; 
+    position: relative;
+    border-radius: 8px;
 }
 
 .info-comentarios .header,
 .info-comentarios-responder .header {
     display: flex;
     justify-content: space-between;
+    align-items: flex-start;
     padding: 10px;
     background: #400683;
     color: white;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding-right: 15px;
+}
+
+.info-comentarios .header h3,
+.info-comentarios-responder .header h4 {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.2;
+}
+
+.info-comentarios .header h4,
+.info-comentarios-responder .header h5 {
+    margin: 3px 0 0 0;
+    font-size: 12px;
+    opacity: 0.9;
+    font-weight: normal;
+    line-height: 1.2;
 }
 
 .footer-comentarios,
 .footer-comentarios-responder {
     width: 100%;
-    padding: 10px;
+    padding: 10px 0;
     display: flex;
     justify-content: space-between;
     color: #504e4e;
+    margin-top: 10px;
 }
-
 
 .cora, 
 .cora-respuesta {
@@ -129,17 +158,150 @@ main h1 {
     cursor: pointer;
 }
 
+.cora.liked, 
+.cora-respuesta.liked {
+    color: #e0245e;
+}
 
+.cora.disabled, 
+.cora-respuesta.disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+/* ===== MENÚ DE OPCIONES CORREGIDO - ALINEACIÓN FIXED ===== */
+.menu-coment { 
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+}
+
+.menu-btn { 
+    background: none; 
+    border: none; 
+    font-size: 24px; 
+    cursor: pointer; 
+    color: white; 
+    padding: 0;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    line-height: 1;
+}
+
+.menu-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.menu-contenido { 
+    display: none; 
+    position: absolute; 
+    right: 0; 
+    top: 100%; 
+    background: #fff; 
+    min-width: 140px; 
+    border: 1px solid #ccc; 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+    padding: 8px; 
+    border-radius: 6px; 
+    z-index: 1000; 
+    margin-top: 5px;
+}
+
+.menu-contenido button { 
+    width: 100%; 
+    border: none; 
+    padding: 8px 12px;
+    margin: 4px 0;
+    cursor: pointer; 
+    text-align: left; 
+    border-radius: 4px; 
+    background: none; 
+    font-size: 14px;
+    color: #333;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+}
+
+.menu-contenido button:hover { 
+    background: #f0f0f0; 
+    color: #400683;
+}
+
+.menu-contenido hr {
+    margin: 5px 0;
+    border: none;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* ===== FORMULARIO DE RESPUESTAS ===== */
+.formulario-respuesta {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.formulario-respuesta textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #4a0c92;
+    border-radius: 8px;
+    resize: none;
+    min-height: 80px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.formulario-respuesta button {
+    background-color: #400683;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.formulario-respuesta button:hover {
+    background-color: #6a0dad;
+}
+
+/* ===== EDITORES DE TEXTO ===== */
+#texto_edicion, 
+#texto_edicion_res {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #4a0c92;
+    border-radius: 8px;
+    resize: vertical;
+    min-height: 100px;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+/* ===== ÁREA DE COMENTAR PRINCIPAL ===== */
 .container-data {
     position: relative;
     background-color: #f5f5f5;
     padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
 }
 
 .foto-input {
     display: flex;
     align-items: center;
     gap: 15px;
+    margin-bottom: 15px;
 }
 
 .perfil-foto img {
@@ -153,14 +315,14 @@ main h1 {
 #nombre-usuario {
     font-weight: bold;
     color: #400683;
+    font-size: 16px;
 }
-
 
 .mensaje {
     width: 100%;
     min-height: 100px;
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: 10px;
+    padding: 15px;
     font-size: 16px;
     border: 2px solid #4a0c92;
     border-radius: 8px;
@@ -170,11 +332,12 @@ main h1 {
 .btn-comentario {
     background-color: #400683;
     color: white;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
+    margin-top: 15px;
     transition: background-color 0.3s ease;
 }
 
@@ -182,10 +345,43 @@ main h1 {
     background-color: #6a0dad;
 }
 
+/* ===== ESTILOS PARA MOSTRAR EL MENÚ ===== */
+.menu-contenido.show {
+    display: block;
+}
 
 @media (max-width: 1024px) {
     .container-comentarios-responder {
         margin-left: 40px;
+    }
+    
+    .info-comentarios .header,
+    .info-comentarios-responder .header {
+        padding-right: 45px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-comentarios-responder {
+        margin-left: 20px;
+    }
+    
+    .comentarios,
+    .comentarios-responder {
+        padding: 15px;
+    }
+    
+    .info-comentarios .header,
+    .info-comentarios-responder .header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-right: 15px;
+    }
+    
+    .menu-coment {
+        position: absolute;
+        top: 15px;
+        right: 15px;
     }
 }
 
@@ -194,6 +390,7 @@ main h1 {
     .comentarios-responder {
         flex-direction: column; 
         align-items: flex-start;
+        padding: 15px;
     }
 
     .foto-perfil,
@@ -205,6 +402,27 @@ main h1 {
     .info-comentarios,
     .info-comentarios-responder {
         width: 100%;
-        padding: 10px;
+        padding: 15px;
+    }
+    
+    .info-comentarios .header,
+    .info-comentarios-responder .header {
+        padding-right: 40px;
+        position: relative;
+    }
+    
+    .menu-coment {
+        top: 15px;
+        right: 15px;
+    }
+    
+    .header-content {
+        width: calc(100% - 40px);
+    }
+    
+    .menu-btn {
+        position: relative;
+        top: 0;
+        right: 0;
     }
 }

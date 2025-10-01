@@ -225,9 +225,12 @@ if ($evento_id > 0) {
         <?php if ($usuario_logueado): ?>
             // Usuario LOGUEADO - mostrar formulario de respuesta
             const formulario = document.getElementById(`form_respuesta_${idComentario}`);
-            if (formulario) {
-                formulario.style.display = 'block';
+            if(formulario.style.display === "block") {
+                formulario.style.display = "none";
+            } else {
+                formulario.style.display = "block";
             }
+
         <?php else: ?>
             // Usuario NO LOGUEADO - redirigir al login
             alert('Debes iniciar sesión para responder');
@@ -265,6 +268,193 @@ if ($evento_id > 0) {
         })
         .catch(err => console.error("Error:", err));
     }
+
+    // Función para alternar menús de comentarios
+function toggleMenu(idComentario) {
+    const menu = document.getElementById(`opciones_${idComentario}`);
+    menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+}
+
+// Función para alternar menús de respuestas
+function toggleMenuRes(idRespuesta) {
+    const menu = document.getElementById(`opciones_res_${idRespuesta}`);
+    menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+}
+
+// Mostrar editor de comentario
+function mostrarEditor(idComentario, textoOriginal) {
+    document.getElementById(`texto_comentario_${idComentario}`).style.display = 'none';
+    document.getElementById(`editor_comentario_${idComentario}`).style.display = 'block';
+    document.getElementById(`texto_edicion_${idComentario}`).value = textoOriginal;
+    
+    // Ocultar menú de opciones
+    document.getElementById(`opciones_${idComentario}`).style.display = 'none';
+}
+
+// Cancelar edición de comentario
+function cancelarEdicionComentario(idComentario) {
+    document.getElementById(`texto_comentario_${idComentario}`).style.display = 'block';
+    document.getElementById(`editor_comentario_${idComentario}`).style.display = 'none';
+}
+
+// Guardar edición de comentario
+function guardarEdicionComentario(idComentario) {
+    const nuevoTexto = document.getElementById(`texto_edicion_${idComentario}`).value.trim();
+    
+    if (nuevoTexto === "") {
+        alert("El comentario no puede estar vacío.");
+        return;
+    }
+    
+    fetch('../backend/Comentarios/editarcom.php', {
+        method: "POST",
+        body: new URLSearchParams({
+            id: idComentario,
+            texto: nuevoTexto
+        }),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Actualizar el texto del comentario sin recargar
+            document.getElementById(`texto_comentario_${idComentario}`).querySelector('p').textContent = data.nuevoTexto;
+            cancelarEdicionComentario(idComentario);
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(err => console.error("Error:", err));
+}
+
+// Eliminar comentario
+function eliminarComentario(idComentario) {
+    if (!confirm("¿Estás seguro de que quieres eliminar este comentario?")) {
+        return;
+    }
+    
+    fetch('../backend/Comentarios/eliminarcom.php', {
+        method: "POST",
+        body: new URLSearchParams({
+            id: idComentario
+        }),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Eliminar el comentario del DOM sin recargar
+            document.getElementById(`comentario_${idComentario}`).remove();
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(err => console.error("Error:", err));
+}
+
+// Mostrar editor de respuesta
+function mostrarEditorRes(idRespuesta, textoOriginal) {
+    document.getElementById(`texto_respuesta_${idRespuesta}`).style.display = 'none';
+    document.getElementById(`editor_respuesta_${idRespuesta}`).style.display = 'block';
+    document.getElementById(`texto_edicion_res_${idRespuesta}`).value = textoOriginal;
+    
+    // Ocultar menú de opciones
+    document.getElementById(`opciones_res_${idRespuesta}`).style.display = 'none';
+}
+
+// Cancelar edición de respuesta
+function cancelarEdicionRespuesta(idRespuesta) {
+    document.getElementById(`texto_respuesta_${idRespuesta}`).style.display = 'block';
+    document.getElementById(`editor_respuesta_${idRespuesta}`).style.display = 'none';
+}
+
+// Guardar edición de respuesta
+function guardarEdicionRespuesta(idRespuesta) {
+    const nuevoTexto = document.getElementById(`texto_edicion_res_${idRespuesta}`).value.trim();
+    
+    if (nuevoTexto === "") {
+        alert("La respuesta no puede estar vacía.");
+        return;
+    }
+    
+    fetch('../backend/Comentarios/editarres.php', {
+        method: "POST",
+        body: new URLSearchParams({
+            id: idRespuesta,
+            texto: nuevoTexto
+        }),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Actualizar el texto de la respuesta sin recargar
+            document.getElementById(`texto_respuesta_${idRespuesta}`).querySelector('p').textContent = data.nuevoTexto;
+            cancelarEdicionRespuesta(idRespuesta);
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(err => console.error("Error:", err));
+}
+
+// Eliminar respuesta
+function eliminarRespuesta(idRespuesta) {
+    if (!confirm("¿Estás seguro de que quieres eliminar esta respuesta?")) {
+        return;
+    }
+    
+    fetch('../backend/Comentarios/eliminarres.php', {
+        method: "POST",
+        body: new URLSearchParams({
+            id: idRespuesta
+        }),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Eliminar la respuesta del DOM sin recargar
+            document.getElementById(`respuesta_${idRespuesta}`).remove();
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(err => console.error("Error:", err));
+}
+
+// Enviar respuesta (versión actualizada para JSON)
+function enviarRespuesta(idComentario) {
+    const texto = document.getElementById(`texto_respuesta_${idComentario}`).value.trim();
+
+    if (texto === "") {
+        alert("Por favor escribe una respuesta.");
+        return;
+    }
+
+    fetch('../backend/Comentarios/responder.php', {
+        method: "POST",
+        body: new URLSearchParams({
+            id_comentario: idComentario,
+            texto: texto
+        }),
+        headers: { "Content-Type": "application/x-www-form-urlencoded" }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Recargar solo los comentarios (no toda la página)
+            cargarComentarios();
+            // Ocultar el formulario de respuesta
+            document.getElementById(`form_respuesta_${idComentario}`).style.display = 'none';
+            // Limpiar el textarea
+            document.getElementById(`texto_respuesta_${idComentario}`).value = '';
+        } else {
+            alert(data.message);
+        }
+    })
+    .catch(err => console.error("Error:", err));
+}
 </script>
 
 </body>
@@ -283,4 +473,3 @@ if ($evento_id > 0) {
 }
 
 ?>
-

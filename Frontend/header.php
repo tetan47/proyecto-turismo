@@ -1,108 +1,109 @@
 <?php
-
-
+// Iniciar sesión si no está iniciada
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if (!isset($_SESSION['ID_Cliente'])) {
-    $_SESSION['ID_Cliente'] = 1; // Reemplaza con un ID real ej: Lucia 
-}
+include('../backend/Conexion.php');
+
+// ========== FUNCIONES DE VERIFICACIÓN ==========
 
 function esUsuario() {
-    return isset($_SESSION['ID_Cliente']);
-
+    return isset($_SESSION['ID_Cliente']) && isset($_SESSION['logueado']) && $_SESSION['logueado'] === true;
 }
 
-
-require_once '../backend/Conexion.php';
-
-
-$usuarioLogueado = false;
-$rol = null; 
-$nombre = '';
-$imagenPerfil = 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png';
-$datosCargados = false;
-
-// Verificar si hay sesión activa
-if (!empty($_SESSION['usuario_id']) && !empty($_SESSION['rol'])) {
-    $usuarioLogueado = true;
-    $rol = $_SESSION['rol'];
-    $nombre = $_SESSION['nombre'] ?? 'Usuario';
-
+function esOrganizador($conn) {
+    if (!esUsuario()) return false;
     
-    if ($rol === 'cliente' || $rol === 'organizador') {
-        $stmt = $conn->prepare("SELECT imag_perfil FROM cliente WHERE ID_Cliente = ?");
-        $stmt->bind_param('i', $_SESSION['usuario_id']);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($fila = $result->fetch_assoc()) {
-            if (!empty($fila['imag_perfil'])) {
-                $imagenPerfil = $fila['imag_perfil'];
-            }
-        }
-        // Por ahora, usamos la imagen por defecto o la guardada en sesión
-        if (!empty($_SESSION['foto'])) {
-            $imagenPerfil = $_SESSION['foto'];
-        }
-    } elseif ($rol === 'admin') {
-        // Admin: no tiene imagen en cliente, usar ícono por defecto
-        $imagenPerfil = 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png';
-    }
-
-    $datosCargados = true;
+    $stmt = $conn->prepare("SELECT Cedula FROM organizadores WHERE ID_Cliente = ?");
+    $stmt->bind_param('i', $_SESSION['ID_Cliente']);
+    $stmt->execute();
+    $result = $stmt->get_result()->num_rows > 0;
+    $stmt->close();
+    return $result;
 }
+
+function esAdmin($conn) {
+    if (!esUsuario()) return false;
+    
+    // Buscar si el correo del usuario está en la tabla administradores
+    $stmt = $conn->prepare("SELECT ID_Administrador FROM administradores WHERE Correo = ?");
+    $stmt->bind_param('s', $_SESSION['correo']);
+    $stmt->execute();
+    $result = $stmt->get_result()->num_rows > 0;
+    $stmt->close();
+    return $result;
+}
+
+function obtenerDatosUsuario($conn) {
+    if (!esUsuario()) return null;
+    
+    $stmt = $conn->prepare("SELECT Nombre, Apellido, imag_perfil FROM cliente WHERE ID_Cliente = ?");
+    $stmt->bind_param('i', $_SESSION['ID_Cliente']);
+    $stmt->execute();
+    $result = $stmt->get_result()->fetch_assoc();
+    $stmt->close();
+    return $result;
+}
+
+// ========== OBTENER DATOS ==========
+$usuarioLogueado = esUsuario();
+$datosUsuario = $usuarioLogueado ? obtenerDatosUsuario($conn) : null;
+$esOrganizador = $usuarioLogueado ? esOrganizador($conn) : false;
+$esAdmin = $usuarioLogueado ? esAdmin($conn) : false;
+
+// Cerrar conexión
+$conn->close();
 ?>
 
 <link rel="stylesheet" href="css/header.css">
 
 <header>
     <div class="logo">
-        <a href="Index.php">
+        <a href="index.php">
             <img id="logo123" src="../Images/Logo-que-viaje.png" alt="Inicio">
         </a>
     </div>
-
-    <div class="selector-idioma">
-         <form method="GET" style="display:inline;">
-             <select name="lang" onchange="this.form.submit()" style="font-size:14px;">
-                 <option value="es" <?php echo (!isset($_GET['lang']) || $_GET['lang'] === 'es') ? 'selected' : ''; ?>>ES</option>
-                 <option value="en" <?php echo (isset($_GET['lang']) && $_GET['lang'] === 'en') ? 'selected' : ''; ?>>EN</option>
-                  <option value="pt" <?php echo (isset($_GET['lang']) && $_GET['lang'] === 'pt') ? 'selected' : ''; ?>>PT</option>
-            </select>
-    </form>
-    </div> 
     
     <div class="perfil">
-        <?php if ($usuarioLogueado && $datosCargados): ?>
+        <?php if ($usuarioLogueado && $datosUsuario): ?>
+            <!-- Usuario logueado -->
             <div class="espacioimg">
-                <img src="<?php echo htmlspecialchars($imagenPerfil); ?>" 
-                     alt="Perfil de <?php echo htmlspecialchars($nombre); ?>">
+                <img src="<?php echo !empty($datosUsuario['imag_perfil']) ? htmlspecialchars($datosUsuario['imag_perfil']) : 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png'; ?>" 
+                     alt="Perfil de <?php echo htmlspecialchars($datosUsuario['Nombre']); ?>"> 
             </div>
-            <p><?php echo htmlspecialchars($nombre); ?></p>
-
+            <p><?php echo htmlspecialchars($datosUsuario['Nombre']); ?></p>
             
             <div class="container-menu">
-                <button class="menu-btn">&#9776;</button>
-                <div class="menu">
-                    <?php if ($rol === 'organizador'): ?>   
-                        <a href="Crear_eventos.php">Mis Eventos</a>
-                        <a href="Crear_eventos.php">Crear Evento</a>
-                    <?php elseif ($rol === 'admin'): ?>
-                        <a href="Administradores.php">Panel de Administración</a>
-                        <a href="gestionar-usuarios.php">Gestionar Usuarios</a>
-                        <a href="gestionar-eventos.php">Gestionar Eventos</a>
-                    <?php else: // cliente ?>
-                        <a href="convertirse-organizador.php">Convertirse en Organizador</a>
+                <button class="menu-btn" aria-label="Abrir menú">&#9776;</button>
+                <div class="menu" style="display: none;">
+                    
+                    <?php if ($esAdmin): ?>
+                        <!-- Opciones de ADMINISTRADOR -->
+                        <a href="admin-panel.php">🛡️ Panel de Administración</a>
+                        <a href="gestionar-usuarios.php">👥 Gestionar Usuarios</a>
+                        <a href="gestionar-eventos.php">📅 Gestionar Eventos</a>
+                        
+                    <?php elseif ($esOrganizador): ?>
+                        <!-- Opciones de ORGANIZADOR -->
+                        <a href="mis-eventos.php">📅 Mis Eventos</a>
+                        <a href="crear_eventos.php">➕ Crear Evento</a>
+                        
+                    <?php else: ?>
+                        <!-- Opciones de USUARIO COMÚN -->
+                        <a href="convertirse-organizador.php">⭐ Convertirse en Organizador</a>
                     <?php endif; ?>
                     
+                    <!-- Opciones comunes para todos los usuarios logueados -->
+                    <hr style="margin: 10px 0; border: none; border-top: 1px solid #ccc;">
                     <a href="perfil.php">👤 Mi Perfil</a>
-                    <a href="configuracion.php">Configuración</a>
-                    <button type="button" class="btn-cerrar" onclick="cerrarSesion()">Cerrar Sesión</button>
+                    <a href="configuracion.php">⚙️ Configuración</a>
+                    <button type="button" class="btn-cerrar" onclick="cerrarSesion()">🚪 Cerrar Sesión</button>
                 </div>    
             </div>
+            
         <?php else: ?>
+            <!-- Usuario ANÓNIMO (no logueado) -->
             <div class="container-menu">
                 <a class="btn-inicio-sesion" href="login.php">Iniciar Sesión</a>
                 <a class="btn-registrarse" href="register.php">Registrarse</a>
@@ -112,11 +113,30 @@ if (!empty($_SESSION['usuario_id']) && !empty($_SESSION['rol'])) {
 </header>
 
 <script>
-    document.querySelector('.menu-btn').addEventListener('click', function() {
-        const menu = document.querySelector(".menu"); 
-        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    // Menú desplegable
+    const menuBtn = document.querySelector('.menu-btn');
+    if (menuBtn) {
+        menuBtn.addEventListener('click', function() {
+            const menu = document.querySelector(".menu"); 
+            if(menu.style.display === "block") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "block";
+            }
+        });
+    }
+
+    // Cerrar menú al hacer clic fuera
+    document.addEventListener('click', function(event) {
+        const menuBtn = document.querySelector('.menu-btn');
+        const menu = document.querySelector('.menu');
+        
+        if (menu && menuBtn && !menuBtn.contains(event.target) && !menu.contains(event.target)) {
+            menu.style.display = 'none';
+        }
     });
 
+    // Función para cerrar sesión
     function cerrarSesion() {
         if (confirm("¿Estás seguro de que deseas cerrar sesión?")) {
             window.location.href = '../backend/Usuarios/cerrar_sesion.php';

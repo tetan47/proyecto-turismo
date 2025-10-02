@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>¡Qué Viaje!</title>
+  <link rel="stylesheet" href="css/estructura_fundamental.css">
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
@@ -78,23 +79,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="social">
-      <a href="#"><i class="fab fa-whatsapp"></i></a>
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-facebook"></i></a>
-    </div>
-    <div class="links">
-      <a href="#">Soporte</a>
-      <a href="#">Manual de Usuario</a>
-      <a href="mailto:Vivalagrasa@mail.com">Contacto</a>
-    </div>
-  </footer>
-
-
-
-
 <script>
   const carrusel = document.querySelector(".carrusel");
   const elementos = document.querySelectorAll(".elemento");
@@ -128,7 +112,6 @@
     mostrarSlide(index);
   }, 5000);
 </script>
-
-
+<?php include("footer.html") ?>
 </body>
 </html>

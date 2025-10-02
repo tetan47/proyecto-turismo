@@ -1,6 +1,20 @@
-body{
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Para que el padding no agrande los elementos */
+}
+
+body {
     background-color: #a7a7a7;
-    color: #1C1C1C;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* El contenido principal que crece para llenar el espacio */
+main {
+    flex: 1;
 }
 
 input, textarea, select {
@@ -8,6 +22,15 @@ input, textarea, select {
     border: 2px solid rgba(28, 28, 28, 0.2);
     border-radius: 10px;
     font-size: 16px;
+    color: #1C1C1C;
+    outline: none; /* Quita el borde feo por defecto */
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Cuando alguien hace click en un campo, se ve así */
+input:focus, textarea:focus, select:focus {
+    border-color: #2979FF;
+    transform: scale(1.02);
 }
 
 button {
@@ -19,11 +42,50 @@ button {
     font-weight: 500;
     color: white;
     transition: transform 0.3s ease, background 0.3s ease;
-    padding: 3px;
+    padding: 8px 16px;
 }
 
+/* Cuando pasas el mouse por arriba del botón */
 button:hover {
     transform: scale(1.05);
     background-color: #1C1C1C;
     color: #FFFFFF;
+}
+
+a {
+    text-decoration: none; /* Sin subrayado */
+    color: inherit; /* Hereda el color del elemento padre */
+    transition: color 0.3s ease;
+}
+
+/* Cuando pasas el mouse por un link */
+a:hover {
+    color: #2979FF;
+}
+
+/* ===== TÍTULOS ===== */
+/* Configuración general para todos los títulos */
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 10px;
+}
+
+img {
+    max-width: 100%; /* No se salen del contenedor */
+    height: auto; /* Mantienen proporciones */
+    border-radius: 8px;
+}
+
+p {
+    line-height: 1.6; /* Espaciado entre líneas */
+    margin-bottom: 10px;
+    color: #1C1C1C;
+}
+
+/* La barra de navegación principal */
+nav {
+    background: #fff;
+    padding: 15px 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 20px;
 }

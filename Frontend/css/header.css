@@ -1,139 +1,278 @@
+/* HEADER STICKY */
 header {
-    max-height: 20VH;
+    position: sticky;
+    top: 0;
+    z-index: 999;
     background-color: #02b3c7;
     color: white;
-    padding: 10px 20px;
-    margin-bottom: 20px;
+    padding: 8px 20px;
+    margin-bottom: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    gap: 15px;
 }
 
-h1 {
-    margin: 0 30px;
-    flex-grow: 1;
-    text-align: center;
-}
-
+/* LOGO */
 .logo {
     display: flex;
     align-items: center;
-
+    flex-shrink: 0;
 }
 
 #logo123 {
-    width: 15vmin;
-    height: 15vmin;
+    width: 50px;
+    height: 50px;
+    transition: transform 0.3s ease;
 }
 
+#logo123:hover {
+    transform: scale(1.05);
+}
+
+/* TÍTULO */
+header h1 {
+    margin: 0 20px;
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+}
+
+/* PERFIL */
 .perfil {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
     position: relative;
+}
+
+.espacioimg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transition: border-color 0.3s ease;
+}
+
+.espacioimg:hover {
+    border-color: rgba(255, 255, 255, 0.8);
 }
 
 .perfil img {
     width: 100%;
     height: 100%;
-    object-fit: cover;  /* recorta la imagen para llenar el cuadro */
+    object-fit: cover;
     display: block;
-    border-radius: 50%;
-}
-
-.espacioimg {
-    width: 10vmin;
-    height: 10vmin;
-  
 }
 
 .perfil p {
     margin: 0;
-    font-weight: bold;
+    font-weight: 500;
+    font-size: 0.95rem;
+    color: white;
 }
 
+/* MENÚ DESPLEGABLE */
 .container-menu {
-    flex-direction: row ; 
     position: relative;
+    display: flex;
+    align-items: center;
 }
-
 
 .menu-btn {
-    width:  40px ; 
-    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
     cursor: pointer;
-    background: none;
+    background: rgba(255, 255, 255, 0.1);
     border: none;
     color: white;
-    padding: 5px 10px;
+    border-radius: 8px;
+    display: flex;
     align-items: center;
-    display: block;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.menu-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .menu {
     position: absolute;
-    top: 100%;
+    top: calc(100% + 10px);
     right: 0;
     display: none;
     background-color: #150958;
-    padding: 15px;
-    border: 3px solid #fff;
-    border-radius: 8px;
+    padding: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     z-index: 1000;
-    min-width: 150px;
+    min-width: 200px;
+    animation: fadeIn 0.2s ease;
 }
 
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-
-.menu a, .btn-cerrar {
+.menu a, 
+.btn-cerrar {
     color: white;
     background: none;
     border: none;
     cursor: pointer;
     text-decoration: none;
     font-size: 14px;
-    padding: 8px 12px;
+    padding: 10px 12px;
     display: block;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.2s ease;
+    border-radius: 6px;
+    width: 100%;
+    text-align: left;
 }
 
-.menu a:hover, .btn-cerrar:hover {
-    background-color: #1c148c;
-    border-radius: 4px;
-   
+.menu a:hover, 
+.btn-cerrar:hover {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-a {
-    text-decoration: none;
-    color: white;
+.menu hr {
+    margin: 8px 0;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-
+/* BOTONES PARA USUARIOS NO LOGUEADOS */
 .btn-inicio-sesion {
-    color: #000;
-    font-size: 17px;
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
     cursor: pointer;
     text-decoration: none;
-    margin-right: 10px;
+    margin-right: 12px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: background 0.3s ease;
 }
 
 .btn-inicio-sesion:hover {
-    text-decoration: underline;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .btn-registrarse {
-    background: #fff;
-    border: 1.5px solid #0078d4;
-    color: #0078d4;
-    font-size: 17px;
-    font-weight: 500;
-    padding: 6px 14px;
+    background: white;
+    border: none;
+    color: #02b3c7;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 8px 18px;
     border-radius: 20px;
     cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .btn-registrarse:hover {
-    background: #0078d4;
-    color: #fff;
+    background: #1C1C1C;
+    color: white;
+    transform: scale(1.05);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 15px;
+        gap: 10px;
+    }
+    
+    #logo123 {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .perfil p {
+        display: none;
+    }
+    
+    .espacioimg {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .perfil {
+        gap: 10px;
+    }
+    
+    header h1 {
+        font-size: 1.2rem;
+        margin: 0 10px;
+    }
+    
+    .btn-inicio-sesion {
+        font-size: 14px;
+        margin-right: 10px;
+        padding: 6px 10px;
+    }
+    
+    .btn-registrarse {
+        font-size: 14px;
+        padding: 7px 16px;
+    }
+    
+    .menu-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 10px 12px;
+        gap: 8px;
+    }
+    
+    #logo123 {
+        width: 42px;
+        height: 42px;
+    }
+    
+    .espacioimg {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .perfil {
+        gap: 8px;
+    }
+    
+    .btn-inicio-sesion {
+        font-size: 13px;
+        padding: 5px 8px;
+        margin-right: 8px;
+    }
+    
+    .btn-registrarse {
+        font-size: 13px;
+        padding: 6px 14px;
+    }
+    
+    .menu-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
 }

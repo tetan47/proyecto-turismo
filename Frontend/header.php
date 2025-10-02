@@ -56,8 +56,8 @@ $esAdmin = $usuarioLogueado ? esAdmin($conn) : false;
 $conn->close();
 ?>
 
+<link rel="stylesheet" href="css/estructura_fundamental.css">
 <link rel="stylesheet" href="css/header.css">
-
 <header>
     <div class="logo">
         <a href="index.php">

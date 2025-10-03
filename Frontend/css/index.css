@@ -46,7 +46,6 @@
 .prev, .next {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%);
   background: rgba(0,0,0,0.5);
   color: white;
   border: none;
@@ -63,11 +62,6 @@
 
 .prev:hover, .next:hover {
   background: rgba(0,0,0,0.8);
-}
-
-.elemento:hover {
-  transform: scale(1.05);
-  z-index: 10;
 }
 
 .botones {

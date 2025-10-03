@@ -26,7 +26,7 @@ Nuestros objetivos son:
 - Incluir geolocalización mediante API de mapas.  
 - Diseñar un sistema accesible y fácil de usar.  
 
-Para este proyecto hemos usado: VSestudio,Xampp,html5,css,js,phpMyAdmin. y MySQL.
+Para este proyecto hemos usado: VScode,XAMPP,HTML5,css,js,phpMyAdmin. y MySQL.
 
 Requisitos previos
 
@@ -43,7 +43,7 @@ Instalación
    - Descargar el contenido del repositorio en tu computadora.  
 
 2. Instalar XAMPP  
-   - Durante la instalación asegurarse de marcar: Apache, MySQL y phpMyAdmin.  
+   - Durante la instalación asegurarse de marcar: Apache y MySQL.
 
 3. Ejecutar servicios  
    - Abrir el XAMPP Control Panel.  
@@ -66,10 +66,10 @@ Dentro de esta base de datos se encuentra la tabla `evento`, donde se almacenar�
 C:\xampp\htdocs\
 
 Ejemplo:  
-C:\xampp\htdocs\eventos_salto
+C:\xampp\htdocsproyecto-turismo
 
 2. Abrir el navegador y escribir en la barra de direcciones:  
-http://localhost/eventos_salto
+http://localhost/proyecto-turismo
 
 3. El sistema estará disponible para su uso.  
 
@@ -85,3 +85,4 @@ http://localhost/eventos_salto
 3. Guardar el evento.  
 4. Verificar en phpMyAdmin, dentro de la tabla `evento`, que el registro se insertó correctamente.  
 5. Visualizar el evento en la página principal del sistema.  
+   

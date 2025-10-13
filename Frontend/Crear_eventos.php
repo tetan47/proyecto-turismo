@@ -45,7 +45,7 @@
     <input type="number" id="capacidad" name="capacidad" min="1" required /><br /><br />
 
     <label for="imagen">Imagen del evento</label><br />
-    <input type="file" id="imagen" name="imagen" accept="image/*" /><br />
+    <input type="file" class="btn-img" id="imagen" name="imagen" accept="image/*" /><br />
     <img id="preview" alt="Vista previa de la imagen" /><br /><br />
 
     <button type="submit">subir</button>

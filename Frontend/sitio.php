@@ -72,7 +72,7 @@ if ($sitio_id > 0) {
             <p><strong>Categoría:</strong> <?php echo htmlspecialchars($sitio['Categoria']); ?></p>
             <p><strong>Teléfono:</strong> <?php echo htmlspecialchars($sitio['telefono'] ?? 'No disponible'); ?></p>
             <p><strong>Descripción:</strong> <?php echo nl2br(htmlspecialchars($sitio['Descripcion'] ?? 'Sin descripción disponible.')); ?></p>
-        </div>
+        </div> 
     </section>
 
     <!---COMENTARIOS--->

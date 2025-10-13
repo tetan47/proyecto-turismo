@@ -41,7 +41,7 @@
     </div>
 
     <section class="catalogo" id="catalogo-eventos">
-    <!-- Aquí se cargarán los eventos filtrados -->
+    <!-- Aquí se cargarán los sitios filtrados -->
   </section>
 
     <script>

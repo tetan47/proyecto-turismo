@@ -41,15 +41,19 @@ if ($result->num_rows === 0) {
     echo '<p style="padding:2em;text-align:center;color:#888;">No se encontraron sitios.</p>';
 } else {
     while ($row = $result->fetch_assoc()) {
-          // Si es un iframe de Google Maps, mostrar solo el enlace "Ver en el mapa"
-    if (strpos($row['Ubicacion'], '<iframe') !== false) {
-        $ubicacion = 'Ver en el mapa';
-    } else {
-        $ubicacion = htmlspecialchars($row['Ubicacion']);
-    }
+        // Si es un iframe de Google Maps, mostrar solo el enlace "Ver en el mapa"
+        if (strpos($row['Ubicacion'], '<iframe') !== false) {
+            $ubicacion = 'Ver en el mapa';
+        } else {
+            $ubicacion = htmlspecialchars($row['Ubicacion']);
+        }
+        
+        // Validar y limpiar la URL de la imagen
+        $imagen = !empty($row['Imagen']) ? htmlspecialchars($row['Imagen']) : 'https://upload.wikimedia.org/wikipedia/commons/0/0e/DefaultImage.png';
+        
         echo '<div class="evento">';
         echo '<div class="img-evento">';
-        echo '<img src="' . htmlspecialchars($row['Imagen']) . '" alt="Imagen sitio" />';
+        echo '<img src="' . $imagen . '" alt="' . htmlspecialchars($row['Titulo']) . '" onerror="this.src=\'https://upload.wikimedia.org/wikipedia/commons/0/0e/DefaultImage.png\'" />';
         echo '</div>';
         echo '<div class="info-evento">';
         echo '<h3>' . htmlspecialchars($row['Titulo']) . '</h3>';

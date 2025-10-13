@@ -5,8 +5,9 @@
 }
 
 body {
-    background-color: #a7a7a7;
+    background-color: #0D0D0D;
     font-family: Arial, sans-serif;
+    color: #ffffff;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -18,38 +19,44 @@ main {
 }
 
 input, textarea, select {
-    background: #F5F5F5;
-    border: 2px solid rgba(28, 28, 28, 0.2);
+    background: rgba(28, 28, 28, 0.85);
+    border: 2px solid rgba(157, 77, 248, 0.3);
     border-radius: 10px;
     font-size: 16px;
-    color: #1C1C1C;
-    outline: none; /* Quita el borde feo por defecto */
-    transition: border-color 0.2s ease, transform 0.2s ease;
+    color: #e0e0e0;
+    outline: none; /* Quita el borde por defecto */
+    transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+input::placeholder, textarea::placeholder, select::placeholder {
+    color: rgba(224, 224, 224, 0.5);
 }
 
 /* Cuando alguien hace click en un campo, se ve así */
 input:focus, textarea:focus, select:focus {
-    border-color: #2979FF;
+    border-color: #9d4df8;
+    background: rgba(28, 28, 28, 0.95);
     transform: scale(1.02);
+    box-shadow: 0 0 0 3px rgba(157, 77, 248, 0.15);
 }
 
 button {
-    background: #2979FF;
+    background-color: #400683;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     font-size: 16px;
-    font-weight: 500;
-    color: white;
-    transition: transform 0.3s ease, background 0.3s ease;
-    padding: 8px 16px;
+    font-weight: 600;
+    color: #FFFFFF;
+    transition: all 0.3s ease;
+    padding: 12px 24px;
+    box-shadow: 0 4px 15px rgba(64, 6, 131, 0.3);
 }
 
 /* Cuando pasas el mouse por arriba del botón */
 button:hover {
-    transform: scale(1.05);
-    background-color: #1C1C1C;
-    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(157, 77, 248, 0.5);
 }
 
 a {
@@ -67,6 +74,7 @@ a:hover {
 /* Configuración general para todos los títulos */
 h1, h2, h3, h4, h5, h6 {
     margin-bottom: 10px;
+    color: #210053;
 }
 
 img {
@@ -78,12 +86,12 @@ img {
 p {
     line-height: 1.6; /* Espaciado entre líneas */
     margin-bottom: 10px;
-    color: #1C1C1C;
+    color: #f0e3e2;
 }
 
 /* La barra de navegación principal */
 nav {
-    background: #fff;
+    background: #1E293B;
     padding: 15px 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;

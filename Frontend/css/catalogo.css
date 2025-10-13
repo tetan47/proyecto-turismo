@@ -80,13 +80,15 @@ nav {
 /* CATÁLOGO DE EVENTOS */
 .catalogo {
     max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
     padding: 20px;
-    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    width: 100%;
+    margin: 0 auto;
+  
+
 }
 
 /* TARJETA DE EVENTO */

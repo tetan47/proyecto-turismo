@@ -58,13 +58,10 @@ $conn->close();
 
 <link rel="stylesheet" href="css/estructura_fundamental.css">
 <link rel="stylesheet" href="css/header.css">
-<link rel="icon" href="/Images/logo-queviaje.webp">
 <header>
     <div class="logo">
         <a href="index.php">
-            <h1>¡QUE <span>VIAJE!</span></h1>
-            <p>LO QUE PASA EN <span>SALTO</span>, PASA ACÁ.</p>
-
+            <img id="logo123" src="../Images/Logo-que-viaje.png" alt="Inicio">
         </a>
     </div>
     

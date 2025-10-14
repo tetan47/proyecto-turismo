@@ -1,7 +1,3 @@
-body {
-    background-color: #f0f0f0;
-}
-
 /* CONTENEDOR DE NAVEGACIÓN */
 .contenedor_nav {
     display: flex;
@@ -13,10 +9,11 @@ body {
 
 nav {
     width: 100%;
-    background: #fff;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     padding: 25px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    border: 1px solid rgba(157, 77, 248, 0.3);
 }
 
 /* FORMULARIO DE BÚSQUEDA */
@@ -46,23 +43,17 @@ nav {
 .busqueda-eventos button {
     padding: 10px 24px;
     min-width: 110px;
-    background: #0097A7;
-    color: #fff;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.busqueda-eventos button:hover {
-    background: #00838F;
-    transform: scale(1.05);
 }
 
 #mostrar-filtros {
-    background: #546E7A;
+    background: rgba(157, 77, 248, 0.2);
+    border: 2px solid #9d4df8;
+    color: #9d4df8;
 }
 
 #mostrar-filtros:hover {
-    background: #455A64;
+    background: rgba(157, 77, 248, 0.4);
+    color: #ffffff;
 }
 
 /* FILTROS DESPLEGABLES */
@@ -71,7 +62,7 @@ nav {
     display: none;
     margin-top: 15px;
     padding-top: 15px;
-    border-top: 2px solid #E0E0E0;
+    border-top: 2px solid rgba(157, 77, 248, 0.3);
     gap: 10px;
     flex-wrap: wrap;
     justify-content: center;
@@ -80,42 +71,47 @@ nav {
 /* CATÁLOGO DE EVENTOS */
 .catalogo {
     max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
     padding: 20px;
-    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    width: 100%;
+    margin: 0 auto;
+  
+
 }
 
 /* TARJETA DE EVENTO */
 .evento {
     display: flex;
     flex-direction: column;
-    background: #fff;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     width: 280px;
     min-width: 280px;
     max-width: 280px;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(157, 77, 248, 0.3);
     transition: all 0.3s ease;
 }
 
 .evento:hover {
     transform: translateY(-5px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 25px rgba(157, 77, 248, 0.4);
+    border-color: rgba(157, 77, 248, 0.5);
 }
 
 .img-evento {
     width: 100%;
     height: 200px;
     overflow: hidden;
-    background: #e0e0e0;
+    background: #0a0a14;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-bottom: 2px solid rgba(157, 77, 248, 0.3);
 }
 
 .img-evento img {
@@ -142,20 +138,20 @@ nav {
 .evento h3 {
     font-size: 1.2rem;
     font-weight: 600;
-    color: #1C1C1C;
+    color: #9d4df8;
     margin: 0 0 8px 0;
     line-height: 1.3;
 }
 
 .evento p {
-    color: #666;
+    color: #b0b0b0;
     font-size: 14px;
     margin: 4px 0;
     line-height: 1.5;
 }
 
 .evento p strong {
-    color: #1C1C1C;
+    color: #e0e0e0;
     font-weight: 600;
 }
 
@@ -163,7 +159,7 @@ nav {
 .boton-ver-detalles {
     display: inline-block;
     padding: 12px 20px;
-    background: #0097A7;
+    background-color:#400683;
     color: white;
     text-decoration: none;
     border-radius: 8px;
@@ -172,20 +168,21 @@ nav {
     transition: all 0.3s ease;
     cursor: pointer;
     margin-top: auto;
+    box-shadow: 0 3px 10px rgba(64, 6, 131, 0.3);
 }
 
 .boton-ver-detalles:hover {
-    background: #00838F;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 151, 167, 0.3);
+    box-shadow: 0 5px 15px rgba(157, 77, 248, 0.5);
     color: white;
 }
 
 .boton-volver {
     display: inline-block;
     padding: 12px 24px;
-    background: #6c757d;
-    color: white;
+    background: rgba(157, 77, 248, 0.2);
+    color: #9d4df8;
+    border: 2px solid #9d4df8;
     text-decoration: none;
     border-radius: 8px;
     font-weight: 600;
@@ -194,10 +191,10 @@ nav {
 }
 
 .boton-volver:hover {
-    background: #545b62;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+    background: #9d4df8;
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(157, 77, 248, 0.3);
 }
 
 /* RESPONSIVE */

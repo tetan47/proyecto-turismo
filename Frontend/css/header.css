@@ -16,6 +16,7 @@ header {
 }
 
 /* LOGO */
+/*
 .logo {
     display: flex;
     align-items: center;
@@ -31,8 +32,46 @@ header {
 #logo123:hover {
     transform: scale(1.05);
 }
-
+*/
 /* TÍTULO */
+
+.logo {
+  text-align: center;
+  transform: rotate(-3deg);
+  font-family: 'Poppins', 'Arial Black', sans-serif;
+  user-select: none;
+  line-height: 1.1;
+}
+
+/* Título principal */
+.logo h1 {
+  font-size: 3rem;
+  color: #ffffff; 
+  font-weight: 900;
+  margin: 0;
+  letter-spacing: -2px;
+}
+
+/* Segunda palabra (VIAJE!) */
+.logo h1 span {
+  color:#ffffff;
+}
+
+/* Eslogan */
+.logo p {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffffff; /* Naranja */
+  margin-top: 0.2em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Resaltar SALTO */
+.logo p span {
+  color: #ff6600;
+}
+
 header h1 {
     margin: 0 20px;
     flex-grow: 1;
@@ -197,12 +236,29 @@ header h1 {
         padding: 10px 15px;
         gap: 10px;
     }
-    
+    /*
     #logo123 {
         width: 45px;
         height: 45px;
     }
-    
+    */
+
+    .logo h1 {
+         font-size: 2.5rem;
+    }
+        .logo p {
+        font-size: 1rem;
+    }
+
+    header h1 {
+        margin: 0 20px;
+        flex-grow: 1;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: white;
+    }
+
     .perfil p {
         display: none;
     }
@@ -244,12 +300,20 @@ header h1 {
         padding: 10px 12px;
         gap: 8px;
     }
-    
+    /*
     #logo123 {
         width: 42px;
         height: 42px;
     }
-    
+    */
+
+    .logo h1 {
+    font-size: 2.5rem;
+  }
+    .logo p {
+    font-size: 1rem;
+  }
+
     .espacioimg {
         width: 36px;
         height: 36px;

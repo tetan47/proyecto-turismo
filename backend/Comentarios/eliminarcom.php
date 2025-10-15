@@ -3,6 +3,7 @@ include('../Conexion.php');
 session_start();
 
 header('Content-Type: application/json');
+
 $response = ['success' => false, 'message' => ''];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -10,16 +11,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario = $_SESSION['ID_Cliente'] ?? 0;
 
     if ($usuario) {
-        $sql = "DELETE FROM comentarios WHERE ID_Comentario=? AND ID_Cliente=?";
+        $sql = "DELETE FROM comentarios WHERE ID_Comentario = ? AND ID_Cliente = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ii", $id, $usuario);
-        
+
         if ($stmt->execute()) {
             $response['success'] = true;
-            $response['message'] = 'Comentario eliminado correctamente';
+            $response['message'] = 'Comentario eliminado correctamente (respuestas también eliminadas)';
         } else {
             $response['message'] = 'Error al eliminar el comentario';
         }
+
         $stmt->close();
     } else {
         $response['message'] = 'Usuario no autenticado';
@@ -30,4 +32,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 echo json_encode($response);
 exit;
-?>
+

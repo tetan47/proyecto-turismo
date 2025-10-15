@@ -1,4 +1,3 @@
-
 .hero {
   background: linear-gradient(135deg, #168AAD 0%, #02b3c7 100%);
   color: white;
@@ -713,7 +712,7 @@
   }
 }
 
-
+/* Celulares pequeños */
 @media (max-width: 480px) {
   .hero {
     padding: 60px 15px;
@@ -770,7 +769,7 @@
   }
 
   .carrusel {
-    transition: none; /* Desactivar transition en móvil */
+    transition: none; /* Desactiva la transicion */
     scroll-behavior: smooth;
   }
 
@@ -779,12 +778,11 @@
     height: 400px;
   }
 
-  /* Ocultar botones en móvil */
+  /* Oculta los  botones*/
   .prev, .next {
     display: none;
   }
-
-  /* Ajustar caption para móvil */
+  /* Ajusta el caption */
   .carrusel-caption {
     transform: translateY(0);
     padding: 20px 15px;
@@ -799,7 +797,8 @@
     font-size: 0.85rem;
   }
 
-  /* Indicadores más visibles en móvil */
+
+  /* Indicadores más visibles en el celular */
   .carrusel-indicators {
     bottom: 15px;
   }
@@ -808,7 +807,8 @@
     width: 8px;
     height: 8px;
   }
-}
+
+  }
 
 @media (max-width: 480px) {
   .elemento {

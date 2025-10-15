@@ -197,6 +197,45 @@ nav {
     box-shadow: 0 4px 12px rgba(157, 77, 248, 0.3);
 }
 
+/* labels */
+#filtros {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.grupo-filtro {
+    display: flex;
+    gap: 15px;
+}
+
+.grupo-filtro > div {
+    flex: 1;
+}
+
+#filtros label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #9d4df8;
+    font-size: 14px;
+     margin-top: 5px;
+}
+
+#filtros input[type="date"],
+#filtros input[type="time"],
+#filtros select {
+    width: 100%;
+   
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .grupo-filtro {
+        flex-direction: column;
+    }
+}
+
 /* RESPONSIVE */
 @media (max-width: 1024px) {
     .catalogo {

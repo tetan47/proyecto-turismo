@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-10-2025 a las 14:36:05
+-- Tiempo de generación: 15-10-2025 a las 18:19:10
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -121,13 +121,12 @@ CREATE TABLE `comentarios` (
 INSERT INTO `comentarios` (`ID_Comentario`, `ID_Cliente`, `ID_Evento`, `ID_Sitio`, `LIKES`, `Texto`, `Creación_Comentario`, `Cédula`, `usuarios_like`) VALUES
 (1, 1, 1, NULL, 12, 'Muy buen ambiente y productos.', '2025-06-11 00:00:00', NULL, ''),
 (2, 2, 2, NULL, 9, 'Excelente sonido y organización.', '2025-06-16 00:00:00', NULL, ''),
-(3, 2, 1, NULL, 11, 'Muy limpio y ordenado', '2025-09-27 00:00:00', NULL, '1,5'),
 (6, 1, 5, NULL, NULL, 'Primer comentario', '2025-09-03 19:27:06', NULL, NULL),
 (8, 1, 5, NULL, NULL, 'Primer comentario', '2025-09-03 19:29:14', NULL, NULL),
 (9, 1, 5, NULL, NULL, 'Segundo comentario', '2025-09-03 19:29:14', NULL, NULL),
 (10, 1, 1, NULL, 1, 'me gustó mucho xd .', '2025-09-15 16:33:19', NULL, '1'),
 (12, 1, 1, NULL, 0, 'pruebas', '2025-09-17 10:55:35', NULL, NULL),
-(14, 5, 1, NULL, 0, 'Así era ella', '2025-10-03 11:14:29', NULL, NULL),
+(14, 5, 1, NULL, 0, 'Así era ella', '2025-10-03 11:14:29', NULL, ''),
 (15, 5, NULL, 2, 1, 'Fui con mi perra y me corrieron 😞', '2025-10-09 10:59:42', NULL, '5'),
 (17, 5, NULL, 5, 0, 'Qué se hace?', '2025-10-09 12:29:27', NULL, NULL);
 
@@ -141,6 +140,7 @@ CREATE TABLE `eventos` (
   `ID_Evento` int(11) NOT NULL,
   `Título` varchar(50) NOT NULL,
   `Descripción` varchar(200) NOT NULL,
+  `Capacidad` int(11) NOT NULL DEFAULT 0,
   `Creacion_Evento` date DEFAULT current_timestamp(),
   `Ubicacion` varchar(50) DEFAULT NULL,
   `Cédula` varchar(10) DEFAULT NULL,
@@ -155,11 +155,11 @@ CREATE TABLE `eventos` (
 -- Volcado de datos para la tabla `eventos`
 --
 
-INSERT INTO `eventos` (`ID_Evento`, `Título`, `Descripción`, `Creacion_Evento`, `Ubicacion`, `Cédula`, `Hora`, `imagen`, `categoria`, `Fecha_Inicio`, `Fecha_Fin`) VALUES
-(1, 'Feria de Artesanos', 'Evento cultural con productos locales.', '2025-06-10', 'Plaza Artigas', '12345678', '12:00:00', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQZeYDEJsUpT3ezV087qItQsAA6AK-5sRm4Q&s', 'Otros', '2025-08-30', NULL),
-(2, 'Concierto de Rock', 'Banda local en vivo.', '2025-06-15', 'Teatro Larrañaga', '87654321', '21:30:00', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzNOofyD4Mr6H45aMbkOV9nVoykLczluR1Pw&s', 'Música', '2026-01-02', NULL),
-(3, 'Fiesta de Aaron', 'Festejamos el cumple de Aaron', '2025-08-29', 'Casa de Aaron', '12345678', '00:00:00', 'https://upload.wikimedia.org/wikipedia/commons/0/0e/DefaultImage.png', 'Otros', '2025-09-10', NULL),
-(4, 'Prueba 4', 'xd', '2025-11-21', 'Casa de Aaron', '12345678', '00:00:00', 'https://upload.wikimedia.org/wikipedia/commons/0/0e/DefaultImage.png', 'Otros', '2025-11-21', NULL);
+INSERT INTO `eventos` (`ID_Evento`, `Título`, `Descripción`, `Capacidad`, `Creacion_Evento`, `Ubicacion`, `Cédula`, `Hora`, `imagen`, `categoria`, `Fecha_Inicio`, `Fecha_Fin`) VALUES
+(1, 'Feria de Artesanos', 'Evento cultural con productos locales.', 0, '2025-06-10', 'Plaza Artigas', '12345678', '12:00:00', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQZeYDEJsUpT3ezV087qItQsAA6AK-5sRm4Q&s', 'Otros', '2025-08-30', NULL),
+(2, 'Concierto de Rock', 'Banda local en vivo.', 0, '2025-06-15', 'Teatro Larrañaga', '87654321', '21:30:00', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzNOofyD4Mr6H45aMbkOV9nVoykLczluR1Pw&s', 'Música', '2026-01-02', NULL),
+(3, 'Fiesta de Aaron', 'Festejamos el cumple de Aaron', 0, '2025-08-29', 'Casa de Aaron', '12345678', '00:00:00', 'https://upload.wikimedia.org/wikipedia/commons/0/0e/DefaultImage.png', 'Otros', '2025-09-10', NULL),
+(4, 'Prueba 4', 'xd', 0, '2025-11-21', 'Casa de Aaron', '12345678', '00:00:00', 'https://upload.wikimedia.org/wikipedia/commons/0/0e/DefaultImage.png', 'Otros', '2025-11-21', NULL);
 
 -- --------------------------------------------------------
 
@@ -207,7 +207,6 @@ INSERT INTO `respondercomentario` (`comentario_responder`, `respuesta`, `ID_Come
 (5, 'quien sos lucia?? que haces comentando la pagina de mi noviO?', 1, '2025-09-16 09:37:45', 1, 1, '1'),
 (8, 'prueba 1', 12, '2025-09-18 08:43:55', 1, 1, '1'),
 (9, 'Hola me llamo Kaze', 1, '2025-10-03 11:14:43', 5, 0, NULL),
-(10, 'huh', 3, '2025-10-03 12:40:30', 1, 0, NULL),
 (12, 'jajaj XD', 15, '2025-10-09 11:10:06', 5, 1, '5');
 
 -- --------------------------------------------------------
@@ -295,8 +294,8 @@ ALTER TABLE `organizadores`
 --
 ALTER TABLE `respondercomentario`
   ADD PRIMARY KEY (`comentario_responder`),
-  ADD KEY `ID_Comentario` (`ID_Comentario`),
-  ADD KEY `ID_Cliente` (`ID_Cliente`);
+  ADD KEY `ID_Cliente` (`ID_Cliente`),
+  ADD KEY `fk_ID_Comentario` (`ID_Comentario`);
 
 --
 -- Indices de la tabla `sitioturistico`
@@ -324,7 +323,7 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `comentarios`
 --
 ALTER TABLE `comentarios`
-  MODIFY `ID_Comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `ID_Comentario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `eventos`
@@ -336,7 +335,7 @@ ALTER TABLE `eventos`
 -- AUTO_INCREMENT de la tabla `respondercomentario`
 --
 ALTER TABLE `respondercomentario`
-  MODIFY `comentario_responder` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `comentario_responder` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `sitioturistico`
@@ -437,6 +436,7 @@ ALTER TABLE `organizadores`
 -- Filtros para la tabla `respondercomentario`
 --
 ALTER TABLE `respondercomentario`
+  ADD CONSTRAINT `fk_ID_Comentario` FOREIGN KEY (`ID_Comentario`) REFERENCES `comentarios` (`ID_Comentario`) ON DELETE CASCADE,
   ADD CONSTRAINT `respondercomentario_ibfk_1` FOREIGN KEY (`ID_Comentario`) REFERENCES `comentarios` (`ID_Comentario`),
   ADD CONSTRAINT `respondercomentario_ibfk_2` FOREIGN KEY (`ID_Cliente`) REFERENCES `cliente` (`ID_Cliente`);
 COMMIT;

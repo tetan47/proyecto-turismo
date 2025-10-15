@@ -10,6 +10,27 @@
     <div class="grid-eventos" id="lista-eventos">
         <!-- Los eventos se generan aca -->
     </div>
+ <!--Div de página en desarrollo futuro-->
+    <div style="position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #f8d7da;
+      color: #721c24;
+      padding: 20px 30px;
+      border: 1px solid #f5c6cb;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 9999;
+      font-family: sans-serif;">
+        <h2>Página en Desarrollo</h2>
+        <p>Estamos trabajando para implementar la funcionalidad completa de validación de eventos. Pronto podrás revisar, validar o descartar eventos propuestos por los usuarios.</p>
+        <p>Gracias por su paciencia profesores.</p>
+        <a href="Index.php" style="text-decoration: underline;  color: #721c24; ">Volver</a>
+ 
+    
+
+
 
     <script>
         // Ejemplo de eventos a validar

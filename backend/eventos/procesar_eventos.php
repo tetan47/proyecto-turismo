@@ -95,7 +95,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (in_array($tipo_archivo, $tipos_permitidos)) {
             // Validar el tamaño (máximo 5MB)
             if ($imagen['size'] <= 5000000) {
-                $directorio_destino = '../../portadas-eventos/';
+                // Usar ruta absoluta desde la raíz del servidor
+                $directorio_destino = $_SERVER['DOCUMENT_ROOT'] . '/portadas-eventos/';
+                
                 if (!file_exists($directorio_destino)) {
                     mkdir($directorio_destino, 0777, true);
                 }
@@ -107,7 +109,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 
                 // Mover el archivo subido al directorio destino
                 if (move_uploaded_file($imagen['tmp_name'], $ruta_destino)) {
-                    $imagen_url = '../Images/eventos/' . $nombre_archivo;
+                    // Usar ruta absoluta desde la raíz del sitio web
+                    $imagen_url = '/portadas-eventos/' . $nombre_archivo;
                 } else {
                     echo "<script>alert('Error al subir la imagen. Se usará la imagen por defecto.');</script>";
                 }
@@ -123,13 +126,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
     
-    $sql = "INSERT INTO eventos (Título, Descripción, Ubicacion, Hora, imagen, categoria, Fecha_Inicio, Fecha_Fin, Cédula, capacidad) 
+    $sql = "INSERT INTO eventos (Título, Descripción, Ubicacion, Hora, imagen, categoria, Fecha_Inicio, Fecha_Fin, Cédula, Capacidad) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     
     // Preparar la sentencia
     if ($stmt = mysqli_prepare($conn, $sql)) {
         // Vincular los parámetros
-        mysqli_stmt_bind_param($stmt, "ssssssssss", 
+        mysqli_stmt_bind_param($stmt, "sssssssssi", 
             $titulo, 
             $descripcion, 
             $ubicacion, 

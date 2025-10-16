@@ -23,7 +23,7 @@ if ($evento_id > 0) {
     // Consultar el evento específico
     $sql = "SELECT e.*, c.Nombre
         FROM eventos e
-        INNER JOIN organizador o ON e.Cédula = o.Cedula
+        INNER JOIN organizadores o ON e.Cédula = o.Cedula
         INNER JOIN cliente c ON o.ID_Cliente = c.ID_Cliente
         WHERE e.ID_Evento = ?";
     $stmt = $conn->prepare($sql);

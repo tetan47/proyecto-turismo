@@ -1,7 +1,11 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* Para que el padding no agrande los elementos */
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
 }
 
 body {
@@ -13,9 +17,17 @@ body {
     flex-direction: column;
 }
 
-/* El contenido principal que crece para llenar el espacio */
 main {
-    flex: 1;
+    flex: 1 0 auto;
+}
+
+section {
+    flex: 1 0 auto;
+}
+
+footer {
+    flex-shrink: 0;
+    margin-top: auto; 
 }
 
 input, textarea, select {
@@ -24,7 +36,7 @@ input, textarea, select {
     border-radius: 10px;
     font-size: 16px;
     color: #e0e0e0;
-    outline: none; /* Quita el borde por defecto */
+    outline: none;
     transition: border-color 0.2s ease, transform 0.2s ease, background 0.2s ease;
 }
 
@@ -32,7 +44,6 @@ input::placeholder, textarea::placeholder, select::placeholder {
     color: rgba(224, 224, 224, 0.5);
 }
 
-/* Cuando alguien hace click en un campo, se ve así */
 input:focus, textarea:focus, select:focus {
     border-color: #9d4df8;
     background: rgba(28, 28, 28, 0.95);
@@ -53,43 +64,38 @@ button {
     box-shadow: 0 4px 15px rgba(64, 6, 131, 0.3);
 }
 
-/* Cuando pasas el mouse por arriba del botón */
 button:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(157, 77, 248, 0.5);
 }
 
 a {
-    text-decoration: none; /* Sin subrayado */
-    color: inherit; /* Hereda el color del elemento padre */
+    text-decoration: none;
+    color: inherit;
     transition: color 0.3s ease;
 }
 
-/* Cuando pasas el mouse por un link */
 a:hover {
     color: #2979FF;
 }
 
-/* ===== TÍTULOS ===== */
-/* Configuración general para todos los títulos */
 h1, h2, h3, h4, h5, h6 {
     margin-bottom: 10px;
     color: #210053;
 }
 
 img {
-    max-width: 100%; /* No se salen del contenedor */
-    height: auto; /* Mantienen proporciones */
+    max-width: 100%;
+    height: auto;
     border-radius: 8px;
 }
 
 p {
-    line-height: 1.6; /* Espaciado entre líneas */
+    line-height: 1.6;
     margin-bottom: 10px;
     color: #f0e3e2;
 }
 
-/* La barra de navegación principal */
 nav {
     background: #1E293B;
     padding: 15px 20px;

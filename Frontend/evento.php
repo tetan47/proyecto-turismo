@@ -21,11 +21,16 @@ $usuario_logueado = isset($_SESSION['ID_Cliente']);
 
 if ($evento_id > 0) {
     // Consultar el evento específico
-    $sql = "SELECT * FROM eventos WHERE ID_Evento = ?";
+    $sql = "SELECT e.*, c.Nombre
+        FROM eventos e
+        INNER JOIN organizadores o ON e.Cédula = o.Cedula
+        INNER JOIN cliente c ON o.ID_Cliente = c.ID_Cliente
+        WHERE e.ID_Evento = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $evento_id);
     $stmt->execute();
     $result = $stmt->get_result();
+
 
     if ($result->num_rows > 0) {
         $evento = $result->fetch_assoc();
@@ -64,7 +69,7 @@ if ($evento_id > 0) {
             <p><strong>Hora:</strong> <?php echo htmlspecialchars($evento['Hora']); ?></p>
             <p><strong>Lugar:</strong> <?php echo htmlspecialchars($evento['Lugar'] ?? 'Ubicación no especificada'); ?></p>
             <p><strong>Categoría:</strong> <?php echo htmlspecialchars($evento['categoria']); ?></p>
-            <p><strong>Creador:</strong> <?php echo htmlspecialchars($evento['creador'] ?? 'Administrador'); ?></p>
+            <p><strong>Creador:</strong> <?php echo htmlspecialchars($evento['Nombre'] ?? 'Administrador'); ?></p>
             <p><strong>Descripción:</strong> <?php echo htmlspecialchars($evento['Descripción'] ?? '-.'); ?></p>
         </div>
     </section>

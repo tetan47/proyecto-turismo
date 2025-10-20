@@ -157,7 +157,9 @@ if ($evento_id > 0) {
             </div>
         <?php } ?>
     <?php } else { ?>
+        <div style="padding:1em;text-align:center;color:#555;">
         <p>No hay comentarios para este evento.</p>
+        </div>
     <?php } 
     $stmt->close();
 } else { ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 // Si ya está logueado, redirigir al index
@@ -9,7 +9,52 @@ if (isset($_SESSION['logueado']) && $_SESSION['logueado'] === true) {
 
 // Procesar login
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    include("../backend/Usuarios/controlador_login.php");
+    require_once __DIR__ . '/../backend/conexion.php';
+
+    $correo = filter_input(INPUT_POST, 'correo', FILTER_VALIDATE_EMAIL);
+    $contraseña = $_POST['contraseña'] ?? '';
+
+    if (!$correo || !$contraseña) {
+        $_SESSION['error_login'] = 'Correo o contraseña inválidos.';
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit;
+    }
+
+    try {
+        $sql = "SELECT id, nombre, correo, contraseña, role FROM usuarios WHERE correo = :correo LIMIT 1";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute([':correo' => $correo]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!$user || !password_verify($contraseña, $user['contraseña'])) {
+            $_SESSION['error_login'] = 'Credenciales incorrectas.';
+            header('Location: ' . $_SERVER['PHP_SELF']);
+            exit;
+        }
+
+        // Verificar que el usuario sea administrador antes de conceder acceso a la zona admin
+        if (!isset($user['role']) || $user['role'] !== 'admin') {
+            $_SESSION['error_login'] = 'Acceso denegado: se requieren permisos de administrador.';
+            header('Location: ' . $_SERVER['PHP_SELF']);
+            exit;
+        }
+
+        // Login exitoso (admin)
+        session_regenerate_id(true);
+        $_SESSION['logueado'] = true;
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_nombre'] = $user['nombre'];
+        $_SESSION['role'] = 'admin';
+
+        header('Location: index.php');
+        exit;
+
+    } catch (Exception $e) {
+        // No exponer errores internos al usuario
+        $_SESSION['error_login'] = 'Error interno. Intente más tarde.';
+        header('Location: ' . $_SERVER['PHP_SELF']);
+        exit;
+    }
 }
 
 // Capturar mensaje de error si existe

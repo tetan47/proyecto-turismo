@@ -1,5 +1,6 @@
 <?php
-include __DIR__ . '/../Conexion.php';
+session_start();
+require_once __DIR__ . '/../conexion.php';
 
 // Verificar que se recibieron datos por POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -64,7 +65,6 @@ if ($stmt->execute()) {
     $nuevo_id = $conn->insert_id;
     
     // Iniciar sesión automáticamente
-    session_start();
     $_SESSION['ID_Cliente'] = $nuevo_id;
     $_SESSION['correo'] = $correo;
     $_SESSION['nombre_usuario'] = $nombre;

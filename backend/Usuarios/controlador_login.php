@@ -1,53 +1,88 @@
 <?php
-session_start();
+// Incluir conexión
+include __DIR__ . '/../Conexion.php';
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../../Frontend/login.php');
-    exit;
+// Iniciar sesión solo si no está activa
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
 }
 
-require_once __DIR__ . '/../conexion.php';
+// Verificar si el formulario fue enviado
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['correo']) && isset($_POST['contraseña'])) {
+    
+    $email = trim($_POST["correo"]);
+    $passw = trim($_POST["contraseña"]);
 
-$correo = filter_input(INPUT_POST, 'correo', FILTER_VALIDATE_EMAIL);
-$contraseña = $_POST['contraseña'] ?? '';
-
-if (!$correo || !$contraseña) {
-    $_SESSION['error_login'] = 'Correo o contraseña inválidos.';
-    header('Location: ../../Frontend/login.php');
-    exit;
-}
-
-try {
-    $sql = "SELECT id, nombre, correo, contraseña, role FROM usuarios WHERE correo = :correo LIMIT 1";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute([':correo' => $correo]);
-    $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    if (!$user || !password_verify($contraseña, $user['contraseña'])) {
-        $_SESSION['error_login'] = 'Credenciales incorrectas.';
-        header('Location: ../../Frontend/login.php');
+    // Validar campos vacíos
+    if (empty($email) || empty($passw)) {
+        $_SESSION['error_login'] = "Los campos están vacíos, por favor ingrese sus datos";
+        header("Location: ../../Frontend/login.php");
         exit;
     }
 
-    // Permitir acceso sólo si role = 'admin'
-    if (!isset($user['role']) || $user['role'] !== 'admin') {
-        $_SESSION['error_login'] = 'Acceso denegado: se requieren permisos de administrador.';
-        header('Location: ../../Frontend/login.php');
-        exit;
+    // Preparar consulta
+    $stmt = $conn->prepare("SELECT ID_Cliente, Correo, Contraseña, Nombre, Apellido, bloquear FROM cliente WHERE Correo = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        
+        // Verificar si el usuario está bloqueado
+        if ($row['bloquear'] == 1) {
+            $_SESSION['error_login'] = "Tu cuenta ha sido bloqueada. Contacta al administrador.";
+            $stmt->close();
+            header("Location: ../../Frontend/login.php");
+            exit;
+        }
+        
+        // Verificar contraseña
+        $password_valida = false;
+        
+        // Intenta verificar con hash primero
+        if (password_verify($passw, $row['Contraseña'])) {
+            $password_valida = true;
+        } 
+        // Si falla, compara en texto plano (solo para migración)
+        elseif ($passw === $row['Contraseña']) {
+            $password_valida = true;
+            
+            // OPCIONAL: Actualizar a hash en el primer login
+            /*$nuevo_hash = password_hash($passw, PASSWORD_BCRYPT);
+            $update = $conn->prepare("UPDATE cliente SET Contraseña = ? WHERE ID_Cliente = ?");
+            $update->bind_param("si", $nuevo_hash, $row['ID_Cliente']);
+            $update->execute();
+            $update->close();*/
+        }
+
+        if ($password_valida) {
+            // Regenerar ID de sesión por seguridad
+            session_regenerate_id(true);
+            
+            // Guardar datos en sesión
+            $_SESSION['ID_Cliente'] = $row['ID_Cliente'];
+            $_SESSION['correo'] = $row['Correo'];
+            $_SESSION['nombre_usuario'] = $row['Nombre'];
+            $_SESSION['logueado'] = true;
+
+            $stmt->close();
+            $conn->close();
+            
+            // Redirigir al index
+            header("Location: ../../Frontend/index.php");
+            exit;
+        } else {
+            $_SESSION['error_login'] = "Correo o contraseña incorrectos";
+        }
+    } else {
+        $_SESSION['error_login'] = "Correo o contraseña incorrectos";
     }
-
-    // Login exitoso (admin)
-    $_SESSION['logueado'] = true;
-    $_SESSION['user_id'] = $user['id'];
-    $_SESSION['user_nombre'] = $user['nombre'];
-    $_SESSION['role'] = $user['role'];
-
-    header('Location: ../../Frontend/index.php');
-    exit;
-
-} catch (Exception $e) {
-    $_SESSION['error_login'] = 'Error interno. Intente más tarde.';
-    header('Location: ../../Frontend/login.php');
+    
+    $stmt->close();
+    $conn->close();
+    
+    // Si llegamos aquí, hubo error
+    header("Location: ../../Frontend/login.php");
     exit;
 }
 ?>

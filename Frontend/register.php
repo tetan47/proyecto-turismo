@@ -12,22 +12,22 @@
     <div class="contenedor">
       <h1>Crear Cuenta</h1>
   
-      <form id="registerForm" method="POST" action="../backend/Usuarios/Insertar.php">
-        <input type="hidden" name="role" value="user"> <!-- forzar role en el formulario -->
+      <form method="POST" action="../backend/Usuarios/Insertar.php">
+  
         <div class="caja">
-          <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+          <input type="text" id=nombre name="nombre" placeholder="Nombre" required>
           <i class="fas fa-user"></i>
         </div>
         <div class="caja">
-          <input type="text" id="apellido" name="apellido" placeholder="Apellido" required>
+          <input type="text" id=apellido name="apellido" placeholder="Apellido" required>
           <i class="fas fa-user"></i>
         </div>
         <div class="caja">
-          <input type="email" id="Correo" name="correo" placeholder="Correo" required>
+          <input type="email" id=Correo name="correo" placeholder="Correo" required>
           <i class="fas fa-envelope"></i>
         </div>
         <div class="caja">
-          <input type="password" id="contraseña" name="contraseña" placeholder="Contraseña" required>
+          <input type="password" id=contraseña name="contraseña" placeholder="Contraseña" required>
           <i class="fas fa-lock"></i>
         </div>
         <button type="submit" class="crear_cuenta">Crear Cuenta</button>
@@ -43,30 +43,5 @@
         <span>Continuar con Google</span>
       </button>
     </div>
-
-<script>
-document.getElementById('registerForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const correo = document.getElementById('Correo').value;
-  try {
-    const resp = await fetch('../backend/Usuarios/check_admin_email.php', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ correo })
-    });
-    const data = await resp.json();
-    if (data.is_admin) {
-      alert('No puedes registrarte con un correo que ya tiene permisos de administrador. Contacta con un administrador.');
-      return;
-    }
-    // si no es admin, enviar el formulario normalmente
-    this.submit();
-  } catch (err) {
-    console.error(err);
-    alert('Error comprobando el correo. Intente nuevamente.');
-  }
-});
-</script>
-
   </body>
 </html>

@@ -96,8 +96,8 @@ $conn->close();
                     
                     <!-- Opciones comunes para todos los usuarios logueados -->
                     <hr style="margin: 10px 0; border: none; border-top: 1px solid #ccc;">
-                    <a href="perfil.php">👤 Mi Perfil</a>
-                    <a href="configuracion.php">⚙️ Configuración</a>
+                    <a href="configuracion.php?tab=perfil">👤 Mi Perfil</a>
+                    <a href="configuracion.php?tab=cuenta">⚙️ Configuración</a>
                     <button type="button" class="btn-cerrar" onclick="cerrarSesion()">🚪 Cerrar Sesión</button>
                 </div>    
             </div>

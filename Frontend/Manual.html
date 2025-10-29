@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - ¡Qué Viaje!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/manual.css">
+    <link rel="stylesheet" href="css/estructura_fundamental.css">
+
+</head>
+
+<body>
+    <header class="manual-header">
+        <div class="manual-header-inner">
+            <h1>Manual de Usuario</h1>
+            <a href="index.php" class="manual-back">
+                <i class="fas fa-home"></i> Volver
+            </a>
+        </div>
+    </header>
+
+    <div class="contenedor-manual">
+        <aside class="barra-lateral" id="barraLateral">
+            <div class="caja-busqueda">
+                <input type="text" id="buscarInput" placeholder="Buscar en el manual...">
+            </div>
+
+            <h2><i class="fas fa-book"></i> Índice</h2>
+            <nav>
+                <ul>
+                    <li><a href="#introduccion" class="enlace-nav activo">Introducción</a></li>
+                    <li><a href="#primeros-pasos" class="enlace-nav">Primeros Pasos</a></li>
+                    <li class="sub-item"><a href="#registro" class="enlace-nav">Registro</a></li>
+                    <li class="sub-item"><a href="#inicio-sesion" class="enlace-nav">Inicio de Sesión</a></li>
+                    <li><a href="#usuarios" class="enlace-nav">Guía de Usuario</a></li>
+                    <li class="sub-item"><a href="#explorar-eventos" class="enlace-nav">Eventos</a></li>
+                    <li class="sub-item"><a href="#sitios-turisticos" class="enlace-nav">Sitios Turísticos</a></li>
+                    <li class="sub-item"><a href="#comentarios" class="enlace-nav">Comentarios</a></li>
+                    <li class="sub-item"><a href="#configuracion" class="enlace-nav">Configuración</a></li>
+                    <li><a href="#organizadores" class="enlace-nav">Para Organizadores</a></li>
+                    <li class="sub-item"><a href="#crear-evento" class="enlace-nav">Crear Eventos</a></li>
+                    <li class="sub-item"><a href="#gestionar-eventos" class="enlace-nav">Mis Eventos</a></li>
+                    <li><a href="#faq" class="enlace-nav">Preguntas Frecuentes</a></li>
+                    <li><a href="#soporte" class="enlace-nav">Contacto y Soporte</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="contenido">
+            <section id="introduccion">
+                <h2><i class="fas fa-info-circle"></i> Bienvenido a ¡Qué Viaje!</h2>
+                <p>¡Qué Viaje! es tu plataforma para descubrir lo mejor de Salto, Uruguay. Encontrá eventos culturales,
+                    deportivos, gastronómicos y los mejores sitios turísticos de la región.</p>
+
+                <h3>¿Qué vas a encontrar acá?</h3>
+                <ul>
+                    <li>Eventos ordenados por fecha, categoría y ubicación</li>
+                    <li>Los mejores lugares turísticos para visitar</li>
+                    <li>Comunidad activa donde compartir experiencias</li>
+                    <li>Herramientas para organizar tus propios eventos</li>
+                    <li>Tu perfil personalizado</li>
+                </ul>
+
+                <h3>Tipos de cuenta</h3>
+                <table>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Descripción</th>
+                        <th>Qué podés hacer</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Visitante</strong></td>
+                        <td>Sin registro</td>
+                        <td>Ver eventos y sitios turísticos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Usuario</strong></td>
+                        <td>Cuenta básica</td>
+                        <td>Comentar, dar likes y personalizar perfil</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Organizador</strong></td>
+                        <td>Con permisos especiales</td>
+                        <td>Crear y gestionar tus eventos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Administrador</strong></td>
+                        <td>Gestión del sitio</td>
+                        <td>Control total de la plataforma</td>
+                    </tr>
+                </table>
+
+                <div class="caja-info consejo">
+                    <strong><i class="fas fa-lightbulb"></i> Tip:</strong>
+                    <p>Registrate para aprovechar todas las funciones de la plataforma. Es gratis y te lleva menos de un
+                        minuto.</p>
+                </div>
+            </section>
+
+            <section id="primeros-pasos">
+                <h2><i class="fas fa-rocket"></i> Primeros Pasos</h2>
+
+                <h3 id="registro">Crear tu cuenta</h3>
+                <div class="pasos">
+                    <div class="paso">
+                        <strong>Entrá a registrarte</strong>
+                        <p>Hacé clic en "Registrarse" arriba a la derecha.</p>
+                    </div>
+                    <div class="paso">
+                        <strong>Completá tus datos</strong>
+                        <p>Te vamos a pedir:</p>
+                        <ul>
+                            <li><strong>Nombre:</strong> Tu nombre real</li>
+                            <li><strong>Apellido:</strong> Tu apellido</li>
+                            <li><strong>Correo:</strong> Va a ser tu usuario</li>
+                            <li><strong>Contraseña:</strong> Mínimo 6 caracteres</li>
+                        </ul>
+                    </div>
+                    <div class="paso">
+                        <strong>Creá tu cuenta</strong>
+                        <p>Dale a "Crear Cuenta" y listo.</p>
+                    </div>
+                    <div class="paso">
+                        <strong>Entrá a tu cuenta</strong>
+                        <p>Usá tu correo y contraseña para acceder.</p>
+                    </div>
+                </div>
+
+                <div class="caja-info advertencia">
+                    <strong><i class="fas fa-exclamation-triangle"></i> Importante:</strong>
+                    <p>Tu correo tiene que ser válido y único. Una vez registrado, no lo vas a poder cambiar.</p>
+                </div>
+
+                <h3 id="inicio-sesion">Iniciar sesión</h3>
+                <div class="pasos">
+                    <div class="paso">
+                        <strong>Clic en "Iniciar Sesión"</strong>
+                        <p>Lo encontrás en el header de la página.</p>
+                    </div>
+                    <div class="paso">
+                        <strong>Ingresá tus datos</strong>
+                        <ul>
+                            <li>Tu correo electrónico</li>
+                            <li>Tu contraseña</li>
+                        </ul>
+                    </div>
+                    <div class="paso">
+                        <strong>Entrá</strong>
+                        <p>Y ya estás dentro de tu cuenta.</p>
+                    </div>
+                </div>
+
+                <div class="caja-info consejo">
+                    <strong><i class="fas fa-lightbulb"></i> ¿Olvidaste tu contraseña?</strong>
+                    <p>Escribinos al correo que está en el footer y te ayudamos.</p>
+                </div>
+            </section>
+
+            <section id="usuarios">
+                <h2><i class="fas fa-users"></i> Guía de Usuario</h2>
+
+                <h3 id="explorar-eventos">Cómo buscar eventos</h3>
+                <p>En el catálogo vas a encontrar todos los eventos disponibles en Salto.</p>
+
+                <h4>Usar los filtros</h4>
+                <ol>
+                    <li>Andá a <strong>Catálogo de Eventos</strong> desde el menú</li>
+                    <li>Hacé clic en <strong>"Filtros"</strong></li>
+                    <li>Elegí lo que buscás:
+                        <ul>
+                            <li><strong>Buscar por nombre:</strong> Escribí el evento que querés encontrar</li>
+                            <li><strong>Por fecha:</strong> Elegí desde cuándo hasta cuándo</li>
+                            <li><strong>Por horario:</strong> Filtrá por hora de inicio y fin</li>
+                            <li><strong>Por categoría:</strong> Música, Deporte, Arte, Gastronomía, etc.</li>
+                        </ul>
+                    </li>
+                    <li>Dale a <strong>"Buscar"</strong></li>
+                    <li>Para borrar los filtros, tocá <strong>"Limpiar"</strong></li>
+                </ol>
+
+                <div class="caja-info exito">
+                    <strong><i class="fas fa-check-circle"></i> Categorías:</strong>
+                    <p>Música, Deporte, Arte, Gastronomía, Historia, Cultura y Otros</p>
+                </div>
+
+                <h4>Ver la info de un evento</h4>
+                <p>Hacé clic en <strong>"Ver Detalles"</strong> en cualquier evento para ver:</p>
+                <ul>
+                    <li>Título y descripción completa</li>
+                    <li>Cuándo y a qué hora es</li>
+                    <li>Dónde es exactamente</li>
+                    <li>Qué tipo de evento es</li>
+                    <li>Quién lo organiza</li>
+                    <li>Los comentarios de otros usuarios</li>
+                </ul>
+
+                <h3 id="sitios-turisticos">Lugares para visitar</h3>
+                <p>Descubrí los mejores sitios turísticos de Salto.</p>
+
+                <h4>Qué vas a encontrar</h4>
+                <ul>
+                    <li>Naturaleza</li>
+                    <li>Termas</li>
+                    <li>Recreativos</li>
+                    <li>Gastronómicos</li>
+                    <li>Históricos</li>
+                    <li>Culturales</li>
+                    <li>Alojamiento</li>
+                    <li>Rutas y Miradores</li>
+                    <li>Deportivos</li>
+                    <li>Otros</li>
+                </ul>
+
+                <h4>Ver en el mapa</h4>
+                <p>En cada sitio turístico podés hacer clic en <strong>"Ver mapa"</strong> para ver exactamente dónde
+                    queda.</p>
+
+                <h3 id="comentarios">Comentá y compartí tu experiencia</h3>
+                <p>Contale a otros usuarios qué te pareció un evento o lugar.</p>
+
+                <h4>Dejar un comentario</h4>
+                <div class="pasos">
+                    <div class="paso">
+                        <strong>Tenés que estar logueado</strong>
+                        <p>Si no tenés cuenta, creá una primero.</p>
+                    </div>
+                    <div class="paso">
+                        <strong>Entrá al evento o sitio</strong>
+                        <p>Andá a la página de detalles.</p>
+                    </div>
+                    <div class="paso">
+                        <strong>Bajá a la sección de comentarios</strong>
+                        <p>Vas a ver tu foto de perfil y nombre.</p>
+                    </div>
+                    <div class="paso">
+                        <strong>Escribí tu comentario</strong>
+                        <p>Máximo 500 caracteres.</p>
+                    </div>
+                    <div class="paso">
+                        <strong>Dale a "Enviar"</strong>
+                        <p>Tu comentario aparece al toque.</p>
+                    </div>
+                </div>
+
+                <h4>Editar o borrar comentarios</h4>
+                <p>Solo podés modificar tus propios comentarios.</p>
+                <ol>
+                    <li>Hacé clic en los <strong>tres puntos (⋮)</strong> de tu comentario</li>
+                    <li>Elegí <strong>"Editar"</strong> o <strong>"Eliminar"</strong></li>
+                    <li>Si editás, modificá el texto y dale <strong>"Guardar"</strong></li>
+                    <li>Si eliminás, confirmá que querés borrarlo</li>
+                </ol>
+
+                <h4>Responder comentarios</h4>
+                <ol>
+                    <li>Tocá <strong>"Responder"</strong> debajo del comentario</li>
+                    <li>Escribí tu respuesta</li>
+                    <li>Dale a <strong>"Enviar respuesta"</strong></li>
+                </ol>
+
+                <h4>Dar likes</h4>
+                <p>Si te gustó un comentario, dale like.</p>
+                <ul>
+                    <li>Hacé clic en el <strong>corazón (♥)</strong></li>
+                    <li>Se pone rojo si ya le diste like</li>
+                    <li>Volvé a hacer clic para sacarlo</li>
+                </ul>
+
+                <div class="caja-info advertencia">
+                    <strong><i class="fas fa-exclamation-triangle"></i> Ojo:</strong>
+                    <p>Para dar likes tenés que estar logueado. Los visitantes solo pueden leer.</p>
+                </div>
+
+                <h3 id="configuracion">Tu perfil y configuración</h3>
+                <p>Personalizá tu cuenta como quieras.</p>
+
+                <h4>Entrar a configuración</h4>
+                <ol>
+                    <li>Hacé clic en el <strong>menú (☰)</strong> arriba</li>
+                    <li>Elegí <strong>"Mi Perfil"</strong> o <strong>"Configuración"</strong></li>
+                </ol>
+
+                <h4>Editar perfil</h4>
+                <p>Podés cambiar:</p>
+                <ul>
+                    <li><strong>Nombre:</strong> Máximo 20 caracteres</li>
+                    <li><strong>Apellido:</strong> Máximo 20 caracteres</li>
+                    <li><strong>Foto de perfil:</strong> URL de tu imagen (opcional)</li>
+                </ul>
+
+                <h4>Cambiar contraseña</h4>
+                <div class="pasos">
+                    <div class="paso">
+                        <strong>Verificá tu identidad</strong>
+                        <p>Ingresá tu contraseña actual.</p>
+                    </div>
+                    <div class="paso">
+                        <strong>Nueva contraseña</strong>
+                        <p>Escribí la nueva (mínimo 8 caracteres).</p>
+                    </div>
+                    <div class="paso">
+                        <strong>Confirmá</strong>
+                        <p>Volvé a escribir la nueva contraseña.</p>
+                    </div>
+                    <div class="paso">
+                        <strong>Guardá</strong>
+                        <p>Dale a "Cambiar contraseña".</p>
+                    </div>
+                </div>
+
+                <div class="caja-info advertencia">
+                    <strong><i class="fas fa-lock"></i> Seguridad:</strong>
+                    <p>El correo NO se puede cambiar por seguridad.</p>
+                </div>
+            </section>
+
+            <section id="organizadores">
+                <h2><i class="fas fa-calendar-plus"></i> Para Organizadores</h2>
+
+                <h3>Hacerte organizador</h3>
+                <p>Si querés publicar tus propios eventos, necesitás ser organizador.</p>
+                <ol>
+                    <li>Ingresá a tu cuenta</li>
+                    <li>Abrí el menú de usuario (☰)</li>
+                    <li>Elegí <strong>"Convertirse en Organizador"</strong></li>
+                    <li>Completá el formulario con tus datos (incluida la cédula)</li>
+                    <li>Una vez aprobado, podés crear eventos</li>
+                </ol>
+
+                <h3 id="crear-evento">Publicar un evento</h3>
+                <p>Compartí tus actividades con toda la comunidad.</p>
+
+                <div class="pasos">
+                    <div class="paso">
+                        <strong>Entrá a "Crear Evento"</strong>
+                        <p>Desde el menú de usuario → "Crear Evento"</p>
+                    </div>
+                    <div class="paso">
+                        <strong>Completá la información</strong>
+                        <p>Los campos con <span style="color: red;">*</span> son obligatorios:</p>
+                        <ul>
+                            <li><strong>Título:</strong> Nombre del evento (máx. 50 caracteres)</li>
+                            <li><strong>Descripción:</strong> Contá de qué se trata (máx. 200 caracteres)</li>
+                            <li><strong>Categoría:</strong> Elegí la que corresponda</li>
+                            <li><strong>Ubicación:</strong> Dirección o lugar (máx. 50 caracteres)</li>
+                            <li><strong>Fecha inicio:</strong> Cuándo arranca</li>
+                            <li><strong>Fecha fin:</strong> Cuándo termina</li>
+                            <li><strong>Hora:</strong> A qué hora empieza</li>
+                            <li><strong>Capacidad:</strong> Cuánta gente entra (1-100,000)</li>
+                            <li><strong>Imagen:</strong> Foto del evento (opcional)</li>
+                        </ul>
+                    </div>
+                    <div class="paso">
+                        <strong>Subir foto (opcional)</strong>
+                        <p>Formatos: JPG, JPEG, PNG, GIF, WEBP</p>
+                        <p>Tamaño máximo: 5MB</p>
+                    </div>
+                    <div class="paso">
+                        <strong>Publicá</strong>
+                        <p>Dale a "Crear Evento" y listo.</p>
+                    </div>
+                </div>
+
+                <div class="caja-info consejo">
+                    <strong><i class="fas fa-lightbulb"></i> Consejo:</strong>
+                    <p>Usá fotos llamativas y descripciones claras. Así tu evento se destaca.</p>
+                </div>
+
+                <h3 id="gestionar-eventos">Ver tus eventos</h3>
+                <p>Administrá todos los eventos que creaste.</p>
+
+                <h4>Entrar a "Mis Eventos"</h4>
+                <ol>
+                    <li>Abrí el menú de usuario (☰)</li>
+                    <li>Tocá <strong>"Mis Eventos"</strong></li>
+                    <li>Vas a ver todos tus eventos publicados</li>
+                </ol>
+
+                <h4>Ver detalles</h4>
+                <p>Hacé clic en <strong>"Ver Detalles"</strong> para entrar a la página completa del evento y ver
+                    comentarios.</p>
+            </section>
+
+            <section id="faq">
+                <h2><i class="fas fa-question-circle"></i> Preguntas Frecuentes</h2>
+
+                <h4>Olvidé mi contraseña, ¿qué hago?</h4>
+                <p>Por ahora no hay recuperación automática. Escribinos al correo del footer y te ayudamos.</p>
+
+                <h4>¿Puedo cambiar mi correo?</h4>
+                <p>No, por seguridad el correo no se puede modificar.</p>
+
+                <h4>¿Cómo subo una imagen a mi evento?</h4>
+                <p>En el formulario de crear evento, dale a "Elegir archivo" y seleccioná una imagen de tu dispositivo
+                    (máx. 5MB).</p>
+
+                <h4>Mi evento no aparece</h4>
+                <p>Revisá que todos los campos obligatorios estén completos. Si sigue sin aparecer, contactanos.</p>
+
+                <h4>¿Puedo eliminar mi cuenta?</h4>
+                <p>Escribinos a soporte para solicitar la eliminación de tu cuenta.</p>
+
+                <h4>¿Cómo reporto un comentario inapropiado?</h4>
+                <p>Contactanos con el link del evento y los detalles del comentario.</p>
+            </section>
+
+            <section id="soporte">
+                <h2><i class="fas fa-headset"></i> Contacto y Soporte</h2>
+                <p>¿Tenés algún problema o duda? Acá estamos para ayudarte:</p>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=tibaware@gmail.com&su=Consulta%20desde%20%C2%A1Qu%C3%A9%20Viaje!&body=Hola%2C%20te%20contacto%20desde%20la%20plataforma%20%C2%A1Qu%C3%A9%20Viaje!" target="_blank" rel="noopener noreferrer">
+                    <strong>Enviar correo a: Tibaware@gmail.com (Abrir en Gmail)</strong>
+                </a>
+           </section>
+        </main>
+    </div>
+
+</body>
+
+</html>

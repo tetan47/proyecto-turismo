@@ -1,3 +1,15 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 .hero {
   background: linear-gradient(135deg, #168AAD 0%, #02b3c7 100%);
   color: white;
@@ -48,6 +60,7 @@
   animation: fadeInUp 1.2s ease;
 }
 
+
 .btn-primario, .btn-secundario {
   padding: 15px 30px;
   border-radius: 30px;
@@ -57,27 +70,15 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-}
-
-.btn-primario {
   background: white;
   color: #168AAD;
-}
-
-.btn-primario:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-}
-
-.btn-secundario {
-  background: transparent;
-  color: white;
   border: 2px solid white;
 }
 
-.btn-secundario:hover {
-  background: white;
-  color: #168AAD;
+.btn-primario:hover, .btn-secundario:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  background: #f0f0f0;
 }
 
 .hero-stats {
@@ -103,7 +104,12 @@
   opacity: 0.9;
 }
 
-/* SECCIÓN EVENTOS MEJORADA */
+/* SECCIÓN EVENTOS - FONDO BLANCO */
+.eventos {
+  background: white;
+  padding: 80px 20px;
+}
+
 .section-header {
   text-align: center;
   margin-bottom: 40px;
@@ -127,12 +133,14 @@
   margin: 0 auto;
   overflow: hidden;
   border-radius: 15px;
+  background: white;
 }
 
 .carrusel {
   display: flex;
   transition: transform 0.5s ease-in-out;
-  margin-bottom:20px ;
+  margin-bottom: 20px;
+  background: white;
 }
 
 .elemento {
@@ -186,8 +194,8 @@
   font-size: 1.2rem;
 }
 
-.elemento p{
-  color:blanchedalmond;
+.elemento p {
+  color: #f5deb3;
 }
 
 /* Caption del carrusel */
@@ -376,11 +384,42 @@
   line-height: 1.6;
 }
 
-/* BENEFICIOS MEJORADOS */
+/* SECCIÓN INFO - ¿POR QUÉ ELEGIR? */
+.info {
+  padding: 80px 20px;
+  background: #f9f9f9;
+}
+
+.info-contenido {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.info-contenido h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+  color: #333;
+}
+
 .beneficios-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
+}
+
+.bloque {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.bloque:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
 }
 
 .bloque-icono {
@@ -389,10 +428,22 @@
   margin-bottom: 15px;
 }
 
-/* TESTIMONIOS */
+.bloque h3 {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.bloque p {
+  color: #666;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* TESTIMONIOS - CORREGIDO */
 .testimonios {
   padding: 80px 20px;
-  background: #f9f9f9;
+  background: white;
 }
 
 .testimonios h2 {
@@ -411,10 +462,16 @@
 }
 
 .testimonio {
-  background: white;
+  background: #f9f9f9;
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.testimonio:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
 }
 
 .testimonio-header {
@@ -440,6 +497,7 @@
 .testimonio-rol {
   color: #168AAD;
   font-size: 0.9rem;
+  display: block;
 }
 
 .testimonio p {
@@ -514,7 +572,7 @@
 /* PRÓXIMOS EVENTOS */
 .proximos-eventos {
   padding: 80px 20px;
-  background: white;
+  background: #f9f9f9;
 }
 
 .proximos-eventos h2 {
@@ -537,14 +595,15 @@
   align-items: center;
   gap: 30px;
   padding: 25px;
-  background: #f9f9f9;
+  background: white;
   border-radius: 15px;
   transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
 }
 
 .evento-item:hover {
   transform: translateX(10px);
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
 }
 
 .evento-fecha {
@@ -584,10 +643,20 @@
   margin: 5px 0;
   font-size: 0.95rem;
 }
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+
+.btn-ver-mas {
+  padding: 10px 20px;
+  background: #168AAD;
+  color: white;
+  text-decoration: none;
+  border-radius: 20px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-ver-mas:hover {
+  background: #02b3c7;
+  transform: scale(1.05);
 }
 
 /* ------ RESPONSIVE ------- */
@@ -633,8 +702,8 @@
     align-items: center;
   }
 
-  .btn-primary,
-  .btn-secondary,
+  .btn-primario,
+  .btn-secundario,
   .btn-cta-primary,
   .btn-cta-secondary {
     width: 100%;
@@ -648,7 +717,6 @@
     align-items: center;
   }
 
-
   .carrusel-container {
     position: relative;
     overflow: hidden;
@@ -656,6 +724,7 @@
 
   .carrusel {
     display: flex;
+    overflow-x: auto;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
@@ -683,6 +752,10 @@
     gap: 20px;
   }
 
+  .beneficios-grid {
+    grid-template-columns: 1fr;
+  }
+
   .pasos-container {
     flex-direction: column;
     align-items: center;
@@ -696,13 +769,11 @@
     gap: 20px;
   }
 
-  
   .cta-buttons {
     flex-direction: column;
     align-items: center;
   }
 
-  
   .evento-item {
     padding: 20px;
   }
@@ -734,6 +805,7 @@
   .section-header h2,
   .categorias h2,
   .como-funciona h2,
+  .info-contenido h2,
   .testimonios h2,
   .proximos-eventos h2,
   .cta-content h2 {
@@ -754,14 +826,13 @@
     font-size: 0.8rem;
   }
 
-  @media (max-width: 480px) {
   .carrusel-container {
     overflow-x: auto;
     overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
-    margin: 20px;
+    margin: 0 15px;
   }
 
   .carrusel-container::-webkit-scrollbar {
@@ -769,54 +840,23 @@
   }
 
   .carrusel {
-    transition: none; /* Desactiva la transicion */
+    transition: none;
     scroll-behavior: smooth;
   }
 
   .elemento {
     scroll-snap-align: start;
-    height: 400px;
-  }
-
-  /* Oculta los  botones*/
-  .prev, .next {
-    display: none;
-  }
-  /* Ajusta el caption */
-  .carrusel-caption {
-    transform: translateY(0);
-    padding: 20px 15px;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 70%, transparent 100%);
-  }
-
-  .carrusel-caption h3 {
-    font-size: 1.1rem;
-  }
-
-  .carrusel-caption p {
-    font-size: 0.85rem;
-  }
-
-
-  /* Indicadores más visibles en el celular */
-  .carrusel-indicators {
-    bottom: 15px;
-  }
-
-  .indicator {
-    width: 8px;
-    height: 8px;
-  }
-
-  }
-
-@media (max-width: 480px) {
-  .elemento {
     height: 300px;
   }
 
+  .prev, .next {
+    display: none;
+  }
+
   .carrusel-caption {
+    transform: translateY(0);
     padding: 15px 10px;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 70%, transparent 100%);
   }
 
   .carrusel-caption h3 {
@@ -831,5 +871,13 @@
     font-size: 0.75rem;
     padding: 3px 10px;
   }
-}
+
+  .carrusel-indicators {
+    bottom: 15px;
+  }
+
+  .indicator {
+    width: 8px;
+    height: 8px;
+  }
 }

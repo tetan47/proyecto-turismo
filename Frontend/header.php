@@ -59,9 +59,11 @@ $conn->close();
 <link rel="stylesheet" href="css/estructura_fundamental.css">
 <link rel="stylesheet" href="css/header.css">
 <header>
-    <div class="logo">
-        <a href="index.php">
-            <img id="logo123" src="../Images/Logo-que-viaje.png" alt="Inicio">
+    <link rel="icon" href="../Images/logo-queviaje.png">
+    <div class="logo-queviaje">
+        <a href="Index.php">
+        <h1>¡QUE <span>VIAJE!</span></h1>
+        <p>LO QUE PASA EN <span>SALTO</span>, PASA ACÁ.</p>
         </a>
     </div>
     

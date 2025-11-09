@@ -26,11 +26,8 @@
         <a href="Catálogo.php" class="btn-primario">
           <i class="fas fa-calendar-alt"></i> Explorar Eventos
         </a>
-        <a href="sitios_turisticos.php" class="btn-primario">
-          <i class="fa fa-map-marked-alt">  Sitios Turísticos</i>
-        </a>
-        <a href="#como-funciona" class="btn-secundario">
-          <i class="fas fa-info-circle"></i> ¿Cómo funciona?
+        <a href="sitios_turisticos.php" class="btn-secundario">
+          <i class="fa fa-map-marked-alt"></i> Sitios Turísticos
         </a>
       </div>
       <div class="hero-stats">

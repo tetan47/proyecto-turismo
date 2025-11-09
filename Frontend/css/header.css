@@ -15,21 +15,36 @@ header {
     gap: 15px;
 }
 
-/* LOGO */
-.logo {
-    display: flex;
-    align-items: center;
-    flex-shrink: 0;
+.logo-queviaje {
+  text-align: center;
+  transform: rotate(-3deg);
+  font-family: 'Poppins', 'Arial Black', sans-serif;
+  user-select: none;
+  line-height: 1.1;
 }
 
-#logo123 {
-    width: 50px;
-    height: 50px;
-    transition: transform 0.3s ease;
+/* Título principal */
+.logo-queviaje h1 {
+  font-size: 2.8rem;
+  font-weight: 900;
+  color:#ff6600;
+  margin: 0;
+  letter-spacing: -2px;
 }
 
-#logo123:hover {
-    transform: scale(1.05);
+
+/* Eslogan */
+.logo-queviaje p {
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-top: 0.2em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Resaltar SALTO */
+.logo-queviaje p span {
+  color: #ff6600;
 }
 
 /* TÍTULO */

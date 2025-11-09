@@ -55,6 +55,50 @@ if ($evento_id > 0) {
     <!---Botón volver al catálogo--->
     <div style="padding: 0 20px;">
         <a href="../Frontend/Catálogo.php" class="boton-volver">← Volver al Catálogo</a>
+    <?php
+    // Mostrar botón de editar sólo si el usuario es el creador del evento o es administrador
+    $puedeEditar = false;
+
+    if (isset($_SESSION['ID_Cliente'])) {
+        $usuario_actual = intval($_SESSION['ID_Cliente']);
+
+        // Obtener la cédula del usuario actual si es organizador (una sola consulta)
+        $usuarioCedula = null;
+        $stmt_ced = $conn->prepare("SELECT Cedula FROM organizadores WHERE ID_Cliente = ? LIMIT 1");
+        if ($stmt_ced) {
+            $stmt_ced->bind_param('i', $usuario_actual);
+            $stmt_ced->execute();
+            $res_ced = $stmt_ced->get_result();
+            if ($row_ced = $res_ced->fetch_assoc()) {
+                $usuarioCedula = $row_ced['Cedula'];
+            }
+        }
+
+        // Comprobar si el usuario es administrador (se admiten varias convenciones de sesión)
+        $esAdmin = false;
+        if (isset($_SESSION['Rol'])) {
+            $rol = strtolower($_SESSION['Rol']);
+            if ($rol === 'admin' || $rol === 'administrador') {
+                $esAdmin = true;
+            }
+        }
+        if (isset($_SESSION['es_admin']) && $_SESSION['es_admin']) {
+            $esAdmin = true;
+        }
+
+        // Permitir editar si:
+        // - la cédula del organizador logueado coincide con la cédula asociada al evento
+        // - o si el usuario es administrador
+        if ((!empty($evento['Cédula']) && $usuarioCedula !== null && $usuarioCedula === $evento['Cédula']) || $esAdmin) {
+            $puedeEditar = true;
+        }
+    }
+
+    if ($puedeEditar) {
+        // Enlace al formulario/acción de edición (ajusta la ruta si hace falta)
+        echo '<a href="editar_evento.php?id=' . intval($evento_id) . '" class="boton-editar">✎ Editar evento</a>';
+    }
+    ?>
     </div>
 
     <!---INFO DEL EVENTO--->

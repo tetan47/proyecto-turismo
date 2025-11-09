@@ -14,6 +14,7 @@ El objetivo es resolver la falta de información en tiempo real sobre eventos, o
 
 La aplicación permite:  
 - Publicar y consultar eventos.  
+- Ver Sitios turísticos.
 - Filtrar por categorías, ubicación o fecha.  
 - Acceder a un mapa interactivo de lugares de interés.  
 - Usar un buscador de información histórica de Salto.  
@@ -26,7 +27,18 @@ Nuestros objetivos son:
 - Incluir geolocalización mediante API de mapas.  
 - Diseñar un sistema accesible y fácil de usar.  
 
-Para este proyecto hemos usado: VScode,XAMPP,HTML5,css,js,phpMyAdmin. y MySQL.
+Para este proyecto hemos usado: GitHub, VScode,XAMPP,HTML5,CSS,js,phpMyAdmin y MySQL.
+
+- GitHub: Plataforma para control de versiones y colaboración.
+- VSCode: Editor de código para desarrollo y debugging
+- XAMPP: Entorno de servidor local (Apache + MySQL + PHP)
+- HTML5: Estructura y contenido de las páginas para formularios y visor de contenedores
+- CSS: Diseño visual y responsive de la interfaz
+- JavaScript: Interactividad dinámica y comunicación con el backend (AJAX)
+- PHP: Lógica del servidor, autenticación y procesamiento de datos
+- MySQL: Base de datos relacional para almacenar usuarios, eventos y comentarios
+- phpMyAdmin: Administración visual de la base de datos
+
 
 Requisitos previos
 

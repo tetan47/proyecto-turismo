@@ -52,8 +52,7 @@ $datosUsuario = $usuarioLogueado ? obtenerDatosUsuario($conn) : null;
 $esOrganizador = $usuarioLogueado ? esOrganizador($conn) : false;
 $esAdmin = $usuarioLogueado ? esAdmin($conn) : false;
 
-// Cerrar conexión
-$conn->close();
+// NO cerrar conexión aquí porque otras páginas la necesitan
 ?>
 
 <link rel="stylesheet" href="css/estructura_fundamental.css">

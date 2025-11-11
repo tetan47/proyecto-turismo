@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-10-2025 a las 16:26:21
+-- Tiempo de generación: 11-11-2025 a las 12:20:06
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -143,7 +143,7 @@ CREATE TABLE `eventos` (
   `Descripción` varchar(200) NOT NULL,
   `Capacidad` int(11) NOT NULL DEFAULT 0,
   `Creacion_Evento` date DEFAULT current_timestamp(),
-  `Ubicacion` varchar(50) DEFAULT NULL,
+  `Ubicacion` varchar(600) DEFAULT NULL,
   `Cédula` varchar(10) DEFAULT NULL,
   `Hora` time DEFAULT NULL,
   `imagen` varchar(255) NOT NULL DEFAULT 'https://upload.wikimedia.org/wikipedia/commons/0/0e/DefaultImage.png',
@@ -162,10 +162,10 @@ INSERT INTO `eventos` (`ID_Evento`, `Título`, `Descripción`, `Capacidad`, `Cre
 (3, 'Fiesta de Aaron', 'Festejamos el cumple de Aaron', 0, '2025-08-29', 'Casa de Aaron', '12345678', '00:00:00', 'https://upload.wikimedia.org/wikipedia/commons/0/0e/DefaultImage.png', 'Otros', '2025-09-10', NULL),
 (4, 'Prueba 4', 'xd', 0, '2025-11-21', 'Casa de Aaron', '12345678', '00:00:00', 'https://upload.wikimedia.org/wikipedia/commons/0/0e/DefaultImage.png', 'Otros', '2025-11-21', NULL),
 (5, 'Festival de Jazz en el Larrañaga', 'Gran festival internacional de jazz con artistas de Argentina, Brasil y Uruguay. Tres días de música en vivo con entrada libre y gratuita. Incluye talleres y jam sessions.', 0, '2025-10-20', 'Teatro Larrañaga, Av. Uruguay 1100', NULL, '20:00:00', 'https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=800&h=500&fit=crop', 'musica', '2025-11-15', '2025-11-17'),
-(6, 'Maratón Termal de Salto', 'Competencia atlética de 21km y 10km por las termas del Daymán y Salto Grande. Inscripciones abiertas. Incluye kit del corredor y medalla finisher.', 0, '2025-10-20', '<iframe src=\"https://www.google.com/maps/embed?pb=', NULL, '07:00:00', 'https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=800&h=500&fit=crop', 'deporte', '2025-12-08', '2025-12-08'),
+(6, 'Maratón Termal de Salto', 'Competencia atlética de 21km y 10km por las termas del Daymán y Salto Grande. Inscripciones abiertas. Incluye kit del corredor y medalla finisher.', 0, '2025-10-20', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2021.7026815861896!2d-57.94460762469598!3d-31.4141820087294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1spesca%20salto!5e0!3m2!1ses-419!2suy!4v1762859925433!5m2!1ses-419!2suy\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>', NULL, '07:00:00', 'https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=800&h=500&fit=crop', 'deporte', '2025-12-08', '2025-12-08'),
 (7, 'Feria Gastronómica del Río Uruguay', 'Muestra gastronómica con productores locales, food trucks y chefs reconocidos. Degustación de vinos, aceites de oliva y productos artesanales de la región.', 0, '2025-10-20', 'Costanera Sur, Parque García Lorca', NULL, '18:00:00', 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&h=500&fit=crop', 'gastronomia', '2025-11-22', '2025-11-24'),
 (8, 'Noche de los Museos Salto', 'Recorrido cultural nocturno gratuito por los principales museos de la ciudad. Incluye actividades interactivas, música en vivo y performances artísticas.', 0, '2025-10-20', 'Circuito: Teatro Larrañaga - Museo de Artes Plásti', NULL, '19:00:00', 'https://images.unsplash.com/photo-1544967082-d9d25d867eeb?w=800&h=500&fit=crop', 'cultura', '2025-10-25', '2025-10-25'),
-(9, 'Torneo de Pesca del Río Uruguay', 'Competencia anual de pesca deportiva con modalidades embarcado y costa. Premios para las mejores piezas. Inscripción previa obligatoria.', 0, '2025-10-20', '<iframe src=\"https://www.google.com/maps/embed?pb=', NULL, '06:00:00', 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=500&fit=crop', 'deporte', '2025-11-30', '2025-12-01'),
+(9, 'Torneo de Pesca del Río Uruguay', 'Competencia anual de pesca deportiva con modalidades embarcado y costa. Premios para las mejores piezas. Inscripción previa obligatoria.', 0, '2025-10-20', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6819.023791099313!2d-57.953578003841834!3d-31.289594001796047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95adc16676af68eb%3A0x1c57de9978ad7fb9!2sParque%20Jos%C3%A9%20Luis%2C%20Departamento%20de%20Salto!5e0!3m2!1ses-419!2suy!4v1762857906385!5m2!1ses-419!2suy\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>', NULL, '06:00:00', 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=500&fit=crop', 'deporte', '2025-11-30', '2025-12-01'),
 (10, 'Carnaval de Salto 2026', 'El carnaval más largo del mundo. Desfiles de comparsas, murgas y conjuntos en el corsódromo oficial. Entrada gratuita. Cuatro semanas de espectáculos.', 0, '2025-10-20', 'Corsódromo de Salto, Zona Parque Solari', NULL, '21:00:00', 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&h=500&fit=crop', 'cultura', '2026-01-10', '2026-02-15'),
 (11, 'Exposición de Arte Contemporáneo', 'Muestra colectiva de artistas plásticos del litoral uruguayo. Pinturas, esculturas e instalaciones. Entrada libre.', 0, '2025-10-20', 'Museo de Artes Plásticas M.I. Olarreaga Gallino', NULL, '10:00:00', 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800&h=500&fit=crop', 'arte', '2025-11-05', '2025-11-30'),
 (12, 'Festival de Folklore y Tradición', 'Encuentro de jineteadas, folklore y danzas tradicionales. Presenta grupos de Uruguay y Argentina. Feria artesanal y gastronómica incluida.', 0, '2025-10-20', 'Predio Salto Grande', NULL, '16:00:00', 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800&h=500&fit=crop', 'cultura', '2025-12-14', '2025-12-15'),
@@ -178,7 +178,8 @@ INSERT INTO `eventos` (`ID_Evento`, `Título`, `Descripción`, `Capacidad`, `Cre
 (19, 'Encuentro de Teatro Independiente', 'Cuatro días de teatro con compañías de todo el país. Obras para adultos y niños. Entrada con bono contribución voluntario.', 0, '2025-10-20', 'Teatro Larrañaga y espacios alternativos', NULL, '20:00:00', 'https://images.unsplash.com/photo-1503095396549-807759245b35?w=800&h=500&fit=crop', 'arte', '2025-11-27', '2025-11-30'),
 (20, 'Fiesta del Olivo', 'Celebración de la cosecha del olivo con actividades educativas sobre producción de aceite. Degustación, venta de productos y recorridos por olivares.', 0, '2025-10-20', 'Olivares Salteños, Zona Rural', NULL, '10:00:00', 'https://images.unsplash.com/photo-1474440692490-2e83ae13ba29?w=800&h=500&fit=crop', 'gastronomia', '2025-12-20', '2025-12-20'),
 (21, 'Caminata Histórica por el Ayuí', 'Recorrido guiado por el sitio histórico donde comenzó el Éxodo del Pueblo Oriental. Incluye charla histórica y refrigerio. Actividad gratuita.', 0, '2025-10-20', 'Sitio Histórico del Ayuí, Salto Grande', NULL, '09:00:00', 'https://images.unsplash.com/photo-1507619665486-cbb202cfd968?w=800&h=500&fit=crop', 'historia', '2025-11-18', '2025-11-18'),
-(22, 'Festival de Tango Río de los Pájaros', 'Encuentro de tango con milongas, clases y shows de reconocidas orquestas. Dos días de pura tradición rioplatense.', 0, '2025-10-20', 'Centro Cultural Mercado 18 de Julio', NULL, '20:00:00', 'https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?w=800&h=500&fit=crop', 'musica', '2025-12-12', '2025-12-13');
+(22, 'Festival de Tango Río de los Pájaros', 'Encuentro de tango con milongas, clases y shows de reconocidas orquestas. Dos días de pura tradición rioplatense.', 0, '2025-10-20', 'Centro Cultural Mercado 18 de Julio', NULL, '20:00:00', 'https://images.unsplash.com/photo-1504609773096-104ff2c73ba4?w=800&h=500&fit=crop', 'musica', '2025-12-12', '2025-12-13'),
+(23, 'Golden Gym', 'PONETE FUETTE', 90, '2025-11-10', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6812.011317105549!2d-57.97363762229001!3d-31.386407499999972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95addd13903bf4ed%3A0x2be3661688be163d!2sGolden%20Gym%20Salto!5e0!3m2!1ses-419!2suy!4v1762810143752!5m2!1ses-419!2suy\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>', '12345678', '00:00:00', '/portadas-eventos/evento_1762805667_691247a3af31d.jfif', 'arte', '2026-01-01', '2040-01-01');
 
 -- --------------------------------------------------------
 
@@ -366,7 +367,7 @@ ALTER TABLE `comentarios`
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `respondercomentario`

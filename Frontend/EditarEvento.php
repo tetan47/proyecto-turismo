@@ -9,138 +9,122 @@
 </head>
 <body>
 <?php 
-// Iniciar sesión
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
+session_start();
+include('../backend/Conexion.php');
 
-$evento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
-
-include("header.php");
-
-// Verificar que el usuario esté logueado
-if (!isset($_SESSION['ID_Cliente']) || !isset($_SESSION['logueado']) || $_SESSION['logueado'] !== true) {
-    echo "<script>
-            alert('Debes iniciar sesión para crear un evento');
-            window.location.href='login.php';
-          </script>";
+// Validar sesión y ID
+if (!isset($_SESSION['ID_Cliente']) || !isset($_GET['id'])) {
+    header('Location: login.php');
     exit();
 }
+
+$evento_id = intval($_GET['id']);
+
+// Obtener datos del evento
+$sql = "SELECT Título, Descripción, categoria, Ubicacion, Fecha_Inicio, Fecha_Fin, Hora, Capacidad, imagen 
+        FROM eventos WHERE ID_Evento = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $evento_id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows === 0) {
+    echo "<script>alert('Evento no encontrado'); window.history.back();</script>";
+    exit();
+}
+
+$evento = $result->fetch_assoc();
+$stmt->close();
+
+// Preparar imagen para mostrar (SIN base64)
+$imagen_preview = $evento['imagen'] ?? '';
+if (empty($imagen_preview)) {
+    $imagen_preview = 'https://via.placeholder.com/300?text=Sin+imagen';
+}
+
+include("header.php");
 ?>
 
 <div class="formulario">
   <h1>Editar Evento</h1>
-  <form action="../backend/eventos/editarorg.php" method="post" enctype="multipart/form-data">
-    <label for="titulo">Título <span style="color: red;">*</span></label><br />
-    <input type="text" id="titulo" name="titulo" required maxlength="50" placeholder="Nombre del evento" /><br /><br />
+  <form action="../backend/eventos/editarevent.php" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="evento_id" value="<?php echo $evento_id; ?>">
 
-    <label for="descripcion">Descripción</label><br />
-    <textarea id="descripcion" name="descripcion" style="min-height: 60px; max-height: 200px;" rows="4" maxlength="200" placeholder="Describe tu evento (máx. 200 caracteres)"></textarea><br /><br />
+    <label>Título <span style="color: red;">*</span></label>
+    <input type="text" name="titulo" value="<?php echo htmlspecialchars($evento['Título']); ?>" required maxlength="50" /><br /><br />
 
-    <label for="categoria">Categoría <span style="color: red;">*</span></label><br />
-    <select id="categoria" name="categoria" required>
-      <option value="">Seleccionar…</option>
-      <option value="música">Música</option>
-      <option value="deporte">Deporte</option>
-      <option value="arte">Arte</option>
-      <option value="gastronómico">Gastronómico</option>
-      <option value="historia">Historia</option>
-      <option value="cultural">Cultural</option>
-      <option value="otros">Otros</option>
+    <label>Descripción</label>
+    <textarea name="descripcion" rows="4" maxlength="200"><?php echo htmlspecialchars($evento['Descripción']); ?></textarea><br /><br />
+
+    <label>Categoría <span style="color: red;">*</span></label>
+    <select name="categoria" required>
+      <option value="música" <?php echo $evento['categoria'] === 'música' ? 'selected' : ''; ?>>Música</option>
+      <option value="deporte" <?php echo $evento['categoria'] === 'deporte' ? 'selected' : ''; ?>>Deporte</option>
+      <option value="arte" <?php echo $evento['categoria'] === 'arte' ? 'selected' : ''; ?>>Arte</option>
+      <option value="gastronómico" <?php echo $evento['categoria'] === 'gastronómico' ? 'selected' : ''; ?>>Gastronómico</option>
+      <option value="historia" <?php echo $evento['categoria'] === 'historia' ? 'selected' : ''; ?>>Historia</option>
+      <option value="cultural" <?php echo $evento['categoria'] === 'cultural' ? 'selected' : ''; ?>>Cultural</option>
+      <option value="otros" <?php echo $evento['categoria'] === 'otros' ? 'selected' : ''; ?>>Otros</option>
     </select><br /><br />
 
-    <label for="ubicacion">Ubicación <span style="color: red;">*</span></label><br />
-    <input type="text" id="ubicacion" name="ubicacion" required maxlength="50" placeholder="Dirección o lugar del evento" /><br /><br />
+    <label>Ubicación <span style="color: red;">*</span></label>
+    <input type="text" name="ubicacion" value="<?php echo htmlspecialchars($evento['Ubicacion']); ?>" required maxlength="100" /><br /><br />
 
-    <label for="fecha_inicio">Fecha inicio <span style="color: red;">*</span></label><br />
-    <input type="date" id="fecha_inicio" name="fecha_inicio" required min="<?php echo date('Y-m-d'); ?>" /><br /><br />
+    <label>Fecha inicio <span style="color: red;">*</span></label>
+    <input type="date" name="fecha_inicio" value="<?php echo $evento['Fecha_Inicio']; ?>" required /><br /><br />
 
-    <label for="fecha_fin">Fecha fin <span style="color: red;">*</span></label><br />
-    <input type="date" id="fecha_fin" name="fecha_fin" required min="<?php echo date('Y-m-d'); ?>" /><br /><br />
+    <label>Fecha fin <span style="color: red;">*</span></label>
+    <input type="date" name="fecha_fin" value="<?php echo $evento['Fecha_Fin']; ?>" required /><br /><br />
 
-    <label for="hora_evento">Hora <span style="color: red;">*</span></label><br />
-    <input type="time" id="hora_evento" name="hora_evento" required /><br /><br />
+    <label>Hora <span style="color: red;">*</span></label>
+    <input type="time" name="hora_evento" value="<?php echo $evento['Hora']; ?>" required /><br /><br />
 
-    <label for="capacidad">Capacidad <span style="color: red;">*</span></label><br />
-    <input type="number" id="capacidad" name="capacidad" min="1" max="100000" required placeholder="Numero de personas" /><br /><br />
+    <label>Capacidad <span style="color: red;">*</span></label>
+    <input type="number" name="capacidad" value="<?php echo $evento['Capacidad']; ?>" min="1" max="100000" required /><br /><br />
 
-    <label for="imagen">Imagen del evento</label><br />
-    <input type="file" class="btn-img" id="imagen" name="imagen" accept="image/*" /><br />
-    <img id="preview" alt="Vista previa de la imagen" style="display: none; max-width: 300px; margin-top: 10px; border-radius: 8px;" /><br /><br />
+    <label>Imagen del evento</label>
+    <input type="file" name="imagen" accept="image/*" /><br />
+    <!-- Mostrar imagen -->
+    <?php if ($imagen_preview): ?>
+        <img id="preview" src="<?php echo $imagen_preview; ?>" alt="Imagen actual" style="max-width: 300px; margin-top: 10px; border-radius: 8px;" /><br /><br />
+    <?php else: ?>
+        <img id="preview" style="display: none; max-width: 300px; margin-top: 10px; border-radius: 8px;" />
+    <?php endif; ?>
 
-    <p style="font-size: 12px; color: #666; margin-bottom: 15px;">
-      <span style="color: red;">*</span> Campos obligatorios
-    </p>
-
-    <button type="submit">Crear Evento</button>
+    <button type="submit">Guardar Cambios</button>
   </form>
 </div>
 
 <script>
-  // Vista previa de la imagen
-  document.getElementById("imagen").addEventListener("change", function(event) {
-    const file = event.target.files[0];
-    const preview = document.getElementById("preview");
+  // Vista previa de nueva imagen
+  document.querySelector('input[name="imagen"]').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
 
-    if (file) {
-      // Validar tamaño (5MB máximo)
-      if (file.size > 5000000) {
-        alert("La imagen es demasiado grande. El tamaño máximo es 5MB.");
-        this.value = "";
-        preview.style.display = "none";
-        return;
-      }
-
-      // Validar tipo de archivo
-      const tiposPermitidos = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
-      if (!tiposPermitidos.includes(file.type)) {
-        alert("Tipo de archivo no permitido. Solo se aceptan: JPG, JPEG, PNG, GIF, WEBP");
-        this.value = "";
-        preview.style.display = "none";
-        return;
-      }
-
-      // Mostrar vista previa
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        preview.src = e.target.result;
-        preview.style.display = "block";
-      };
-      reader.readAsDataURL(file);
-    } else {
-      preview.style.display = "none";
-      preview.src = "";
+    if (file.size > 5000000) {
+      alert('La imagen es muy grande (máx. 5MB)');
+      this.value = '';
+      return;
     }
+
+    const tipos = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    if (!tipos.includes(file.type)) {
+      alert('Solo se aceptan: JPG, PNG, GIF, WEBP');
+      this.value = '';
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      document.getElementById('preview').src = e.target.result;
+      document.getElementById('preview').style.display = 'block';
+    };
+    reader.readAsDataURL(file);
   });
 
-  // Sincronizar fecha mínima de fecha_fin con fecha_inicio
-  document.getElementById("fecha_inicio").addEventListener("change", function() {
-    const fechaInicio = this.value;
-    const fechaFinInput = document.getElementById("fecha_fin");
-    
-    // Establecer la fecha mínima
-    fechaFinInput.setAttribute("min", fechaInicio);
-    
-    // Si ya hay una fecha_fin seleccionada, validarla
-    if (fechaFinInput.value && fechaFinInput.value < fechaInicio) {
-      alert("La fecha de fin no puede ser anterior a la fecha de inicio. Por favor, selecciona una nueva fecha de fin.");
-      fechaFinInput.value = "";
-    }
-  });
-
-  // Validar que fecha_fin no sea menor que fecha_inicio
-  document.getElementById("fecha_fin").addEventListener("blur", function() {
-    const fechaInicio = document.getElementById("fecha_inicio").value;
-    const fechaFin = this.value;
-
-    // Solo validar si ambas fechas están completamente ingresadas
-    if (fechaInicio && fechaFin && fechaFin.length === 10) {
-      if (fechaFin < fechaInicio) {
-        alert("La fecha de fin no puede ser anterior a la fecha de inicio");
-        this.value = "";
-        this.focus();
-      }
-    }
+  // Validar fechas
+  document.querySelector('input[name="fecha_inicio"]').addEventListener('change', function() {
+    document.querySelector('input[name="fecha_fin"]').setAttribute('min', this.value);
   });
 </script>
 <?php include("footer.html") ?>

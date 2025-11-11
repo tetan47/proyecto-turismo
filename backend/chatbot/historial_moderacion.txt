@@ -1,0 +1,2 @@
+[2025-11-11 17:19:47] mierda → RECHAZADO: Lenguaje inapropiado detectado: 'mierda'. Reformula tu comentario.
+[2025-11-11 17:19:53] buen evento → APROBADO

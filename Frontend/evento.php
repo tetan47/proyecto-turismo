@@ -236,31 +236,55 @@ if ($evento_id > 0) {
     document.addEventListener('DOMContentLoaded', () => {
         cargarComentarios();
 
-        const btnComentar = document.getElementById("btn-comentar");
-        if (btnComentar) {
-            btnComentar.addEventListener("click", () => {
-                const texto = document.getElementById("texto-comentario").value.trim();
-                const id_evento = btnComentar.dataset.evento;
+const btnComentar = document.getElementById("btn-comentar");
+const textarea = document.getElementById("texto-comentario");
+const errorDiv = document.createElement('div');
+errorDiv.id = 'error-moderacion';
+errorDiv.style.cssText = 'color: #d32f2f; font-size: 14px; margin-top: 8px; display: none; font-weight: 500;';
+textarea.parentNode.insertBefore(errorDiv, textarea.nextSibling);
 
-                if (texto === "") {
-                    alert('Por favor escribe un comentario');
-                    return;
-                }
-
-                fetch(`../backend/Comentarios/Comentar.php?id_evento=${id_evento}`, {
-                    method: "POST",
-                    body: new URLSearchParams({ Texto: texto }),
-                    headers: { "Content-Type": "application/x-www-form-urlencoded" }
-                })
-                .then(response => response.text())
-                .then(data => {
-                    alert(data);
-                    document.getElementById("texto-comentario").value = "";
-                    cargarComentarios();
-                })
-                .catch(err => console.error("Error:", err));
-            });
+if (btnComentar) {
+    btnComentar.addEventListener("click", async () => {
+        const texto = textarea.value.trim();
+        const id_evento = btnComentar.dataset.evento;
+        if (texto === "") {
+            alert("Por favor escribe un comentario.");
+            return;
         }
+        try {
+            const response = await fetch('http://localhost:5000/moderacion', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ texto: texto })
+            });
+            const data = await response.json();
+            if (!data.aprobado) {
+                textarea.style.border = '2px solid #d32f2f';
+                textarea.style.boxShadow = '0 0 8px rgba(211, 47, 47, 0.3)';
+                errorDiv.textContent = data.mensaje;
+                errorDiv.style.display = 'block';
+                setTimeout(() => {
+                    textarea.style.border = '';
+                    textarea.style.boxShadow = '';
+                    errorDiv.style.display = 'none';
+                }, 6000);
+                return;
+            }
+            const phpResponse = await fetch(`../backend/Comentarios/Comentar.php?id_evento=${id_evento}`, {
+                method: "POST",
+                body: new URLSearchParams({ Texto: texto }),
+                headers: { "Content-Type": "application/x-www-form-urlencoded" }
+            });
+            const phpData = await phpResponse.text();
+            alert(phpData);
+            textarea.value = "";
+            cargarComentarios();
+        } catch (err) {
+            console.error("Error con IA:", err);
+            alert("Error al conectar con la moderacion. Intenta más tarde.");
+        }
+    });
+}
     });
 
     function mostrarFormularioRespuesta(idComentario) {

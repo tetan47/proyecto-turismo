@@ -26,7 +26,6 @@ if (!isset($_SESSION['ID_Cliente'])) {
             <div class="tabs-container">
                 <button class="tab-btn active" data-tab="perfil">Perfil</button>
                 <button class="tab-btn" data-tab="cuenta">Cuenta</button>
-                <button class="tab-btn" data-tab="preferencias">Preferencias</button>
             </div>
 
             <div class="content-wrapper">
@@ -103,52 +102,6 @@ if (!isset($_SESSION['ID_Cliente'])) {
                                 <button type="button" class="secondary" onclick="cargarDatosUsuario()">Cancelar</button>
                             </div>
                         </form>
-                    </div>
-                </div>
-
-                <!-- PREFERENCIAS -->
-                <div id="preferencias" class="tab-content">
-                    <h2 class="section-title">Preferencias</h2>
-                    
-                    <div class="pref-group">
-                        <h3>Apariencia</h3>
-                        <div class="pref-item">
-                            <div>
-                                <p class="pref-label">Tema Claro</p>
-                                <p class="pref-desc">Cambiar a colores claros</p>
-                            </div>
-                            <label class="toggle">
-                                <input type="checkbox" id="temaClaro">
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        <div class="pref-item">
-                            <div>
-                                <p class="pref-label">Alto Contraste</p>
-                                <p class="pref-desc">Aumentar contraste visual</p>
-                            </div>
-                            <label class="toggle">
-                                <input type="checkbox" id="altoContraste">
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="pref-group">
-                        <h3>Idioma</h3>
-                        <div class="form-group">
-                            <label>Selecciona tu idioma</label>
-                            <select id="idioma">
-                                <option value="es">Español</option>
-                                <option value="en">English</option>
-                                <option value="pt">Português</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="button-group">
-                        <button type="button" onclick="guardarPreferencias()">Guardar preferencias</button>
-                        <button type="button" class="secondary" onclick="resetPreferencias()">Restaurar por defecto</button>
                     </div>
                 </div>
             </div>
@@ -406,18 +359,6 @@ if (!isset($_SESSION['ID_Cliente'])) {
                 mostrarMensaje('Error de conexión', 'error');
             });
         });
-
-        // Funciones de preferencias (para implementar en el futuro)
-        function guardarPreferencias() {
-            mostrarMensaje('Preferencias guardadas correctamente', 'success');
-        }
-
-        function resetPreferencias() {
-            document.getElementById('temaClaro').checked = false;
-            document.getElementById('altoContraste').checked = false;
-            document.getElementById('idioma').value = 'es';
-            mostrarMensaje('Preferencias restauradas', 'success');
-        }
 
         // Función para mostrar mensajes
         function mostrarMensaje(mensaje, tipo) {

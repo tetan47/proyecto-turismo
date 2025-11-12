@@ -150,12 +150,6 @@
       </div>
       <div class="paso">
         <div class="paso-numero">2</div>
-        <i class="fas fa-bookmark paso-icono"></i>
-        <h3>Guarda</h3>
-        <p>Marca tus eventos favoritos y crea tu propia agenda personalizada</p>
-      </div>
-      <div class="paso">
-        <div class="paso-numero">3</div>
         <i class="fas fa-share-alt paso-icono"></i>
         <h3>Comparte</h3>
         <p>Invita a amigos y familia a unirse a las mejores experiencias de Salto</p>
@@ -192,12 +186,6 @@
           </div>
 
           <div class="bloque">
-            <i class="fas fa-bell bloque-icono"></i>
-            <h3>Notificaciones inteligentes</h3>
-            <p>Recibe alertas sobre nuevos eventos de tu interés y recordatorios de tus actividades guardadas.</p>
-          </div>
-
-          <div class="bloque">
             <i class="fas fa-star bloque-icono"></i>
             <h3>Reseñas y valoraciones</h3>
             <p>Lee experiencias de otros usuarios y comparte las tuyas para ayudar a la comunidad.</p>
@@ -207,63 +195,6 @@
       </div>
     </section>
 
-  <section class="testimonios">
-    <h2>Lo que dicen nuestros usuarios</h2>
-      <div class="testimonios-grid">
-        <div class="testimonio">
-          <div class="testimonio-header">
-            <img src="https://i.pravatar.cc/100?img=1" alt="Usuario">
-          <div>
-            <h4>María González</h4>
-            <span class="testimonio-rol">Turista</span>
-          </div>
-        </div>
-        <p>"Gracias a ¡Qué Viaje! descubrí eventos increíbles que no aparecían en ninguna guía turística tradicional."</p>
-        <div class="testimonio-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-        </div>
-      </div>
-         <div class="testimonio">
-        <div class="testimonio-header">
-          <img src="https://i.pravatar.cc/100?img=3" alt="Usuario">
-          <div>
-            <h4>Juan Pérez</h4>
-            <span class="testimonio-rol">Organizador</span>
-          </div>
-        </div>
-        <p>"La plataforma es intuitiva y muy completa."</p>
-        <div class="testimonio-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-        </div>
-      </div>
-      
-      <div class="testimonio">
-        <div class="testimonio-header">
-          <img src="https://i.pravatar.cc/100?img=5" alt="Usuario">
-          <div>
-            <h4>Ana Rodríguez</h4>
-            <span class="testimonio-rol">Residente</span>
-          </div>
-        </div>
-        <p>"Como salteña, ahora estoy al día con todo lo que pasa en mi ciudad. ¡Es genial!"</p>
-        <div class="testimonio-rating">
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-          <i class="fas fa-star"></i>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section class="cta">
     <div class="cta-content">
@@ -285,41 +216,41 @@
     <div class="eventos-lista">
       <div class="evento-item">
         <div class="evento-fecha">
-          <span class="dia">15</span>
+          <span class="dia">18</span>
           <span class="mes">NOV</span>
         </div>
         <div class="evento-info">
-          <h3>Festival de la Primavera</h3>
+          <h3>Fiesta de Aaron</h3>
+          <p><i class="fas fa-map-marker-alt"></i> Su casa</p>
+          <p><i class="fas fa-clock"></i> 12:00 - 23:59</p>
+        </div>
+        <a href="evento.php?id=3" class="btn-ver-mas">Ver más</a>
+      </div>
+      
+      <div class="evento-item">
+        <div class="evento-fecha">
+          <span class="dia">30</span>
+          <span class="mes">OCT</span>
+        </div>
+        <div class="evento-info">
+          <h3>Feria de Artesanos</h3>
           <p><i class="fas fa-map-marker-alt"></i> Plaza Artigas</p>
-          <p><i class="fas fa-clock"></i> 18:00 - 23:00</p>
+          <p><i class="fas fa-clock"></i> 12:00 - 16:00</p>
         </div>
-        <a href="#" class="btn-ver-mas">Ver más</a>
+        <a href="evento.php?id=1" class="btn-ver-mas">Ver más</a>
       </div>
       
       <div class="evento-item">
         <div class="evento-fecha">
-          <span class="dia">20</span>
-          <span class="mes">NOV</span>
+          <span class="dia">2</span>
+          <span class="mes">ENE</span>
         </div>
         <div class="evento-info">
-          <h3>Expo Artesanías del Litoral</h3>
-          <p><i class="fas fa-map-marker-alt"></i> Centro Cultural</p>
-          <p><i class="fas fa-clock"></i> 10:00 - 20:00</p>
+          <h3>Concierto de Rock</h3>
+          <p><i class="fas fa-map-marker-alt"></i> Teatro larrañaga</p>
+          <p><i class="fas fa-clock"></i> 21:30 - 23:30</p>
         </div>
-        <a href="#" class="btn-ver-mas">Ver más</a>
-      </div>
-      
-      <div class="evento-item">
-        <div class="evento-fecha">
-          <span class="dia">25</span>
-          <span class="mes">NOV</span>
-        </div>
-        <div class="evento-info">
-          <h3>Maratón Ciudad de Salto</h3>
-          <p><i class="fas fa-map-marker-alt"></i> Costanera</p>
-          <p><i class="fas fa-clock"></i> 07:00 - 12:00</p>
-        </div>
-        <a href="#" class="btn-ver-mas">Ver más</a>
+        <a href="evento.php?id=2" class="btn-ver-mas">Ver más</a>
          </div>
     </div>
   </section>
@@ -462,9 +393,5 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
   </script>
-
-  <script src="JavaScript/translations.js"></script>
-  <script src="JavaScript/language.js"></script>
-
 </body>
 </html>

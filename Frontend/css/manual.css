@@ -14,7 +14,6 @@ body {
 /* Header centrado y contenido alineado */
 .manual-header {
     width: 100%;
-    /* usar el mismo max-width que .contenedor-manual para coherencia */
     display: flex;
     justify-content: center;
     padding: 18px 12px;
@@ -36,7 +35,12 @@ body {
     color: #9d4df8;
 }
 
-.manual-back {
+.manual-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.manual-back, .manual-translate {
     color: #ffffff;
     background: rgba(255,255,255,0.06);
     padding: 8px 12px;
@@ -45,9 +49,17 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-.manual-back i {
+.manual-back:hover, .manual-translate:hover {
+    background: rgba(157, 77, 248, 0.2);
+    transform: translateY(-2px);
+}
+
+.manual-back i, .manual-translate i {
     font-size: 0.95rem;
 }
 
@@ -351,11 +363,18 @@ table tr:hover {
         align-items: flex-start;
         gap: 10px;
     }
+    
+    .manual-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
     .barra-lateral {
         position: relative;
         width: 100%;
         max-height: none;
     }
+    
     .contenedor-manual {
         flex-direction: column;
         padding: 12px;
@@ -378,7 +397,9 @@ table tr:hover {
     .manual-header h1 {
         font-size: 1.1rem;
     }
-    .manual-back {
+    
+    .manual-back, .manual-translate {
         padding: 6px 10px;
+        font-size: 0.9rem;
     }
 }

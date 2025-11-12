@@ -1,12 +1,26 @@
 <?php 
+// Iniciar sesión si no está iniciada
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 include('../backend/Conexion.php'); 
 
-// Verificación más simple y directa
+// Verificar que el usuario esté logueado
+if (!isset($_SESSION['logueado']) || $_SESSION['logueado'] !== true) {
+    header('Location: ../Frontend/login.php');
+    exit();
+}
+
+// Verificación de administrador
+$esAdmin = false;
+
+// 1. Verificar si ya tiene ID_Administrador en sesión
 if (isset($_SESSION['ID_Administrador'])) {
-    // Es administrador, permitir acceso
+    $esAdmin = true;
 } else {
-    // Si no tiene ID_Administrador en sesión, verificar por correo
-    $correo = $_SESSION['Correo'] ?? $_SESSION['correo'] ?? null;
+    // 2. Si no, verificar por correo (usar minúscula como se guarda en el login)
+    $correo = $_SESSION['correo'] ?? null;
     
     if ($correo) {
         $stmt = $conn->prepare("SELECT ID_Administrador FROM administradores WHERE Correo = ?");
@@ -15,20 +29,20 @@ if (isset($_SESSION['ID_Administrador'])) {
         $result = $stmt->get_result();
         
         if ($result->num_rows > 0) {
-            // Es administrador, guardar en sesión para futuras verificaciones
+            // Es administrador, guardar en sesión
             $admin_data = $result->fetch_assoc();
             $_SESSION['ID_Administrador'] = $admin_data['ID_Administrador'];
-        } else {
-            header('Location: ../Frontend/index.php');
-            exit();
+            $esAdmin = true;
         }
         $stmt->close();
-    } else {
-        header('Location: ../Frontend/index.php');
-        exit();
     }
 }
 
+// Si no es administrador, redirigir
+if (!$esAdmin) {
+    header('Location: ../Frontend/index.php');
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">

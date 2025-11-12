@@ -4,7 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-include('../backend/Conexion.php');
+// Conexión con ruta absoluta relativa
+require_once __DIR__ . '/../backend/Conexion.php';
 
 // ========== FUNCIONES DE VERIFICACIÓN ==========
 
@@ -81,7 +82,8 @@ $esAdmin = $usuarioLogueado ? esAdmin($conn) : false;
                     
                     <?php if ($esAdmin): ?>
                         <!-- Opciones de ADMINISTRADOR -->
-                        <a href="admin-panel.php">🛡️ Panel de Administración</a>
+                        <a href="Panel_de_administracion.php">🛡️ Panel de Administración</a>
+                        <hr>
                         <a href="gestionar-usuarios.php">👥 Gestionar Usuarios</a>
                         <a href="gestionar-eventos.php">📅 Gestionar Eventos</a>
                         

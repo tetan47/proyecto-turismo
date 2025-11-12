@@ -308,33 +308,66 @@ if (btnComentar) {
         }
     }
 
-    function enviarRespuesta(idComentario) {
-        const texto = document.getElementById(`texto_respuesta_${idComentario}`).value.trim();
+async function enviarRespuesta(idComentario) {
+        const textarea = document.getElementById(`texto_respuesta_${idComentario}`);
+        const texto = textarea.value.trim();
 
         if (texto === "") {
             alert("Por favor escribe una respuesta.");
             return;
         }
 
-        fetch('../backend/Comentarios/responder.php', {
-            method: "POST",
-            body: new URLSearchParams({
-                id_comentario: idComentario,
-                texto: texto
-            }),
-            headers: { "Content-Type": "application/x-www-form-urlencoded" }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
+        let errorDiv = document.getElementById(`error-respuesta-${idComentario}`);
+        if (!errorDiv) {
+            errorDiv = document.createElement('div');
+            errorDiv.id = `error-respuesta-${idComentario}`;
+            errorDiv.style.cssText = 'color: #d32f2f; font-size: 14px; margin-top: 8px; display: none; font-weight: 500;';
+            textarea.parentNode.insertBefore(errorDiv, textarea.nextSibling);
+        }
+
+        try {
+            const response = await fetch('http://localhost:5000/moderacion', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ texto: texto })
+            });
+            const data = await response.json();
+
+            if (!data.aprobado) {
+                textarea.style.border = '2px solid #d32f2f';
+                textarea.style.boxShadow = '0 0 8px rgba(211, 47, 47, 0.3)';
+                errorDiv.textContent = data.mensaje;
+                errorDiv.style.display = 'block';
+                
+                setTimeout(() => {
+                    textarea.style.border = '';
+                    textarea.style.boxShadow = '';
+                    errorDiv.style.display = 'none';
+                }, 6000);
+                return;
+            }
+
+            const phpResponse = await fetch('../backend/Comentarios/responder.php', {
+                method: "POST",
+                body: new URLSearchParams({
+                    id_comentario: idComentario,
+                    texto: texto
+                }),
+                headers: { "Content-Type": "application/x-www-form-urlencoded" }
+            });
+            const phpData = await phpResponse.json();
+
+            if (phpData.success) {
                 cargarComentarios();
                 document.getElementById(`form_respuesta_${idComentario}`).style.display = 'none';
-                document.getElementById(`texto_respuesta_${idComentario}`).value = '';
+                textarea.value = '';
             } else {
-                alert(data.message);
+                alert(phpData.message);
             }
-        })
-        .catch(err => console.error("Error:", err));
+        } catch (err) {
+            console.error("Error con moderación:", err);
+            alert("Error al conectar con la moderación. Intenta más tarde.");
+        }
     }
 
     function toggleMenu(idComentario) {

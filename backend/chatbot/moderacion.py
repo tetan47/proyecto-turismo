@@ -12,7 +12,7 @@ palabras_prohibidas = [
     "baboso", "gilipollas", "cagón", "maricón", "pendejo", "huevón",
     "weón", "conchesumadre", "reculiao", "pijas", "cornudo", "fracasado",
     "imbécil", "retrasado", "subnormal", "violador", "pedófilo", "nigga", "mogolico",
-    "bolita", "estupido", "gorreado", "gordo", "termotanque de rabioles", "peruano"
+    "bolita", "estupido", "gorreado", "gordo", "termotanque de ravioles", "peruano"
 ]
 
 def moderar_comentario(texto):

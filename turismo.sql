@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-11-2025 a las 12:20:06
+-- Tiempo de generación: 12-11-2025 a las 16:19:13
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -93,7 +93,7 @@ INSERT INTO `cliente` (`ID_Cliente`, `Nombre`, `Apellido`, `Correo`, `Contraseñ
 (2, 'Carlos', 'Gómez', 'carlos.gomez@gmail.com', 'carlos456', '2025-06-02', NULL, 0),
 (4, 'Keylor', 'Navarro', 'keylornava23@gmail.com', 'keylor123', '2025-10-03', 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png', 0),
 (5, 'Cristian', 'Castro', 'crisgoku@gmail.com', 'cristian123', '2025-10-03', 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png', 0),
-(6, 'Ana', 'López', 'ana.lopez@gmail.com', 'adminana', '2025-10-03', 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png', 0),
+(6, 'Anna', 'López', 'ana.lopez@gmail.com', 'adminana', '2025-10-03', 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png', 0),
 (7, 'pedro', 'gallino', 'pedrogallino@gmail.com', 'pedrogallino', '2025-10-03', 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png', 0),
 (8, 'Jorge', 'Martinez', 'jorge.martinez@gmail.com', 'adminjorge', '2025-10-20', 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png', 0);
 
@@ -157,14 +157,14 @@ CREATE TABLE `eventos` (
 --
 
 INSERT INTO `eventos` (`ID_Evento`, `Título`, `Descripción`, `Capacidad`, `Creacion_Evento`, `Ubicacion`, `Cédula`, `Hora`, `imagen`, `categoria`, `Fecha_Inicio`, `Fecha_Fin`) VALUES
-(1, 'Feria de Artesanos', 'Evento cultural con productos locales.', 0, '2025-06-10', 'Plaza Artigas', '12345678', '12:00:00', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQZeYDEJsUpT3ezV087qItQsAA6AK-5sRm4Q&s', 'Otros', '2025-08-30', NULL),
+(1, 'Feria de Artesanos', 'Evento cultural con productos locales.', 160, '2025-06-10', 'Plaza Artigas', '12345678', '12:00:00', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQZeYDEJsUpT3ezV087qItQsAA6AK-5sRm4Q&s', 'cultural', '2025-08-30', '2026-02-01'),
 (2, 'Concierto de Rock', 'Banda local en vivo.', 0, '2025-06-15', 'Teatro Larrañaga', '87654321', '21:30:00', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzNOofyD4Mr6H45aMbkOV9nVoykLczluR1Pw&s', 'Música', '2026-01-02', NULL),
 (3, 'Fiesta de Aaron', 'Festejamos el cumple de Aaron', 0, '2025-08-29', 'Casa de Aaron', '12345678', '00:00:00', 'https://upload.wikimedia.org/wikipedia/commons/0/0e/DefaultImage.png', 'Otros', '2025-09-10', NULL),
 (4, 'Prueba 4', 'xd', 0, '2025-11-21', 'Casa de Aaron', '12345678', '00:00:00', 'https://upload.wikimedia.org/wikipedia/commons/0/0e/DefaultImage.png', 'Otros', '2025-11-21', NULL),
 (5, 'Festival de Jazz en el Larrañaga', 'Gran festival internacional de jazz con artistas de Argentina, Brasil y Uruguay. Tres días de música en vivo con entrada libre y gratuita. Incluye talleres y jam sessions.', 0, '2025-10-20', 'Teatro Larrañaga, Av. Uruguay 1100', NULL, '20:00:00', 'https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=800&h=500&fit=crop', 'musica', '2025-11-15', '2025-11-17'),
 (6, 'Maratón Termal de Salto', 'Competencia atlética de 21km y 10km por las termas del Daymán y Salto Grande. Inscripciones abiertas. Incluye kit del corredor y medalla finisher.', 0, '2025-10-20', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d2021.7026815861896!2d-57.94460762469598!3d-31.4141820087294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1spesca%20salto!5e0!3m2!1ses-419!2suy!4v1762859925433!5m2!1ses-419!2suy\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>', NULL, '07:00:00', 'https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=800&h=500&fit=crop', 'deporte', '2025-12-08', '2025-12-08'),
 (7, 'Feria Gastronómica del Río Uruguay', 'Muestra gastronómica con productores locales, food trucks y chefs reconocidos. Degustación de vinos, aceites de oliva y productos artesanales de la región.', 0, '2025-10-20', 'Costanera Sur, Parque García Lorca', NULL, '18:00:00', 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&h=500&fit=crop', 'gastronomia', '2025-11-22', '2025-11-24'),
-(8, 'Noche de los Museos Salto', 'Recorrido cultural nocturno gratuito por los principales museos de la ciudad. Incluye actividades interactivas, música en vivo y performances artísticas.', 0, '2025-10-20', 'Circuito: Teatro Larrañaga - Museo de Artes Plásti', NULL, '19:00:00', 'https://images.unsplash.com/photo-1544967082-d9d25d867eeb?w=800&h=500&fit=crop', 'cultura', '2025-10-25', '2025-10-25'),
+(8, 'Noche de los Museos Salto', 'Recorrido cultural nocturno gratuito por los principales museos de la ciudad. Incluye actividades interactivas, música en vivo y performances artísticas.', 1, '2025-10-20', 'Circuito: Teatro Larrañaga - Museo de Artes Plásti', NULL, '19:00:00', 'https://images.unsplash.com/photo-1544967082-d9d25d867eeb?w=800&h=500&fit=crop', 'música', '2025-10-25', '2025-10-25'),
 (9, 'Torneo de Pesca del Río Uruguay', 'Competencia anual de pesca deportiva con modalidades embarcado y costa. Premios para las mejores piezas. Inscripción previa obligatoria.', 0, '2025-10-20', '<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6819.023791099313!2d-57.953578003841834!3d-31.289594001796047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95adc16676af68eb%3A0x1c57de9978ad7fb9!2sParque%20Jos%C3%A9%20Luis%2C%20Departamento%20de%20Salto!5e0!3m2!1ses-419!2suy!4v1762857906385!5m2!1ses-419!2suy\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>', NULL, '06:00:00', 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=500&fit=crop', 'deporte', '2025-11-30', '2025-12-01'),
 (10, 'Carnaval de Salto 2026', 'El carnaval más largo del mundo. Desfiles de comparsas, murgas y conjuntos en el corsódromo oficial. Entrada gratuita. Cuatro semanas de espectáculos.', 0, '2025-10-20', 'Corsódromo de Salto, Zona Parque Solari', NULL, '21:00:00', 'https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&h=500&fit=crop', 'cultura', '2026-01-10', '2026-02-15'),
 (11, 'Exposición de Arte Contemporáneo', 'Muestra colectiva de artistas plásticos del litoral uruguayo. Pinturas, esculturas e instalaciones. Entrada libre.', 0, '2025-10-20', 'Museo de Artes Plásticas M.I. Olarreaga Gallino', NULL, '10:00:00', 'https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=800&h=500&fit=crop', 'arte', '2025-11-05', '2025-11-30'),
@@ -189,8 +189,8 @@ INSERT INTO `eventos` (`ID_Evento`, `Título`, `Descripción`, `Capacidad`, `Cre
 
 CREATE TABLE `organizadores` (
   `Cedula` varchar(10) NOT NULL,
-  `RUT` varchar(15) DEFAULT NULL,
   `Teléfono` varchar(20) DEFAULT NULL,
+  `Aprobado` tinyint(1) NOT NULL DEFAULT 0,
   `ID_Cliente` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -198,9 +198,10 @@ CREATE TABLE `organizadores` (
 -- Volcado de datos para la tabla `organizadores`
 --
 
-INSERT INTO `organizadores` (`Cedula`, `RUT`, `Teléfono`, `ID_Cliente`) VALUES
-('12345678', '12345678901', '099111222', 1),
-('87654321', '98765432109', '098222111', 2);
+INSERT INTO `organizadores` (`Cedula`, `Teléfono`, `Aprobado`, `ID_Cliente`) VALUES
+('12345678', '099111222', 1, 1),
+('87654321', '098222111', 1, 2),
+('87654351', '098222111', 0, 5);
 
 -- --------------------------------------------------------
 
@@ -324,8 +325,7 @@ ALTER TABLE `eventos`
 --
 ALTER TABLE `organizadores`
   ADD PRIMARY KEY (`Cedula`),
-  ADD UNIQUE KEY `ID_Cliente` (`ID_Cliente`) USING BTREE,
-  ADD UNIQUE KEY `RUT` (`RUT`);
+  ADD UNIQUE KEY `ID_Cliente` (`ID_Cliente`) USING BTREE;
 
 --
 -- Indices de la tabla `respondercomentario`

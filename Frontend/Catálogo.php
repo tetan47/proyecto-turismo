@@ -74,7 +74,7 @@
   <?php include("footer.html") ?>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
+  document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('form-filtros');
   const catalogo = document.getElementById('catalogo-eventos');
   const mostrarFiltros = document.getElementById('mostrar-filtros');

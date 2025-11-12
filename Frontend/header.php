@@ -15,7 +15,7 @@ function esUsuario() {
 function esOrganizador($conn) {
     if (!esUsuario()) return false;
     
-    $stmt = $conn->prepare("SELECT Cedula FROM organizadores WHERE ID_Cliente = ?");
+    $stmt = $conn->prepare("SELECT Cedula FROM organizadores WHERE ID_Cliente = ? AND Aprobado = 1");
     $stmt->bind_param('i', $_SESSION['ID_Cliente']);
     $stmt->execute();
     $result = $stmt->get_result()->num_rows > 0;

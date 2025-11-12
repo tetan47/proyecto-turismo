@@ -21,7 +21,7 @@ $usuario_logueado = isset($_SESSION['ID_Cliente']);
 if ($evento_id > 0) {
     $sql = "SELECT e.*, c.Nombre
         FROM eventos e
-        LEFT JOIN organizadores o ON e.Cedula = o.Cedula
+        LEFT JOIN organizadores o ON e.Cédula = o.Cedula
         LEFT JOIN cliente c ON o.ID_Cliente = c.ID_Cliente
         WHERE e.ID_Evento = ?";
     

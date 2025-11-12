@@ -1,5 +1,34 @@
 <?php 
 include('../backend/Conexion.php'); 
+
+// Verificación más simple y directa
+if (isset($_SESSION['ID_Administrador'])) {
+    // Es administrador, permitir acceso
+} else {
+    // Si no tiene ID_Administrador en sesión, verificar por correo
+    $correo = $_SESSION['Correo'] ?? $_SESSION['correo'] ?? null;
+    
+    if ($correo) {
+        $stmt = $conn->prepare("SELECT ID_Administrador FROM administradores WHERE Correo = ?");
+        $stmt->bind_param('s', $correo);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        if ($result->num_rows > 0) {
+            // Es administrador, guardar en sesión para futuras verificaciones
+            $admin_data = $result->fetch_assoc();
+            $_SESSION['ID_Administrador'] = $admin_data['ID_Administrador'];
+        } else {
+            header('Location: ../Frontend/index.php');
+            exit();
+        }
+        $stmt->close();
+    } else {
+        header('Location: ../Frontend/index.php');
+        exit();
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">

@@ -92,7 +92,7 @@ $esAdmin = $usuarioLogueado ? esAdmin($conn) : false;
                         
                     <?php else: ?>
                         <!-- Opciones de USUARIO COMÚN -->
-                        <a href="convertirse-organizador.php">⭐ Convertirse en Organizador</a>
+                        <a href="convertirse_organizador.php">⭐ Convertirse en Organizador</a>
                     <?php endif; ?>
                     
                     <!-- Opciones comunes para todos los usuarios logueados -->

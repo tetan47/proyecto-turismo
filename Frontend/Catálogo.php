@@ -74,45 +74,56 @@
   <?php include("footer.html") ?>
 
   <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const form = document.getElementById('form-filtros');
-      const catalogo = document.getElementById('catalogo-eventos');
-      const mostrarFiltros = document.getElementById('mostrar-filtros');
-      const filtros = document.getElementById('filtros');
-      const btnLimpiar = document.getElementById('btn-limpiar');
+  document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('form-filtros');
+  const catalogo = document.getElementById('catalogo-eventos');
+  const mostrarFiltros = document.getElementById('mostrar-filtros');
+  const filtros = document.getElementById('filtros');
+  const btnLimpiar = document.getElementById('btn-limpiar');
 
-      mostrarFiltros.addEventListener('click', function (e) {
-        e.preventDefault();
-        filtros.style.display = filtros.style.display === 'none' ? 'block' : 'none';
+  mostrarFiltros.addEventListener('click', function (e) {
+    e.preventDefault();
+    filtros.style.display = filtros.style.display === 'none' ? 'block' : 'none';
+  });
+
+  function cargarEventos() {
+    const datos = new FormData(form);
+    fetch("../backend/eventos/Filtrar.php", {
+      method: 'POST',
+      body: datos
+    })
+      .then(res => res.text())
+      .then(html => {
+        catalogo.innerHTML = html;
       });
+  }
 
-      function cargarEventos() {
-        const datos = new FormData(form);
-        fetch("../backend/eventos/Filtrar.php", {
-          method: 'POST',
-          body: datos
-        })
-          .then(res => res.text())
-          .then(html => {
-            catalogo.innerHTML = html;
-          });
-      }
+  // Cargar todos los eventos al inicio
+  cargarEventos();
 
-      // Cargar todos los eventos al inicio
-      cargarEventos();
+  // Al enviar el formulario, filtra sin recargar
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    cargarEventos();
+  });
 
-      // Al enviar el formulario, filtra sin recargar
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        cargarEventos();
-      });
+  // Limpiar el formulario y recargar eventos
+  btnLimpiar.addEventListener('click', function (e) {
+    form.reset();
+    cargarEventos();
+  });
+});
 
-      // Limpiar el formulario y recargar eventos
-      btnLimpiar.addEventListener('click', function (e) {
-        form.reset();
-        cargarEventos();
-      });
-    });
+function toggleMapa(btn) {
+  const mapa = btn.nextElementSibling;
+  if (mapa.style.display === "none" || mapa.style.display === "") {
+    mapa.style.display = "block";
+    btn.textContent = "Ocultar mapa";
+  } else {
+    mapa.style.display = "none";
+    btn.textContent = "Ver mapa";
+  }
+}
   </script>
 </body>
 

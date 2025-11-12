@@ -1,6 +1,5 @@
 <?php
 include('../backend/Conexion.php');
-
 session_start();
 
 // Obtener datos del usuario si está logueado
@@ -20,17 +19,16 @@ $evento_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 $usuario_logueado = isset($_SESSION['ID_Cliente']);
 
 if ($evento_id > 0) {
-    // Consultar el evento específico
     $sql = "SELECT e.*, c.Nombre
         FROM eventos e
-        INNER JOIN organizadores o ON e.Cédula = o.Cedula
-        INNER JOIN cliente c ON o.ID_Cliente = c.ID_Cliente
+        LEFT JOIN organizadores o ON e.Cédula = o.Cedula
+        LEFT JOIN cliente c ON o.ID_Cliente = c.ID_Cliente
         WHERE e.ID_Evento = ?";
+    
     $stmt = $conn->prepare($sql);
     $stmt->bind_param('i', $evento_id);
     $stmt->execute();
     $result = $stmt->get_result();
-
 
     if ($result->num_rows > 0) {
         $evento = $result->fetch_assoc();
@@ -42,27 +40,26 @@ if ($evento_id > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title><?php echo htmlspecialchars($evento['Título']); ?></title>
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/estructura_fundamental.css">
     <link rel="stylesheet" href="css/evento.css">
     <link rel="stylesheet" href="css/comentarios.css">
     <link rel="stylesheet" href="css/catalogo.css">
-    
 </head>
 <body>
     <?php include("header.php") ?>
 
     <!---Botón volver al catálogo--->
     <div style="padding: 0 20px;">
-        <a href="../Frontend/Catálogo.php" class="boton-volver">← Volver al Catálogo</a>
+        <a href="Catálogo.php" class="boton-volver">← Volver al Catálogo</a>
     <?php
-    // Mostrar botón de editar sólo si el usuario es el creador del evento o es administrador
+    // Verificar si el usuario puede editar el evento
     $puedeEditar = false;
 
-    if (isset($_SESSION['ID_Cliente'])) {
+    if ($usuario_logueado) {
         $usuario_actual = intval($_SESSION['ID_Cliente']);
 
-        // Obtener la cédula del usuario actual si es organizador (una sola consulta)
+        // Obtener la cédula del usuario actual si es organizador
         $usuarioCedula = null;
         $stmt_ced = $conn->prepare("SELECT Cedula FROM organizadores WHERE ID_Cliente = ? LIMIT 1");
         if ($stmt_ced) {
@@ -72,31 +69,22 @@ if ($evento_id > 0) {
             if ($row_ced = $res_ced->fetch_assoc()) {
                 $usuarioCedula = $row_ced['Cedula'];
             }
+            $stmt_ced->close();
         }
 
-        // Comprobar si el usuario es administrador (se admiten varias convenciones de sesión)
-        $esAdmin = false;
-        if (isset($_SESSION['Rol'])) {
-            $rol = strtolower($_SESSION['Rol']);
-            if ($rol === 'admin' || $rol === 'administrador') {
-                $esAdmin = true;
-            }
-        }
-        if (isset($_SESSION['es_admin']) && $_SESSION['es_admin']) {
-            $esAdmin = true;
-        }
+        // Usar función del header para verificar admin
+        $esAdminActual = esAdmin($conn);
 
         // Permitir editar si:
         // - la cédula del organizador logueado coincide con la cédula asociada al evento
         // - o si el usuario es administrador
-        if ((!empty($evento['Cédula']) && $usuarioCedula !== null && $usuarioCedula === $evento['Cédula']) || $esAdmin) {
+        if ((!empty($evento['Cédula']) && $usuarioCedula !== null && $usuarioCedula === $evento['Cédula']) || $esAdminActual) {
             $puedeEditar = true;
         }
     }
 
     if ($puedeEditar) {
-        // Enlace al formulario/acción de edición (ajusta la ruta si hace falta)
-        echo '<a href="editar_evento.php?id=' . intval($evento_id) . '" class="boton-editar">✎ Editar evento</a>';
+        echo '<a href="EditarEvento.php?id=' . intval($evento_id) . '" class="boton-editar">✎ Editar evento</a>';
     }
     ?>
     </div>
@@ -109,9 +97,20 @@ if ($evento_id > 0) {
         <div class="detalles-evento">
             <h2><?php echo htmlspecialchars($evento['Título']); ?></h2>
             <p><strong>Fecha Inicio:</strong> <?php echo htmlspecialchars($evento['Fecha_Inicio']); ?></p>
-            <p><strong>Fecha Final:</strong> <?php echo htmlspecialchars($evento['Fecha_Final'] ?? $evento['Fecha_Inicio']); ?></p>
+            <p><strong>Fecha Final:</strong> <?php echo htmlspecialchars($evento['Fecha_Fin'] ?? $evento['Fecha_Inicio']); ?></p>
             <p><strong>Hora:</strong> <?php echo htmlspecialchars($evento['Hora']); ?></p>
-            <p><strong>Lugar:</strong> <?php echo htmlspecialchars($evento['Lugar'] ?? 'Ubicación no especificada'); ?></p>
+            
+            <?php
+            // Mostrar ubicación (puede ser iframe o texto)
+            if (isset($evento['Ubicacion']) && strpos($evento['Ubicacion'], '<iframe') !== false) {
+                echo '<div><strong>Ubicación:</strong></div>';
+                echo '<button class="ver-mapa" onclick="toggleMapaDetalle(this)">Ver mapa</button>';
+                echo '<div class="mapa" style="display:none;">' . $evento['Ubicacion'] . '</div>';
+            } else {
+                echo '<p><strong>Lugar:</strong> ' . htmlspecialchars($evento['Ubicacion'] ?? 'Ubicación no especificada') . '</p>';
+            }
+            ?>
+            
             <p><strong>Categoría:</strong> <?php echo htmlspecialchars($evento['categoria']); ?></p>
             <p><strong>Creador:</strong> <?php echo htmlspecialchars($evento['Nombre'] ?? 'Administrador'); ?></p>
             <p><strong>Descripción:</strong> <?php echo htmlspecialchars($evento['Descripción'] ?? '-.'); ?></p>
@@ -135,12 +134,6 @@ if ($evento_id > 0) {
                 <span id="nombre-usuario"><?php echo htmlspecialchars($datosUsuario['Nombre']); ?></span>
             </div>
 
-            <!---<div class="formato-toolbar">
-                <button type="button" class="formato-btn" data-comando="bold"><b>B</b></button>
-                <button type="button" class="formato-btn" data-comando="italic"><i>I</i></button>
-                <button type="button" class="formato-btn" data-comando="underline"><u>U</u></button>
-            </div>--->
-
             <textarea id="texto-comentario" style="width:100%; border:1px solid #ccc; min-height:60px; padding:10px; margin-top:10px;"></textarea>
             <button id="btn-comentar" data-evento="<?php echo $evento_id; ?>">Enviar</button>
 
@@ -154,7 +147,17 @@ if ($evento_id > 0) {
     <?php include("footer.html") ?>
 
 <script>
-    // Enganchar likes
+    function toggleMapaDetalle(btn) {
+        const mapa = btn.nextElementSibling;
+        if (mapa.style.display === "none" || mapa.style.display === "") {
+            mapa.style.display = "block";
+            btn.textContent = "Ocultar mapa";
+        } else {
+            mapa.style.display = "none";
+            btn.textContent = "Ver mapa";
+        }
+    }
+
     function engancharLikes() {
         document.querySelectorAll('.cora').forEach(cora => {
             if (cora.classList.contains('disabled')) {
@@ -188,39 +191,38 @@ if ($evento_id > 0) {
     }
 
     function engancharLikesRespuestas() {
-    document.querySelectorAll('.cora-respuesta').forEach(cora => {
-        if (cora.classList.contains('disabled')) {
-            cora.addEventListener('click', e => {
-                e.preventDefault();
-                alert('Debes iniciar sesión para dar like');
+        document.querySelectorAll('.cora-respuesta').forEach(cora => {
+            if (cora.classList.contains('disabled')) {
+                cora.addEventListener('click', e => {
+                    e.preventDefault();
+                    alert('Debes iniciar sesión para dar like');
+                });
+                return;
+            }
+            cora.addEventListener('click', () => {
+                const idRespuesta = cora.dataset.id;
+                const liked = cora.classList.contains('liked');
+                const action = liked ? 'dislike' : 'like';
+
+                fetch('../backend/Comentarios/like_respuesta.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: new URLSearchParams({ idRespuesta, action })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                        return;
+                    }
+                    cora.querySelector('.likes').textContent = data.likes;
+                    cora.classList.toggle('liked', data.liked);
+                })
+                .catch(console.error);
             });
-            return;
-        }
-        cora.addEventListener('click', () => {
-            const idRespuesta = cora.dataset.id;
-            const liked = cora.classList.contains('liked');
-            const action = liked ? 'dislike' : 'like';
-
-            fetch('../backend/Comentarios/like_respuesta.php', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: new URLSearchParams({ idRespuesta, action })
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.error) {
-                    alert(data.error);
-                    return;
-                }
-                cora.querySelector('.likes').textContent = data.likes;
-                cora.classList.toggle('liked', data.liked);
-            })
-            .catch(console.error);
         });
-    });
-}
+    }
 
-    // Cargar comentarios dinámicamente
     function cargarComentarios() {
         fetch('../backend/Comentarios/listaCOM.php?id_evento=<?php echo $evento_id; ?>')
             .then(res => res.text())
@@ -234,54 +236,66 @@ if ($evento_id > 0) {
     document.addEventListener('DOMContentLoaded', () => {
         cargarComentarios();
 
-        // Formato de texto
-        document.querySelectorAll('.formato-btn').forEach(boton => {
-            boton.addEventListener('click', () => {
-                const comando = boton.getAttribute('data-comando');
-                document.execCommand(comando, false, null);
-            });
-        });
+const btnComentar = document.getElementById("btn-comentar");
+const textarea = document.getElementById("texto-comentario");
+const errorDiv = document.createElement('div');
+errorDiv.id = 'error-moderacion';
+errorDiv.style.cssText = 'color: #d32f2f; font-size: 14px; margin-top: 8px; display: none; font-weight: 500;';
+textarea.parentNode.insertBefore(errorDiv, textarea.nextSibling);
 
-        // Enviar comentario
-        const btnComentar = document.getElementById("btn-comentar");
-        if (btnComentar) {
-            btnComentar.addEventListener("click", () => {
-                const texto = document.getElementById("texto-comentario").value.trim();
-                const id_evento = btnComentar.dataset.evento;
-
-                if (texto === "") {
-                    alert('Por favor escribe un comentario');
-                    return;
-                }
-
-                fetch(`../backend/Comentarios/Comentar.php?id_evento=${id_evento}`, {
-                    method: "POST",
-                    body: new URLSearchParams({ Texto: texto }),
-                    headers: { "Content-Type": "application/x-www-form-urlencoded" }
-                })
-                .then(response => response.text())
-                .then(data => {
-                    alert(data);
-                    document.getElementById("texto-comentario").value = "";
-                    cargarComentarios();
-                })
-                .catch(err => console.error("Error:", err));
-            });
+if (btnComentar) {
+    btnComentar.addEventListener("click", async () => {
+        const texto = textarea.value.trim();
+        const id_evento = btnComentar.dataset.evento;
+        if (texto === "") {
+            alert("Por favor escribe un comentario.");
+            return;
         }
+        try {
+            const response = await fetch('http://localhost:5000/moderacion', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ texto: texto })
+            });
+            const data = await response.json();
+            if (!data.aprobado) {
+                textarea.style.border = '2px solid #d32f2f';
+                textarea.style.boxShadow = '0 0 8px rgba(211, 47, 47, 0.3)';
+                errorDiv.textContent = data.mensaje;
+                errorDiv.style.display = 'block';
+                setTimeout(() => {
+                    textarea.style.border = '';
+                    textarea.style.boxShadow = '';
+                    errorDiv.style.display = 'none';
+                }, 6000);
+                return;
+            }
+            const phpResponse = await fetch(`../backend/Comentarios/Comentar.php?id_evento=${id_evento}`, {
+                method: "POST",
+                body: new URLSearchParams({ Texto: texto }),
+                headers: { "Content-Type": "application/x-www-form-urlencoded" }
+            });
+            const phpData = await phpResponse.text();
+            alert(phpData);
+            textarea.value = "";
+            cargarComentarios();
+        } catch (err) {
+            console.error("Error con IA:", err);
+            alert("Error al conectar con la moderacion. Intenta más tarde.");
+        }
+    });
+}
     });
 
     function mostrarFormularioRespuesta(idComentario) {
         <?php if ($usuario_logueado): ?>
-            // Usuario LOGUEADO - mostrar formulario de respuesta
             const formulario = document.getElementById(`form_respuesta_${idComentario}`);
             if(formulario.style.display === "block") {
                 formulario.style.display = "none";
             } else {
                 formulario.style.display = "block";
             }
-
         <?php else: ?>
-            // Usuario NO LOGUEADO - redirigir al login
             alert('Debes iniciar sesión para responder');
             window.location.href = 'login.php';
         <?php endif; ?>
@@ -310,200 +324,154 @@ if ($evento_id > 0) {
             }),
             headers: { "Content-Type": "application/x-www-form-urlencoded" }
         })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(data => {
-            alert(data);
-            cargarComentarios(); // Recargar comentarios y respuestas
+            if (data.success) {
+                cargarComentarios();
+                document.getElementById(`form_respuesta_${idComentario}`).style.display = 'none';
+                document.getElementById(`texto_respuesta_${idComentario}`).value = '';
+            } else {
+                alert(data.message);
+            }
         })
         .catch(err => console.error("Error:", err));
     }
 
-    // Función para alternar menús de comentarios
-function toggleMenu(idComentario) {
-    const menu = document.getElementById(`opciones_${idComentario}`);
-    menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-}
-
-// Función para alternar menús de respuestas
-function toggleMenuRes(idRespuesta) {
-    const menu = document.getElementById(`opciones_res_${idRespuesta}`);
-    menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-}
-
-// Mostrar editor de comentario
-function mostrarEditor(idComentario, textoOriginal) {
-    document.getElementById(`texto_comentario_${idComentario}`).style.display = 'none';
-    document.getElementById(`editor_comentario_${idComentario}`).style.display = 'block';
-    document.getElementById(`texto_edicion_${idComentario}`).value = textoOriginal;
-    
-    // Ocultar menú de opciones
-    document.getElementById(`opciones_${idComentario}`).style.display = 'none';
-}
-
-// Cancelar edición de comentario
-function cancelarEdicionComentario(idComentario) {
-    document.getElementById(`texto_comentario_${idComentario}`).style.display = 'block';
-    document.getElementById(`editor_comentario_${idComentario}`).style.display = 'none';
-}
-
-// Guardar edición de comentario
-function guardarEdicionComentario(idComentario) {
-    const nuevoTexto = document.getElementById(`texto_edicion_${idComentario}`).value.trim();
-    
-    if (nuevoTexto === "") {
-        alert("El comentario no puede estar vacío.");
-        return;
-    }
-    
-    fetch('../backend/Comentarios/editarcom.php', {
-        method: "POST",
-        body: new URLSearchParams({
-            id: idComentario,
-            texto: nuevoTexto
-        }),
-        headers: { "Content-Type": "application/x-www-form-urlencoded" }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // Actualizar el texto del comentario sin recargar
-            document.getElementById(`texto_comentario_${idComentario}`).querySelector('p').textContent = data.nuevoTexto;
-            cancelarEdicionComentario(idComentario);
-        } else {
-            alert(data.message);
-        }
-    })
-    .catch(err => console.error("Error:", err));
-}
-
-// Eliminar comentario
-function eliminarComentario(idComentario) {
-    if (!confirm("¿Estás seguro de que quieres eliminar este comentario?")) {
-        return;
-    }
-    
-    fetch('../backend/Comentarios/eliminarcom.php', {
-        method: "POST",
-        body: new URLSearchParams({
-            id: idComentario
-        }),
-        headers: { "Content-Type": "application/x-www-form-urlencoded" }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // Eliminar el comentario del DOM sin recargar
-            document.getElementById(`comentario_${idComentario}`).remove();
-        } else {
-            alert(data.message);
-        }
-    })
-    .catch(err => console.error("Error:", err));
-}
-
-// Mostrar editor de respuesta
-function mostrarEditorRes(idRespuesta, textoOriginal) {
-    document.getElementById(`texto_respuesta_${idRespuesta}`).style.display = 'none';
-    document.getElementById(`editor_respuesta_${idRespuesta}`).style.display = 'block';
-    document.getElementById(`texto_edicion_res_${idRespuesta}`).value = textoOriginal;
-    
-    // Ocultar menú de opciones
-    document.getElementById(`opciones_res_${idRespuesta}`).style.display = 'none';
-}
-
-// Cancelar edición de respuesta
-function cancelarEdicionRespuesta(idRespuesta) {
-    document.getElementById(`texto_respuesta_${idRespuesta}`).style.display = 'block';
-    document.getElementById(`editor_respuesta_${idRespuesta}`).style.display = 'none';
-}
-
-// Guardar edición de respuesta
-function guardarEdicionRespuesta(idRespuesta) {
-    const nuevoTexto = document.getElementById(`texto_edicion_res_${idRespuesta}`).value.trim();
-    
-    if (nuevoTexto === "") {
-        alert("La respuesta no puede estar vacía.");
-        return;
-    }
-    
-    fetch('../backend/Comentarios/editarres.php', {
-        method: "POST",
-        body: new URLSearchParams({
-            id: idRespuesta,
-            texto: nuevoTexto
-        }),
-        headers: { "Content-Type": "application/x-www-form-urlencoded" }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // Actualizar el texto de la respuesta sin recargar
-            document.getElementById(`texto_respuesta_${idRespuesta}`).querySelector('p').textContent = data.nuevoTexto;
-            cancelarEdicionRespuesta(idRespuesta);
-        } else {
-            alert(data.message);
-        }
-    })
-    .catch(err => console.error("Error:", err));
-}
-
-// Eliminar respuesta
-function eliminarRespuesta(idRespuesta) {
-    if (!confirm("¿Estás seguro de que quieres eliminar esta respuesta?")) {
-        return;
-    }
-    
-    fetch('../backend/Comentarios/eliminarres.php', {
-        method: "POST",
-        body: new URLSearchParams({
-            id: idRespuesta
-        }),
-        headers: { "Content-Type": "application/x-www-form-urlencoded" }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // Eliminar la respuesta del DOM sin recargar
-            document.getElementById(`respuesta_${idRespuesta}`).remove();
-        } else {
-            alert(data.message);
-        }
-    })
-    .catch(err => console.error("Error:", err));
-}
-
-// Enviar respuesta (versión actualizada para JSON)
-function enviarRespuesta(idComentario) {
-    const texto = document.getElementById(`texto_respuesta_${idComentario}`).value.trim();
-
-    if (texto === "") {
-        alert("Por favor escribe una respuesta.");
-        return;
+    function toggleMenu(idComentario) {
+        const menu = document.getElementById(`opciones_${idComentario}`);
+        menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
     }
 
-    fetch('../backend/Comentarios/responder.php', {
-        method: "POST",
-        body: new URLSearchParams({
-            id_comentario: idComentario,
-            texto: texto
-        }),
-        headers: { "Content-Type": "application/x-www-form-urlencoded" }
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
-            // Recargar solo los comentarios (no toda la página)
-            cargarComentarios();
-            // Ocultar el formulario de respuesta
-            document.getElementById(`form_respuesta_${idComentario}`).style.display = 'none';
-            // Limpiar el textarea
-            document.getElementById(`texto_respuesta_${idComentario}`).value = '';
-        } else {
-            alert(data.message);
+    function toggleMenuRes(idRespuesta) {
+        const menu = document.getElementById(`opciones_res_${idRespuesta}`);
+        menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function mostrarEditor(idComentario, textoOriginal) {
+        document.getElementById(`texto_comentario_${idComentario}`).style.display = 'none';
+        document.getElementById(`editor_comentario_${idComentario}`).style.display = 'block';
+        document.getElementById(`texto_edicion_${idComentario}`).value = textoOriginal;
+        document.getElementById(`opciones_${idComentario}`).style.display = 'none';
+    }
+
+    function cancelarEdicionComentario(idComentario) {
+        document.getElementById(`texto_comentario_${idComentario}`).style.display = 'block';
+        document.getElementById(`editor_comentario_${idComentario}`).style.display = 'none';
+    }
+
+    function guardarEdicionComentario(idComentario) {
+        const nuevoTexto = document.getElementById(`texto_edicion_${idComentario}`).value.trim();
+        
+        if (nuevoTexto === "") {
+            alert("El comentario no puede estar vacío.");
+            return;
         }
-    })
-    .catch(err => console.error("Error:", err));
-}
+        
+        fetch('../backend/Comentarios/editarcom.php', {
+            method: "POST",
+            body: new URLSearchParams({
+                id: idComentario,
+                texto: nuevoTexto
+            }),
+            headers: { "Content-Type": "application/x-www-form-urlencoded" }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById(`texto_comentario_${idComentario}`).querySelector('p').textContent = data.nuevoTexto;
+                cancelarEdicionComentario(idComentario);
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(err => console.error("Error:", err));
+    }
+
+    function eliminarComentario(idComentario) {
+        if (!confirm("¿Estás seguro de que quieres eliminar este comentario?")) {
+            return;
+        }
+        
+        fetch('../backend/Comentarios/eliminarcom.php', {
+            method: "POST",
+            body: new URLSearchParams({
+                id: idComentario
+            }),
+            headers: { "Content-Type": "application/x-www-form-urlencoded" }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById(`comentario_${idComentario}`).remove();
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(err => console.error("Error:", err));
+    }
+
+    function mostrarEditorRes(idRespuesta, textoOriginal) {
+        document.getElementById(`texto_respuesta_${idRespuesta}`).style.display = 'none';
+        document.getElementById(`editor_respuesta_${idRespuesta}`).style.display = 'block';
+        document.getElementById(`texto_edicion_res_${idRespuesta}`).value = textoOriginal;
+        document.getElementById(`opciones_res_${idRespuesta}`).style.display = 'none';
+    }
+
+    function cancelarEdicionRespuesta(idRespuesta) {
+        document.getElementById(`texto_respuesta_${idRespuesta}`).style.display = 'block';
+        document.getElementById(`editor_respuesta_${idRespuesta}`).style.display = 'none';
+    }
+
+    function guardarEdicionRespuesta(idRespuesta) {
+        const nuevoTexto = document.getElementById(`texto_edicion_res_${idRespuesta}`).value.trim();
+        
+        if (nuevoTexto === "") {
+            alert("La respuesta no puede estar vacía.");
+            return;
+        }
+        
+        fetch('../backend/Comentarios/editarres.php', {
+            method: "POST",
+            body: new URLSearchParams({
+                id: idRespuesta,
+                texto: nuevoTexto
+            }),
+            headers: { "Content-Type": "application/x-www-form-urlencoded" }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById(`texto_respuesta_${idRespuesta}`).querySelector('p').textContent = data.nuevoTexto;
+                cancelarEdicionRespuesta(idRespuesta);
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(err => console.error("Error:", err));
+    }
+
+    function eliminarRespuesta(idRespuesta) {
+        if (!confirm("¿Estás seguro de que quieres eliminar esta respuesta?")) {
+            return;
+        }
+        
+        fetch('../backend/Comentarios/eliminarres.php', {
+            method: "POST",
+            body: new URLSearchParams({
+                id: idRespuesta
+            }),
+            headers: { "Content-Type": "application/x-www-form-urlencoded" }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById(`respuesta_${idRespuesta}`).remove();
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(err => console.error("Error:", err));
+    }
 </script>
 
 </body>
@@ -518,7 +486,5 @@ function enviarRespuesta(idComentario) {
 } else {
     echo "ID de evento no válido.";
     $conn->close();
-
 }
-
 ?>

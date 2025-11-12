@@ -17,60 +17,61 @@ body {
 }
 
 .imagen_inicio_sesion {
-  width: 65% ;
-  height: 100vh ;
+  width: 65%;
+  height: 100vh;
   padding: 0;
   margin: 0;
 }
 
 .contenedor {
-    margin-left: auto ;
-    width: 35%;
-    height: 100vh;
-    background: linear-gradient(rgb(105, 0, 167), rgb(15, 0, 36));
-    backdrop-filter: blur(15px);
-    padding: 30px 90px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .contenedor h1 {
-    font-size: 36px;
-    text-align: center;
-  }
+  margin-left: auto;
+  width: 35%;
+  height: 100vh;
+  background: linear-gradient(rgb(105, 0, 167), rgb(15, 0, 36));
+  backdrop-filter: blur(15px);
+  padding: 30px 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-  .contenedor .caja {
-    width: 100%;
-    height: 50px;
-    position: relative;
-    margin: 30px 0;
-  }
+.contenedor h1 {
+  margin-top: 60px;
+  font-size: 36px;
+  text-align: center;
+}
+
+.contenedor .caja {
+  width: 100%;
+  height: 50px;
+  position: relative;
+  margin: 30px 0;
+}
 
 .caja input {
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 40px;
-    font-size: 16px;
-    color: #fff;
-    padding: 20px 45px 20px 20px;
-  }
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  font-size: 16px;
+  color: #fff;
+  padding: 20px 45px 20px 20px;
+}
 
-  .caja input::placeholder {
-    color: #fff;
-  }
+.caja input::placeholder {
+  color: #fff;
+}
 
 .caja i {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 20px;
-  }
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+}
 
 input:focus {
   border-color: #3498db;
@@ -79,33 +80,33 @@ input:focus {
 }
 
 .iniciar_sesion {
-    width: 100%;
-    height: 45px;
-    background: #fff;
-    border: none;
-    outline: none;
-    border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    font-size: 16px;
-    color: #333;
-    font-weight: 600;
-    border: 1px solid #ddd;
-    border-radius: 40px;
-  }
+  width: 100%;
+  height: 45px;
+  background: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+  border: 1px solid #ddd;
+  border-radius: 40px;
+}
 
 .contenedor .registrar_link {
-    text-align: center;
-    font-size: 14px;
-    margin: 40px 0 2px;
-    color: gray;
-  }
+  text-align: center;
+  font-size: 14px;
+  margin: 40px 0 2px;
+  color: gray;
+}
 
 .contenedor .registrar_link p a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-  }
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
 
 .separador {
   display: flex;
@@ -114,16 +115,16 @@ input:focus {
   margin: 10px 0 10px;
   color: #fff;
   font-weight: 500;
-  }
+}
 
 .separador hr {
   flex: 1;
   border: none;
   border-top: 1px solid rgba(255, 255, 255, 0.3);
   margin: 0 10px;
-  }
+}
 
-.boton_google{
+.boton_google {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -139,24 +140,70 @@ input:focus {
   font-weight: 500;
   color: #000;
   transition: background 0.3s ease;
-  }
+}
 
-.google_logo{
+.google_logo {
   width: 35px;
   height: 35px;
-  }
+}
 
 button:hover {
   transform: scale(1.01);
-  background-color:rgb(55, 0, 87);
+  background-color: rgb(55, 0, 87);
   color: white;
 }
 
+/* --- POSICIÓN FIJA SOLO EN EL LOGIN --- */
+body .boton-volver {
+  position: fixed !important;
+  top: 15px !important;
+  left: 15px !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+}
+
+@media (max-width: 1024px) {
+  body {
+    flex-direction: column-reverse; /* Imagen abajo del formulario */
+    height: auto;
+  }
+
+  .contenedor {
+    width: 100%;
+    height: auto;
+    padding: 50px 80px;
+  }
+
+  .imagen_inicio_sesion {
+    width: 100%;
+    height: 300px; /* altura razonable de imagen al fondo */
+    object-fit: cover;
+  }
+
+  .contenedor h1 {
+    font-size: 32px;
+  }
+
+  .caja input {
+    font-size: 15px;
+    padding: 18px 40px 18px 18px;
+  }
+
+  .iniciar_sesion {
+    font-size: 15px;
+    height: 45px;
+  }
+
+  .boton_google {
+    height: 45px;
+  }
+}
 
 @media (max-width: 768px) {
   body {
     flex-direction: column;
   }
+
   .imagen_inicio_sesion {
     width: 100%;
     height: 0;
@@ -190,7 +237,8 @@ button:hover {
   .contenedor .registrar_link {
     font-size: 13px;
   }
-    .boton_google span {
+
+  .boton_google span {
     font-size: 14px;
   }
 
@@ -201,5 +249,22 @@ button:hover {
   .google_logo {
     width: 18px;
     height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contenedor h1 {
+    font-size: 1.5rem;
+  }
+
+  .iniciar_sesion {
+    width: 100%;
+  }
+
+  .boton-volver {
+    font-size: 13px;
+    padding: 5px 10px;
+    top: 10px;
+    left: 10px;
   }
 }

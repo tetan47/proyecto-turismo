@@ -23,6 +23,7 @@ unset($_SESSION['error_login']); // Limpiar después de mostrar
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/catalogo.css">
     <title>Iniciar Sesión</title>
     <style>
         .alert {
@@ -41,6 +42,9 @@ unset($_SESSION['error_login']); // Limpiar después de mostrar
 <body>
 
     <div class="contenedor">
+      <!--Volver al inicio-->
+     <a href="Index.php" class="boton-volver">← Volver al Inicio</a>
+
       <h1>Iniciar Sesión</h1>
   
       <?php if (!empty($error_login)): ?>
@@ -71,9 +75,9 @@ unset($_SESSION['error_login']); // Limpiar después de mostrar
         <hr><span>O</span><hr>
       </div>
       
-      <button type="button" class="boton_google">
+      <!--<button type="button" class="boton_google">
         <img class="google_logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png" alt="Google Logo">
-        <span>Continuar con Google</span>
+        <span>Continuar con Google</span>-->
       </button>
     </div>
     

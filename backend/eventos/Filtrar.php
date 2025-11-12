@@ -80,11 +80,20 @@ if ($result->num_rows === 0) {
     while ($row = $result->fetch_assoc()) {
         $titulo = htmlspecialchars($row['Título']);
         $categoria = htmlspecialchars($row['categoria']);
-        $fecha = htmlspecialchars($row['Fecha_Inicio']);
+        $fecha = htmlspecialchars($row['Fecha_Inicio']) . ' - ' . htmlspecialchars($row['Fecha_Fin']);
         $hora = htmlspecialchars($row['Hora']);
-        $ubicacion = htmlspecialchars($row['Ubicacion']);
         $imagen = !empty($row['imagen']) ? htmlspecialchars($row['imagen']) : 'https://upload.wikimedia.org/wikipedia/commons/0/0e/DefaultImage.png';
 
+        // Verificar si Ubicacion contiene un iframe
+        if (isset($row['Ubicacion']) && strpos($row['Ubicacion'], '<iframe') !== false) {
+            // Mostrar el iframe directamente (sin escapar)
+            $ubicacionHTML = '<button class="ver-mapa" onclick="toggleMapa(this)">Ver mapa</button>'
+                . '<div class="mapa" style="display:none;">' . $row['Ubicacion'] . '</div>';
+        } else {
+            // Escapar texto común, pero no los iframes
+            $ubicacionHTML = '<p>' . htmlspecialchars($row['Ubicacion']) . '</p>';
+        }
+        
         echo '<div class="evento">';
         echo '  <div class="img-evento">';
         echo '      <img src="' . $imagen . '" alt="' . $titulo . '" onerror="this.src=\'https://upload.wikimedia.org/wikipedia/commons/0/0e/DefaultImage.png\'">';
@@ -93,7 +102,7 @@ if ($result->num_rows === 0) {
         echo '      <h3>' . $titulo . '</h3>';
         echo '      <p>' . $fecha . ' - ' . $hora . '</p>';
         echo '      <p>Categoría: ' . $categoria . '</p>';
-        echo '      <p>' . $ubicacion . '</p>';
+        echo $ubicacionHTML;
         echo '      <a href="evento.php?id=' . $row['ID_Evento'] . '" class="boton-ver-detalles">Ver Detalles</a>';
         echo '  </div>';
         echo '</div>';
@@ -103,3 +112,16 @@ if ($result->num_rows === 0) {
 $stmt->close();
 $conn->close();
 ?>
+
+<script>
+    function toggleMapa(btn) {
+        const mapa = btn.nextElementSibling;
+        if (mapa.style.display === "none") {
+            mapa.style.display = "block";
+            btn.textContent = "Ocultar mapa";
+        } else {
+            mapa.style.display = "none";
+            btn.textContent = "Ver mapa";
+        }
+    }
+</script>

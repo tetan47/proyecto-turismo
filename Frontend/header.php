@@ -15,7 +15,7 @@ function esUsuario() {
 function esOrganizador($conn) {
     if (!esUsuario()) return false;
     
-    $stmt = $conn->prepare("SELECT Cedula FROM organizadores WHERE ID_Cliente = ?");
+    $stmt = $conn->prepare("SELECT Cedula FROM organizadores WHERE ID_Cliente = ? AND Aprobado = 1");
     $stmt->bind_param('i', $_SESSION['ID_Cliente']);
     $stmt->execute();
     $result = $stmt->get_result()->num_rows > 0;
@@ -52,8 +52,7 @@ $datosUsuario = $usuarioLogueado ? obtenerDatosUsuario($conn) : null;
 $esOrganizador = $usuarioLogueado ? esOrganizador($conn) : false;
 $esAdmin = $usuarioLogueado ? esAdmin($conn) : false;
 
-// Cerrar conexión
-$conn->close();
+// NO cerrar conexión aquí porque otras páginas la necesitan
 ?>
 
 <link rel="stylesheet" href="css/estructura_fundamental.css">
@@ -82,7 +81,7 @@ $conn->close();
                     
                     <?php if ($esAdmin): ?>
                         <!-- Opciones de ADMINISTRADOR -->
-                        <a href="admin-panel.php">🛡️ Panel de Administración</a>
+                        <a href="panel-administracion.php">🛡️ Panel de Administración</a>
                         <a href="gestionar-usuarios.php">👥 Gestionar Usuarios</a>
                         <a href="gestionar-eventos.php">📅 Gestionar Eventos</a>
                         
@@ -93,7 +92,7 @@ $conn->close();
                         
                     <?php else: ?>
                         <!-- Opciones de USUARIO COMÚN -->
-                        <a href="convertirse-organizador.php">⭐ Convertirse en Organizador</a>
+                        <a href="convertirse_organizador.php">⭐ Convertirse en Organizador</a>
                     <?php endif; ?>
                     
                     <!-- Opciones comunes para todos los usuarios logueados -->

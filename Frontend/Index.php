@@ -163,55 +163,56 @@
     </div>
 
      <section class="info">
-    <div class="info-contenido">
-      <h2>¿Por qué elegir ¡Qué Viaje!?</h2>
+      <div class="info-contenido">
+        <h2>¿Por qué elegir ¡Qué Viaje!?</h2>
 
-      <div class="beneficios-grid">
-        <div class="bloque">
-          <i class="fas fa-map-marked-alt bloque-icono"></i>
-          <h3>Centralización de eventos</h3>
-          <p>Toda la información sobre eventos turísticos, culturales y sociales de Salto en un solo lugar. Nunca más te perderás de nada.</p>
-        </div>
+        <div class="beneficios-grid">
+          <div class="bloque">
+            <i class="fas fa-map-marked-alt bloque-icono"></i>
+            <h3>Centralización de eventos</h3>
+            <p>Toda la información sobre eventos turísticos, culturales y sociales de Salto en un solo lugar. Nunca más te perderás de nada.</p>
+          </div>
 
-        <div class="bloque">
-          <i class="fas fa-calendar-check bloque-icono"></i>
-          <h3>Agenda interactiva</h3>
-          <p>Calendario inteligente que te permite filtrar por tus intereses, disponibilidad y ubicación. Planifica tu semana perfecta.</p>
-        </div>
+          <div class="bloque">
+            <i class="fas fa-calendar-check bloque-icono"></i>
+            <h3>Agenda interactiva</h3>
+            <p>Calendario inteligente que te permite filtrar por tus intereses, disponibilidad y ubicación. Planifica tu semana perfecta.</p>
+          </div>
 
-        <div class="bloque">
-          <i class="fas fa-bullhorn bloque-icono"></i>
-          <h3>Para organizadores</h3>
-          <p>Plataforma completa para publicar eventos, gestionar asistentes, obtener estadísticas y llegar a miles de personas.</p>
-        </div>
+          <div class="bloque">
+            <i class="fas fa-bullhorn bloque-icono"></i>
+            <h3>Para organizadores</h3>
+            <p>Plataforma completa para publicar eventos, gestionar asistentes, obtener estadísticas y llegar a miles de personas.</p>
+          </div>
 
-        <div class="bloque">
-          <i class="fas fa-mobile-alt bloque-icono"></i>
-          <h3>Acceso universal</h3>
-          <p>Funciona perfectamente en cualquier dispositivo, para turistas y residentes.</p>
-        </div>
+          <div class="bloque">
+            <i class="fas fa-mobile-alt bloque-icono"></i>
+            <h3>Acceso universal</h3>
+            <p>Funciona perfectamente en cualquier dispositivo, para turistas y residentes.</p>
+          </div>
 
-        <div class="bloque">
-          <i class="fas fa-bell bloque-icono"></i>
-          <h3>Notificaciones inteligentes</h3>
-          <p>Recibe alertas sobre nuevos eventos de tu interés y recordatorios de tus actividades guardadas.</p>
-        </div>
+          <div class="bloque">
+            <i class="fas fa-bell bloque-icono"></i>
+            <h3>Notificaciones inteligentes</h3>
+            <p>Recibe alertas sobre nuevos eventos de tu interés y recordatorios de tus actividades guardadas.</p>
+          </div>
 
-        <div class="bloque">
-          <i class="fas fa-star bloque-icono"></i>
-          <h3>Reseñas y valoraciones</h3>
-          <p>Lee experiencias de otros usuarios y comparte las tuyas para ayudar a la comunidad.</p>
+          <div class="bloque">
+            <i class="fas fa-star bloque-icono"></i>
+            <h3>Reseñas y valoraciones</h3>
+            <p>Lee experiencias de otros usuarios y comparte las tuyas para ayudar a la comunidad.</p>
+          </div>
+    </section>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
   <section class="testimonios">
     <h2>Lo que dicen nuestros usuarios</h2>
-    <div class="testimonios-grid">
-      <div class="testimonio">
-        <div class="testimonio-header">
-          <img src="https://i.pravatar.cc/100?img=1" alt="Usuario">
+      <div class="testimonios-grid">
+        <div class="testimonio">
+          <div class="testimonio-header">
+            <img src="https://i.pravatar.cc/100?img=1" alt="Usuario">
           <div>
             <h4>María González</h4>
             <span class="testimonio-rol">Turista</span>
@@ -225,6 +226,7 @@
           <i class="fas fa-star"></i>
           <i class="fas fa-star"></i>
         </div>
+      </div>
          <div class="testimonio">
         <div class="testimonio-header">
           <img src="https://i.pravatar.cc/100?img=3" alt="Usuario">
@@ -321,6 +323,9 @@
          </div>
     </div>
   </section>
+  <?php
+   include("footer.html") 
+   ?>
   <script>
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -457,6 +462,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
   </script>
-<?php include("footer.html") ?>
+
+  <script src="JavaScript/translations.js"></script>
+  <script src="JavaScript/language.js"></script>
+
 </body>
 </html>

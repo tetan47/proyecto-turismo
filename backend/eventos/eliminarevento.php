@@ -1,24 +1,26 @@
 <?php
 include("../conexion.php");
+session_start();
 
 $ID_Evento = $_POST['id'];
 
-// Iniciar transacción para asegurar consistencia
 mysqli_begin_transaction($conn);
 
 try {
-    // 1. Primero eliminar los comentarios relacionados
-    $sql_comentarios = "DELETE FROM comentarios WHERE ID_Evento = '$ID_Evento'";
-    mysqli_query($conn, $sql_comentarios);
+    $sql_comentarios = "DELETE FROM comentarios WHERE ID_Evento = ?";
+    $stmt = $conn->prepare($sql_comentarios);
+    $stmt->bind_param('i', $ID_Evento);
+    $stmt->execute();
+    $stmt->close();
     
-    // 2. La tabla 'administra' se elimina automáticamente por el CASCADE
-    // 3. Finalmente eliminar el evento
-    $sql_evento = "DELETE FROM eventos WHERE ID_Evento = '$ID_Evento'";
+    $sql_evento = "DELETE FROM eventos WHERE ID_Evento = ?";
+    $stmt = $conn->prepare($sql_evento);
+    $stmt->bind_param('i', $ID_Evento);
     
-    if (mysqli_query($conn, $sql_evento)) {
+    if ($stmt->execute()) {
         mysqli_commit($conn);
-        echo "Evento eliminado correctamente.";
-        echo '<script>window.history.back();</script>';
+        $stmt->close();
+        header('Location: ../../Frontend/mis-eventos.php?success=eliminado');
         exit();
     } else {
         throw new Exception("Error al eliminar el evento: " . mysqli_error($conn));
@@ -27,5 +29,6 @@ try {
 } catch (Exception $e) {
     mysqli_rollback($conn);
     echo "Error: " . $e->getMessage();
+    echo '<script>setTimeout(() => window.history.back(), 3000);</script>';
 }
 ?>

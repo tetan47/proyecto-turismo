@@ -152,7 +152,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             echo "<script>
                     alert('¡Evento creado exitosamente!\\n\\nID del evento: " . $id_evento . "\\nTítulo: " . addslashes($titulo) . "');
-                    window.location.href='mis-eventos.php';
+                    window.location.href='../../frontend/mis-eventos.php';
                   </script>";
         } else {
             // Error al ejecutar la consulta

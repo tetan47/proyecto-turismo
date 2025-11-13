@@ -6,6 +6,18 @@ $evento_id = isset($_GET['id_evento']) ? intval($_GET['id_evento']) : 0;
 $idUsuario = $_SESSION['ID_Cliente'] ?? 0;
 $usuario_logueado = ($idUsuario > 0);
 
+// Verificar si el usuario es administrador
+$esAdmin = false;
+if ($usuario_logueado) {
+    $sql_admin = "SELECT ID_Administrador FROM administradores WHERE Correo = (SELECT Correo FROM cliente WHERE ID_Cliente = ?)";
+    $stmt_admin = $conn->prepare($sql_admin);
+    $stmt_admin->bind_param("i", $idUsuario);
+    $stmt_admin->execute();
+    $result_admin = $stmt_admin->get_result();
+    $esAdmin = ($result_admin->num_rows > 0);
+    $stmt_admin->close();
+}
+
 if ($evento_id > 0) {
     $sql = "SELECT c.ID_Comentario, c.Texto, c.LIKES, c.Creación_Comentario, 
                    cl.Nombre, cl.imag_perfil, c.usuarios_like, c.ID_Cliente
@@ -24,6 +36,7 @@ if ($evento_id > 0) {
             $usuarios_like = $row['usuarios_like'] ? explode(',', $row['usuarios_like']) : [];
             $liked = ($idUsuario && in_array($idUsuario, $usuarios_like)) ? true : false;
             $esPropietario = ($idUsuario == $row['ID_Cliente']);
+            $puedeEditar = $esPropietario || $esAdmin; // Admin puede editar cualquier comentario
 ?>
             <!-- Comentarios -->
             <div class="comentarios" id="comentario_<?php echo $row['ID_Comentario']; ?>">
@@ -36,7 +49,7 @@ if ($evento_id > 0) {
                             <h3><?php echo htmlspecialchars($row['Nombre']); ?></h3>
                             <h4><?php echo htmlspecialchars($row['Creación_Comentario']); ?></h4>
                         </div>
-                        <?php if ($esPropietario): ?>
+                        <?php if ($puedeEditar): ?>
                         <div class="menu-coment">
                             <button class="menu-btn" onclick="toggleMenu(<?php echo $row['ID_Comentario']; ?>)">⋮</button>
                             <div class="menu-contenido" id="opciones_<?php echo $row['ID_Comentario']; ?>" style="display:none;">
@@ -92,6 +105,7 @@ if ($evento_id > 0) {
                             $usuarios_like_res = $respuesta['usuarios_like_res'] ? explode(',', $respuesta['usuarios_like_res']) : []; 
                             $liked_respuesta = ($idUsuario && in_array($idUsuario, $usuarios_like_res));
                             $esPropietarioRespuesta = ($idUsuario == $respuesta['ID_Cliente']);
+                            $puedeEditarRespuesta = $esPropietarioRespuesta || $esAdmin; // Admin puede editar cualquier respuesta
                         ?>
                         
                         <div class="comentarios respuesta" id="respuesta_<?php echo $respuesta['comentario_responder']; ?>">
@@ -104,7 +118,7 @@ if ($evento_id > 0) {
                                         <h4><?php echo htmlspecialchars($respuesta['Nombre']); ?></h4>
                                         <h5><?php echo htmlspecialchars($respuesta['Creación_Respuesta']); ?></h5>
                                     </div>
-                                    <?php if ($esPropietarioRespuesta): ?>
+                                    <?php if ($puedeEditarRespuesta): ?>
                                     <div class="menu-coment">
                                         <button class="menu-btn" onclick="toggleMenuRes(<?php echo $respuesta['comentario_responder']; ?>)">⋮</button>
                                         <div class="menu-contenido" id="opciones_res_<?php echo $respuesta['comentario_responder']; ?>" style="display:none;">

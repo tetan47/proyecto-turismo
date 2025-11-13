@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - ¡Qué Viaje!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="css/manual.css">
+    <link rel="stylesheet" href="css/estructura_fundamental.css">
+</head>
+<body>
+    <header class="manual-header">
+        <div class="manual-header-inner">
+            <h1>
+                <span class="lang-es active">Manual de Usuario</span>
+                <span class="lang-en">User Manual</span>
+            </h1>
+            <div class="header-buttons">
+                <button class="language-toggle" onclick="toggleLanguage()">
+                    <i class="fas fa-language"></i>
+                    <span class="lang-es active">English</span>
+                    <span class="lang-en">Español</span>
+                </button>
+                <a href="index.php" class="manual-back">
+                    <i class="fas fa-home"></i>
+                    <span class="lang-es active">Volver</span>
+                    <span class="lang-en">Back</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="contenedor-manual">
+        <aside class="barra-lateral" id="barraLateral">
+            <h2>
+                <i class="fas fa-book"></i>
+                <span class="lang-es active">Índice</span>
+                <span class="lang-en">Index</span>
+            </h2>
+            <nav>
+                <ul>
+                    <li><a href="#introduccion" class="enlace-nav activo">
+                        <span class="lang-es active">Introducción</span>
+                        <span class="lang-en">Introduction</span>
+                    </a></li>
+                    <li><a href="#primeros-pasos" class="enlace-nav">
+                        <span class="lang-es active">Primeros Pasos</span>
+                        <span class="lang-en">Getting Started</span>
+                    </a></li>
+                    <li class="sub-item"><a href="#registro" class="enlace-nav">
+                        <span class="lang-es active">Registro</span>
+                        <span class="lang-en">Registration</span>
+                    </a></li>
+                    <li class="sub-item"><a href="#inicio-sesion" class="enlace-nav">
+                        <span class="lang-es active">Inicio de Sesión</span>
+                        <span class="lang-en">Login</span>
+                    </a></li>
+                    <li><a href="#usuarios" class="enlace-nav">
+                        <span class="lang-es active">Guía de Usuario</span>
+                        <span class="lang-en">User Guide</span>
+                    </a></li>
+                    <li class="sub-item"><a href="#explorar-eventos" class="enlace-nav">
+                        <span class="lang-es active">Eventos</span>
+                        <span class="lang-en">Events</span>
+                    </a></li>
+                    <li class="sub-item"><a href="#sitios-turisticos" class="enlace-nav">
+                        <span class="lang-es active">Sitios Turísticos</span>
+                        <span class="lang-en">Tourist Sites</span>
+                    </a></li>
+                    <li class="sub-item"><a href="#comentarios" class="enlace-nav">
+                        <span class="lang-es active">Comentarios</span>
+                        <span class="lang-en">Comments</span>
+                    </a></li>
+                    <li class="sub-item"><a href="#configuracion" class="enlace-nav">
+                        <span class="lang-es active">Configuración</span>
+                        <span class="lang-en">Settings</span>
+                    </a></li>
+                    <li><a href="#organizadores" class="enlace-nav">
+                        <span class="lang-es active">Para Organizadores</span>
+                        <span class="lang-en">For Organizers</span>
+                    </a></li>
+                    <li class="sub-item"><a href="#crear-evento" class="enlace-nav">
+                        <span class="lang-es active">Crear Eventos</span>
+                        <span class="lang-en">Create Events</span>
+                    </a></li>
+                    <li class="sub-item"><a href="#gestionar-eventos" class="enlace-nav">
+                        <span class="lang-es active">Mis Eventos</span>
+                        <span class="lang-en">My Events</span>
+                    </a></li>
+                    <li><a href="#faq" class="enlace-nav">
+                        <span class="lang-es active">Preguntas Frecuentes</span>
+                        <span class="lang-en">FAQ</span>
+                    </a></li>
+                    <li><a href="#soporte" class="enlace-nav">
+                        <span class="lang-es active">Contacto y Soporte</span>
+                        <span class="lang-en">Contact & Support</span>
+                    </a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="contenido">
+            <section id="introduccion">
+                <h2>
+                    <i class="fas fa-info-circle"></i>
+                    <span class="lang-es active">Bienvenido a ¡Qué Viaje!</span>
+                    <span class="lang-en">Welcome to ¡Qué Viaje!</span>
+                </h2>
+                
+                <p class="lang-es active">¡Qué Viaje! es tu plataforma para descubrir lo mejor de Salto, Uruguay. Encontrá eventos culturales, deportivos, gastronómicos y los mejores sitios turísticos de la región.</p>
+                <p class="lang-en">¡Qué Viaje! is your platform to discover the best of Salto, Uruguay. Find cultural, sports, and gastronomic events, along with the best tourist sites in the region.</p>
+
+                <h3>
+                    <span class="lang-es active">¿Qué vas a encontrar acá?</span>
+                    <span class="lang-en">What will you find here?</span>
+                </h3>
+                <ul class="lang-es active">
+                    <li>Eventos ordenados por fecha, categoría y ubicación</li>
+                    <li>Los mejores lugares turísticos para visitar</li>
+                    <li>Comunidad activa donde compartir experiencias</li>
+                    <li>Herramientas para organizar tus propios eventos</li>
+                    <li>Tu perfil personalizado</li>
+                </ul>
+                <ul class="lang-en">
+                    <li>Events sorted by date, category, and location</li>
+                    <li>The best tourist places to visit</li>
+                    <li>Active community to share experiences</li>
+                    <li>Tools to organize your own events</li>
+                    <li>Your personalized profile</li>
+                </ul>
+
+                <h3>
+                    <span class="lang-es active">Tipos de cuenta</span>
+                    <span class="lang-en">Account Types</span>
+                </h3>
+                <table class="lang-es active">
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Descripción</th>
+                        <th>Qué podés hacer</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Visitante</strong></td>
+                        <td>Sin registro</td>
+                        <td>Ver eventos y sitios turísticos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Usuario</strong></td>
+                        <td>Cuenta básica</td>
+                        <td>Comentar, dar likes y personalizar perfil</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Organizador</strong></td>
+                        <td>Con permisos especiales</td>
+                        <td>Crear y gestionar tus eventos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Administrador</strong></td>
+                        <td>Gestión del sitio</td>
+                        <td>Control total de la plataforma</td>
+                    </tr>
+                </table>
+                <table class="lang-en">
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>What you can do</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Visitor</strong></td>
+                        <td>No registration</td>
+                        <td>View events and tourist sites</td>
+                    </tr>
+                    <tr>
+                        <td><strong>User</strong></td>
+                        <td>Basic account</td>
+                        <td>Comment, like, and customize profile</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Organizer</strong></td>
+                        <td>Special permissions</td>
+                        <td>Create and manage your events</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Administrator</strong></td>
+                        <td>Site management</td>
+                        <td>Full platform control</td>
+                    </tr>
+                </table>
+
+                <div class="caja-info consejo">
+                    <strong>
+                        <i class="fas fa-lightbulb"></i>
+                        <span class="lang-es active">Tip:</span>
+                        <span class="lang-en">Tip:</span>
+                    </strong>
+                    <p class="lang-es active">Registrate para aprovechar todas las funciones de la plataforma. Es gratis y te lleva menos de un minuto.</p>
+                    <p class="lang-en">Register to take advantage of all platform features. It's free and takes less than a minute.</p>
+                </div>
+            </section>
+
+            <section id="primeros-pasos">
+                <h2>
+                    <i class="fas fa-rocket"></i>
+                    <span class="lang-es active">Primeros Pasos</span>
+                    <span class="lang-en">Getting Started</span>
+                </h2>
+
+                <h3 id="registro">
+                    <span class="lang-es active">Crear tu cuenta</span>
+                    <span class="lang-en">Create your account</span>
+                </h3>
+                <div class="pasos">
+                    <div class="paso">
+                        <strong class="lang-es active">Entrá a registrarte</strong>
+                        <strong class="lang-en">Go to register</strong>
+                        <p class="lang-es active">Hacé clic en "Registrarse" arriba a la derecha.</p>
+                        <p class="lang-en">Click on "Registrarse" at the top right.</p>
+                    </div>
+                    <div class="paso">
+                        <strong class="lang-es active">Completá tus datos</strong>
+                        <strong class="lang-en">Complete your information</strong>
+                        <p class="lang-es active">Te vamos a pedir:</p>
+                        <p class="lang-en">We'll ask you for:</p>
+                        <ul class="lang-es active">
+                            <li><strong>Nombre:</strong> Tu nombre real</li>
+                            <li><strong>Apellido:</strong> Tu apellido</li>
+                            <li><strong>Correo:</strong> Va a ser tu usuario</li>
+                            <li><strong>Contraseña:</strong> Mínimo 6 caracteres</li>
+                        </ul>
+                        <ul class="lang-en">
+                            <li><strong>Name:</strong> Your real name</li>
+                            <li><strong>Last name:</strong> Your last name</li>
+                            <li><strong>Email:</strong> This will be your username</li>
+                            <li><strong>Password:</strong> Minimum 6 characters</li>
+                        </ul>
+                    </div>
+                    <div class="paso">
+                        <strong class="lang-es active">Creá tu cuenta</strong>
+                        <strong class="lang-en">Create your account</strong>
+                        <p class="lang-es active">Dale a "Crear Cuenta" y listo.</p>
+                        <p class="lang-en">Click "Crear Cuenta" and you're done.</p>
+                    </div>
+                    <div class="paso">
+                        <strong class="lang-es active">Entrá a tu cuenta</strong>
+                        <strong class="lang-en">Access your account</strong>
+                        <p class="lang-es active">Usá tu correo y contraseña para acceder.</p>
+                        <p class="lang-en">Use your email and password to log in.</p>
+                    </div>
+                </div>
+
+                <div class="caja-info advertencia">
+                    <strong>
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span class="lang-es active">Importante:</span>
+                        <span class="lang-en">Important:</span>
+                    </strong>
+                    <p class="lang-es active">Tu correo tiene que ser válido y único. Una vez registrado, no lo vas a poder cambiar.</p>
+                    <p class="lang-en">Your email must be valid and unique. Once registered, you won't be able to change it.</p>
+                </div>
+
+                <h3 id="inicio-sesion">
+                    <span class="lang-es active">Iniciar sesión</span>
+                    <span class="lang-en">Log in</span>
+                </h3>
+                <div class="pasos">
+                    <div class="paso">
+                        <strong class="lang-es active">Clic en "Iniciar Sesión"</strong>
+                        <strong class="lang-en">Click "Iniciar Sesión"</strong>
+                        <p class="lang-es active">Lo encontrás en el header de la página.</p>
+                        <p class="lang-en">You'll find it in the page header.</p>
+                    </div>
+                    <div class="paso">
+                        <strong class="lang-es active">Ingresá tus datos</strong>
+                        <strong class="lang-en">Enter your information</strong>
+                        <ul class="lang-es active">
+                            <li>Tu correo electrónico</li>
+                            <li>Tu contraseña</li>
+                        </ul>
+                        <ul class="lang-en">
+                            <li>Your email</li>
+                            <li>Your password</li>
+                        </ul>
+                    </div>
+                    <div class="paso">
+                        <strong class="lang-es active">Entrá</strong>
+                        <strong class="lang-en">Enter</strong>
+                        <p class="lang-es active">Y ya estás dentro de tu cuenta.</p>
+                        <p class="lang-en">And you're in your account.</p>
+                    </div>
+                </div>
+
+                <div class="caja-info consejo">
+                    <strong>
+                        <i class="fas fa-lightbulb"></i>
+                        <span class="lang-es active">¿Olvidaste tu contraseña?</span>
+                        <span class="lang-en">Forgot your password?</span>
+                    </strong>
+                    <p class="lang-es active">Escribinos al correo que está en el footer y te ayudamos.</p>
+                    <p class="lang-en">Write to the email in the footer and we'll help you.</p>
+                </div>
+            </section>
+
+            <section id="usuarios">
+                <h2>
+                    <i class="fas fa-users"></i>
+                    <span class="lang-es active">Guía de Usuario</span>
+                    <span class="lang-en">User Guide</span>
+                </h2>
+
+                <h3 id="explorar-eventos">
+                    <span class="lang-es active">Cómo buscar eventos</span>
+                    <span class="lang-en">How to search for events</span>
+                </h3>
+                <p class="lang-es active">En el catálogo vas a encontrar todos los eventos disponibles en Salto.</p>
+                <p class="lang-en">In the catalog you'll find all available events in Salto.</p>
+
+                <h4>
+                    <span class="lang-es active">Usar los filtros</span>
+                    <span class="lang-en">Using filters</span>
+                </h4>
+                <ol class="lang-es active">
+                    <li>Andá a <strong>Catálogo de Eventos</strong> desde el menú</li>
+                    <li>Hacé clic en <strong>"Filtros"</strong></li>
+                    <li>Elegí lo que buscás:
+                        <ul>
+                            <li><strong>Buscar por nombre:</strong> Escribí el evento que querés encontrar</li>
+                            <li><strong>Por fecha:</strong> Elegí desde cuándo hasta cuándo</li>
+                            <li><strong>Por horario:</strong> Filtrá por hora de inicio y fin</li>
+                            <li><strong>Por categoría:</strong> Música, Deporte, Arte, Gastronomía, etc.</li>
+                        </ul>
+                    </li>
+                    <li>Dale a <strong>"Buscar"</strong></li>
+                    <li>Para borrar los filtros, tocá <strong>"Limpiar"</strong></li>
+                </ol>
+                <ol class="lang-en">
+                    <li>Go to <strong>Catálogo de Eventos</strong> from the menu</li>
+                    <li>Click on <strong>"Filtros"</strong></li>
+                    <li>Choose what you're looking for:
+                        <ul>
+                            <li><strong>Search by name:</strong> Type the event you want to find</li>
+                            <li><strong>By date:</strong> Choose from when to when</li>
+                            <li><strong>By time:</strong> Filter by start and end time</li>
+                            <li><strong>By category:</strong> Music, Sports, Art, Gastronomy, etc.</li>
+                        </ul>
+                    </li>
+                    <li>Click <strong>"Buscar"</strong></li>
+                    <li>To clear filters, click <strong>"Limpiar"</strong></li>
+                </ol>
+
+                <div class="caja-info exito">
+                    <strong>
+                        <i class="fas fa-check-circle"></i>
+                        <span class="lang-es active">Categorías:</span>
+                        <span class="lang-en">Categories:</span>
+                    </strong>
+                    <p class="lang-es active">Música, Deporte, Arte, Gastronomía, Historia, Cultura y Otros</p>
+                    <p class="lang-en">Music, Sports, Art, Gastronomy, History, Culture, and Others</p>
+                </div>
+
+                <h4>
+                    <span class="lang-es active">Ver la info de un evento</span>
+                    <span class="lang-en">View event information</span>
+                </h4>
+                <p class="lang-es active">Hacé clic en <strong>"Ver Detalles"</strong> en cualquier evento para ver:</p>
+                <p class="lang-en">Click <strong>"Ver Detalles"</strong> on any event to see:</p>
+                <ul class="lang-es active">
+                    <li>Título y descripción completa</li>
+                    <li>Cuándo y a qué hora es</li>
+                    <li>Dónde es exactamente</li>
+                    <li>Qué tipo de evento es</li>
+                    <li>Quién lo organiza</li>
+                    <li>Los comentarios de otros usuarios</li>
+                </ul>
+                <ul class="lang-en">
+                    <li>Title and full description</li>
+                    <li>When and at what time</li>
+                    <li>Exact location</li>
+                    <li>Event type</li>
+                    <li>Who organizes it</li>
+                    <li>Comments from other users</li>
+                </ul>
+
+                <h3 id="sitios-turisticos">
+                    <span class="lang-es active">Lugares para visitar</span>
+                    <span class="lang-en">Places to visit</span>
+                </h3>
+                <p class="lang-es active">Descubrí los mejores sitios turísticos de Salto.</p>
+                <p class="lang-en">Discover the best tourist sites in Salto.</p>
+
+                <h4>
+                    <span class="lang-es active">Qué vas a encontrar</span>
+                    <span class="lang-en">What you'll find</span>
+                </h4>
+                <ul class="lang-es active">
+                    <li>Naturaleza</li>
+                    <li>Termas</li>
+                    <li>Recreativos</li>
+                    <li>Gastronómicos</li>
+                    <li>Históricos</li>
+                    <li>Culturales</li>
+                    <li>Alojamiento</li>
+                    <li>Rutas y Miradores</li>
+                    <li>Deportivos</li>
+                    <li>Otros</li>
+                </ul>
+                <ul class="lang-en">
+                    <li>Nature</li>
+                    <li>Hot Springs</li>
+                    <li>Recreation</li>
+                    <li>Gastronomy</li>
+                    <li>Historical</li>
+                    <li>Cultural</li>
+                    <li>Accommodation</li>
+                    <li>Routes and Viewpoints</li>
+                    <li>Sports</li>
+                    <li>Others</li>
+                </ul>
+
+                <h4>
+                    <span class="lang-es active">Ver en el mapa</span>
+                    <span class="lang-en">View on map</span>
+                </h4>
+                <p class="lang-es active">En cada sitio turístico podés hacer clic en <strong>"Ver mapa"</strong> para ver exactamente dónde queda.</p>
+                <p class="lang-en">On each tourist site you can click <strong>"Ver mapa"</strong> to see exactly where it's located.</p>
+
+                <h3 id="comentarios">
+                    <span class="lang-es active">Comentá y compartí tu experiencia</span>
+                    <span class="lang-en">Comment and share your experience</span>
+                </h3>
+                <p class="lang-es active">Contale a otros usuarios qué te pareció un evento o lugar.</p>
+                <p class="lang-en">Tell other users what you thought of an event or place.</p>
+
+                <h4>
+                    <span class="lang-es active">Dejar un comentario</span>
+                    <span class="lang-en">Leave a comment</span>
+                </h4>
+                <div class="pasos">
+                    <div class="paso">
+                        <strong class="lang-es active">Tenés que estar logueado</strong>
+                        <strong class="lang-en">You must be logged in</strong>
+                        <p class="lang-es active">Si no tenés cuenta, creá una primero.</p>
+                        <p class="lang-en">If you don't have an account, create one first.</p>
+                    </div>
+                    <div class="paso">
+                        <strong class="lang-es active">Entrá al evento o sitio</strong>
+                        <strong class="lang-en">Enter the event or site</strong>
+                        <p class="lang-es active">Andá a la página de detalles.</p>
+                        <p class="lang-en">Go to the details page.</p>
+                    </div>
+                    <div class="paso">
+                        <strong class="lang-es active">Bajá a la sección de comentarios</strong>
+                        <strong class="lang-en">Scroll down to the comments section</strong>
+                        <p class="lang-es active">Vas a ver tu foto de perfil y nombre.</p>
+                        <p class="lang-en">You'll see your profile picture and name.</p>
+                    </div>
+                    <div class="paso">
+                        <strong class="lang-es active">Escribí tu comentario</strong>
+                        <strong class="lang-en">Write your comment</strong>
+                        <p class="lang-es active">Máximo 500 caracteres.</p>
+                        <p class="lang-en">Maximum 500 characters.</p>
+                    </div>
+                    <div class="paso">
+                        <strong class="lang-es active">Dale a "Enviar"</strong>
+                        <strong class="lang-en">Click "Enviar"</strong>
+                        <p class="lang-es active">Tu comentario aparece al toque.</p>
+                        <p class="lang-en">Your comment appears instantly.</p>
+                    </div>
+                </div>
+
+                <h4>
+                    <span class="lang-es active">Editar o borrar comentarios</span>
+                    <span class="lang-en">Edit or delete comments</span>
+                </h4>
+                <p class="lang-es active">Solo podés modificar tus propios comentarios.</p>
+                <p class="lang-en">You can only modify your own comments.</p>
+                <ol class="lang-es active">
+                    <li>Hacé clic en los <strong>tres puntos (⋮)</strong> de tu comentario</li>
+                    <li>Elegí <strong>"Editar"</strong> o <strong>"Eliminar"</strong></li>
+                    <li>Si editás, modificá el texto y dale <strong>"Guardar"</strong></li>
+                    <li>Si eliminás, confirmá que querés borrarlo</li>
+                </ol>
+                <ol class="lang-en">
+                    <li>Click the <strong>three dots (⋮)</strong> on your comment</li>
+                    <li>Choose <strong>"Editar"</strong> or <strong>"Eliminar"</strong></li>
+                    <li>If editing, modify the text and click <strong>"Guardar"</strong></li>
+                    <li>If deleting, confirm you want to remove it</li>
+                </ol>
+
+                <h4>
+                    <span class="lang-es active">Responder comentarios</span>
+                    <span class="lang-en">Reply to comments</span>
+                </h4>
+                <ol class="lang-es active">
+                    <li>Tocá <strong>"Responder"</strong> debajo del comentario</li>
+                    <li>Escribí tu respuesta</li>
+                    <li>Dale a <strong>"Enviar respuesta"</strong></li>
+                </ol>
+                <ol class="lang-en">
+                    <li>Click <strong>"Responder"</strong> below the comment</li>
+                    <li>Write your reply</li>
+                    <li>Click <strong>"Enviar respuesta"</strong></li>
+                </ol>
+
+                <h4>
+                    <span class="lang-es active">Dar likes</span>
+                    <span class="lang-en">Give likes</span>
+                </h4>
+                <p class="lang-es active">Si te gustó un comentario, dale like.</p>
+                <p class="lang-en">If you liked a comment, give it a like.</p>
+                <ul class="lang-es active">
+                    <li>Hacé clic en el <strong>corazón (♥)</strong></li>
+                    <li>Se pone rojo si ya le diste like</li>
+                    <li>Volvé a hacer clic para sacarlo</li>
+                </ul>
+                <ul class="lang-en">
+                    <li>Click the <strong>heart (♥)</strong></li>
+                    <li>It turns red if you already liked it</li>
+                    <li>Click again to remove it</li>
+                </ul>
+
+                <div class="caja-info advertencia">
+                    <strong>
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span class="lang-es active">Ojo:</span>
+                        <span class="lang-en">Attention:</span>
+                    </strong>
+                    <p class="lang-es active">Para dar likes tenés que estar logueado. Los visitantes solo pueden leer.</p>
+                    <p class="lang-en">To give likes you must be logged in. Visitors can only read.</p>
+                </div>
+
+                <h3 id="configuracion">
+                    <span class="lang-es active">Tu perfil y configuración</span>
+                    <span class="lang-en">Your profile and settings</span>
+                </h3>
+                <p class="lang-es active">Personalizá tu cuenta como quieras.</p>
+                <p class="lang-en">Customize your account as you want.</p>
+
+                <h4>
+                    <span class="lang-es active">Entrar a configuración</span>
+                    <span class="lang-en">Access settings</span>
+                </h4>
+                <ol class="lang-es active">
+                    <li>Hacé clic en el <strong>menú (☰)</strong> arriba</li>
+                    <li>Elegí <strong>"Mi Perfil"</strong> o <strong>"Configuración"</strong></li>
+                </ol>
+                <ol class="lang-en">
+                    <li>Click the <strong>menu (☰)</strong> at the top</li>
+                    <li>Choose <strong>"Mi Perfil"</strong> or <strong>"Configuración"</strong></li>
+                </ol>
+
+                <h4>
+                    <span class="lang-es active">Editar perfil</span>
+                    <span class="lang-en">Edit profile</span>
+                </h4>
+                <p class="lang-es active">Podés cambiar:</p>
+                <p class="lang-en">You can change:</p>
+                <ul class="lang-es active">
+                    <li><strong>Nombre:</strong> Máximo 20 caracteres</li>
+                    <li><strong>Apellido:</strong> Máximo 20 caracteres</li>
+                    <li><strong>Foto de perfil:</strong> URL de tu imagen (opcional)</li>
+                </ul>
+                <ul class="lang-en">
+                    <li><strong>Name:</strong> Maximum 20 characters</li>
+                    <li><strong>Last name:</strong> Maximum 20 characters</li>
+                    <li><strong>Profile picture:</strong> Your image URL (optional)</li>
+                </ul>
+
+                <h4>
+                    <span class="lang-es active">Cambiar contraseña</span>
+                    <span class="lang-en">Change password</span>
+                </h4>
+                <div class="pasos">
+                    <div class="paso">
+                        <strong class="lang-es active">Verificá tu identidad</strong>
+                        <strong class="lang-en">Verify your identity</strong>
+                        <p class="lang-es active">Ingresá tu contraseña actual.</p>
+                        <p class="lang-en">Enter your current password.</p>
+                    </div>
+                    <div class="paso">
+                        <strong class="lang-es active">Nueva contraseña</strong>
+                        <strong class="lang-en">New password</strong>
+                        <p class="lang-es active">Escribí la nueva (mínimo 8 caracteres).</p>
+                        <p class="lang-en">Write the new one (minimum 8 characters).</p>
+                    </div>
+                    <div class="paso">
+                        <strong class="lang-es active">Confirmá</strong>
+                        <strong class="lang-en">Confirm</strong>
+                        <p class="lang-es active">Volvé a escribir la nueva contraseña.</p>
+                        <p class="lang-en">Re-enter the new password.</p>
+                    </div>
+                    <div class="paso">
+                        <strong class="lang-es active">Guardá</strong>
+                        <strong class="lang-en">Save</strong>
+                        <p class="lang-es active">Dale a "Cambiar contraseña".</p>
+                        <p class="lang-en">Click "Cambiar contraseña".</p>
+                    </div>
+                </div>
+
+                <div class="caja-info advertencia">
+                    <strong>
+                        <i class="fas fa-lock"></i>
+                        <span class="lang-es active">Seguridad:</span>
+                        <span class="lang-en">Security:</span>
+                    </strong>
+                    <p class="lang-es active">El correo NO se puede cambiar por seguridad.</p>
+                    <p class="lang-en">The email CANNOT be changed for security reasons.</p>
+                </div>
+            </section>
+
+            <section id="organizadores">
+                <h2>
+                    <i class="fas fa-calendar-plus"></i>
+                    <span class="lang-es active">Para Organizadores</span>
+                    <span class="lang-en">For Organizers</span>
+                </h2>
+
+                <h3>
+                    <span class="lang-es active">Hacerte organizador</span>
+                    <span class="lang-en">Become an organizer</span>
+                </h3>
+                <p class="lang-es active">Si querés publicar tus propios eventos, necesitás ser organizador.</p>
+                <p class="lang-en">If you want to publish your own events, you need to be an organizer.</p>
+                <ol class="lang-es active">
+                    <li>Ingresá a tu cuenta</li>
+                    <li>Abrí el menú de usuario (☰)</li>
+                    <li>Elegí <strong>"Convertirse en Organizador"</strong></li>
+                    <li>Completá el formulario con tus datos (incluida la cédula)</li>
+                    <li>Una vez aprobado, podés crear eventos</li>
+                </ol>
+                <ol class="lang-en">
+                    <li>Log into your account</li>
+                    <li>Open the user menu (☰)</li>
+                    <li>Choose <strong>"Convertirse en Organizador"</strong></li>
+                    <li>Complete the form with your information (including ID)</li>
+                    <li>Once approved, you can create events</li>
+                </ol>
+
+                <h3 id="crear-evento">
+                    <span class="lang-es active">Publicar un evento</span>
+                    <span class="lang-en">Publish an event</span>
+                </h3>
+                <p class="lang-es active">Compartí tus actividades con toda la comunidad.</p>
+                <p class="lang-en">Share your activities with the entire community.</p>
+
+                <div class="pasos">
+                    <div class="paso">
+                        <strong class="lang-es active">Entrá a "Crear Evento"</strong>
+                        <strong class="lang-en">Go to "Crear Evento"</strong>
+                        <p class="lang-es active">Desde el menú de usuario → "Crear Evento"</p>
+                        <p class="lang-en">From the user menu → "Crear Evento"</p>
+                    </div>
+                    <div class="paso">
+                        <strong class="lang-es active">Completá la información</strong>
+                        <strong class="lang-en">Fill in the information</strong>
+                        <p class="lang-es active">Los campos con <span style="color: red;">*</span> son obligatorios:</p>
+                        <p class="lang-en">Fields with <span style="color: red;">*</span> are required:</p>
+                        <ul class="lang-es active">
+                            <li><strong>Título:</strong> Nombre del evento (máx. 50 caracteres)</li>
+                            <li><strong>Descripción:</strong> Contá de qué se trata (máx. 200 caracteres)</li>
+                            <li><strong>Categoría:</strong> Elegí la que corresponda</li>
+                            <li><strong>Ubicación:</strong> Dirección o lugar (máx. 50 caracteres)</li>
+                            <li><strong>Fecha inicio:</strong> Cuándo arranca</li>
+                            <li><strong>Fecha fin:</strong> Cuándo termina</li>
+                            <li><strong>Hora:</strong> A qué hora empieza</li>
+                            <li><strong>Capacidad:</strong> Cuánta gente entra (1-100,000)</li>
+                            <li><strong>Imagen:</strong> Foto del evento (opcional)</li>
+                        </ul>
+                        <ul class="lang-en">
+                            <li><strong>Title:</strong> Event name (max. 50 characters)</li>
+                            <li><strong>Description:</strong> What it's about (max. 200 characters)</li>
+                            <li><strong>Category:</strong> Choose the appropriate one</li>
+                            <li><strong>Location:</strong> Address or place (max. 50 characters)</li>
+                            <li><strong>Start date:</strong> When it starts</li>
+                            <li><strong>End date:</strong> When it ends</li>
+                            <li><strong>Time:</strong> What time it starts</li>
+                            <li><strong>Capacity:</strong> How many people (1-100,000)</li>
+                            <li><strong>Image:</strong> Event photo (optional)</li>
+                        </ul>
+                    </div>
+                    <div class="paso">
+                        <strong class="lang-es active">Subir foto (opcional)</strong>
+                        <strong class="lang-en">Upload photo (optional)</strong>
+                        <p class="lang-es active">Formatos: JPG, JPEG, PNG, GIF, WEBP</p>
+                        <p class="lang-en">Formats: JPG, JPEG, PNG, GIF, WEBP</p>
+                        <p class="lang-es active">Tamaño máximo: 5MB</p>
+                        <p class="lang-en">Maximum size: 5MB</p>
+                    </div>
+                    <div class="paso">
+                        <strong class="lang-es active">Publicá</strong>
+                        <strong class="lang-en">Publish</strong>
+                        <p class="lang-es active">Dale a "Crear Evento" y listo.</p>
+                        <p class="lang-en">Click "Crear Evento" and you're done.</p>
+                    </div>
+                </div>
+
+                <div class="caja-info consejo">
+                    <strong>
+                        <i class="fas fa-lightbulb"></i>
+                        <span class="lang-es active">Consejo:</span>
+                        <span class="lang-en">Tip:</span>
+                    </strong>
+                    <p class="lang-es active">Usá fotos llamativas y descripciones claras. Así tu evento se destaca.</p>
+                    <p class="lang-en">Use eye-catching photos and clear descriptions. This way your event stands out.</p>
+                </div>
+
+                <h3 id="gestionar-eventos">
+                    <span class="lang-es active">Ver tus eventos</span>
+                    <span class="lang-en">View your events</span>
+                </h3>
+                <p class="lang-es active">Administrá todos los eventos que creaste.</p>
+                <p class="lang-en">Manage all the events you created.</p>
+
+                <h4>
+                    <span class="lang-es active">Entrar a "Mis Eventos"</span>
+                    <span class="lang-en">Access "Mis Eventos"</span>
+                </h4>
+                <ol class="lang-es active">
+                    <li>Abrí el menú de usuario (☰)</li>
+                    <li>Tocá <strong>"Mis Eventos"</strong></li>
+                    <li>Vas a ver todos tus eventos publicados</li>
+                </ol>
+                <ol class="lang-en">
+                    <li>Open the user menu (☰)</li>
+                    <li>Click <strong>"Mis Eventos"</strong></li>
+                    <li>You'll see all your published events</li>
+                </ol>
+
+                <h4>
+                    <span class="lang-es active">Ver detalles</span>
+                    <span class="lang-en">View details</span>
+                </h4>
+                <p class="lang-es active">Hacé clic en <strong>"Ver Detalles"</strong> para entrar a la página completa del evento y ver comentarios.</p>
+                <p class="lang-en">Click <strong>"Ver Detalles"</strong> to enter the full event page and see comments.</p>
+            </section>
+
+            <section id="faq">
+                <h2>
+                    <i class="fas fa-question-circle"></i>
+                    <span class="lang-es active">Preguntas Frecuentes</span>
+                    <span class="lang-en">Frequently Asked Questions</span>
+                </h2>
+
+                <h4 class="lang-es active">Olvidé mi contraseña, ¿qué hago?</h4>
+                <h4 class="lang-en">I forgot my password, what do I do?</h4>
+                <p class="lang-es active">Por ahora no hay recuperación automática. Escribinos al correo del footer y te ayudamos.</p>
+                <p class="lang-en">There's no automatic recovery for now. Write to the email in the footer and we'll help you.</p>
+
+                <h4 class="lang-es active">¿Puedo cambiar mi correo?</h4>
+                <h4 class="lang-en">Can I change my email?</h4>
+                <p class="lang-es active">No, por seguridad el correo no se puede modificar.</p>
+                <p class="lang-en">No, for security reasons the email cannot be modified.</p>
+
+                <h4 class="lang-es active">¿Cómo subo una imagen a mi evento?</h4>
+                <h4 class="lang-en">How do I upload an image to my event?</h4>
+                <p class="lang-es active">En el formulario de crear evento, dale a "Elegir archivo" y seleccioná una imagen de tu dispositivo (máx. 5MB).</p>
+                <p class="lang-en">In the create event form, click "Elegir archivo" and select an image from your device (max. 5MB).</p>
+
+                <h4 class="lang-es active">Mi evento no aparece</h4>
+                <h4 class="lang-en">My event doesn't appear</h4>
+                <p class="lang-es active">Revisá que todos los campos obligatorios estén completos. Si sigue sin aparecer, contactanos.</p>
+                <p class="lang-en">Check that all required fields are complete. If it still doesn't appear, contact us.</p>
+
+                <h4 class="lang-es active">¿Puedo eliminar mi cuenta?</h4>
+                <h4 class="lang-en">Can I delete my account?</h4>
+                <p class="lang-es active">Escribinos a soporte para solicitar la eliminación de tu cuenta.</p>
+                <p class="lang-en">Write to support to request account deletion.</p>
+
+                <h4 class="lang-es active">¿Cómo reporto un comentario inapropiado?</h4>
+                <h4 class="lang-en">How do I report an inappropriate comment?</h4>
+                <p class="lang-es active">Contactanos con el link del evento y los detalles del comentario.</p>
+                <p class="lang-en">Contact us with the event link and comment details.</p>
+            </section>
+
+            <section id="soporte">
+                <h2>
+                    <i class="fas fa-headset"></i>
+                    <span class="lang-es active">Contacto y Soporte</span>
+                    <span class="lang-en">Contact & Support</span>
+                </h2>
+                <p class="lang-es active">¿Tenés algún problema o duda? Acá estamos para ayudarte:</p>
+                <p class="lang-en">Do you have any problems or questions? We're here to help:</p>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=tibaware@gmail.com&su=Consulta%20desde%20%C2%A1Qu%C3%A9%20Viaje!&body=Hola%2C%20te%20contacto%20desde%20la%20plataforma%20%C2%A1Qu%C3%A9%20Viaje!" target="_blank" rel="noopener noreferrer">
+                    <strong>
+                        <span class="lang-es active">Enviar correo a: Tibaware@gmail.com (Abrir en Gmail)</span>
+                        <span class="lang-en">Send email to: Tibaware@gmail.com (Open in Gmail)</span>
+                    </strong>
+                </a>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        let currentLang = 'es';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            
+            // Toggle all language elements
+            document.querySelectorAll('.lang-es, .lang-en').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            document.querySelectorAll(`.lang-${currentLang}`).forEach(el => {
+                el.classList.add('active');
+            });
+
+            // Update search input value and placeholder
+            const searchInput = document.getElementById('buscarInput');
+            searchInput.value = ''; // Clear the input
+            if (currentLang === 'es') {
+                searchInput.placeholder = 'Buscar en el manual...';
+            } else {
+                searchInput.placeholder = 'Search in manual...';
+            }
+        }
+
+        // Navigation highlighting
+        const navLinks = document.querySelectorAll('.enlace-nav');
+        const sections = document.querySelectorAll('section');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('activo');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('activo');
+                }
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('buscarInput');
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const contentSections = document.querySelectorAll('.contenido section');
+            
+            contentSections.forEach(section => {
+                const text = section.textContent.toLowerCase();
+                if (text.includes(searchTerm) || searchTerm === '') {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
+        });
+
+        // Smooth scroll
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>

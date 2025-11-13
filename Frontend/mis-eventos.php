@@ -55,36 +55,48 @@ $resultado_eventos = $stmt_eventos->get_result();
 
     <section class="contenedormiseventos">
         <h1>Mis Eventos</h1>
-    <?php
-    if ($resultado_eventos->num_rows > 0) {
-        echo "<p><strong>Total de eventos: {$resultado_eventos->num_rows}</strong></p>";
+        <?php
+        if ($resultado_eventos->num_rows > 0) {
+            echo "<p><strong>Total de eventos: {$resultado_eventos->num_rows}</strong></p>";
 
-        while ($evento = $resultado_eventos->fetch_assoc()) {
-            echo '<div class="evento">';
-            echo '<div class="img-evento">';
-            echo '<img src="' . htmlspecialchars($evento['imagen']) . '" alt="Imagen Evento" />';
-            echo '</div>';
-            echo '<div class="info-evento">';
-            echo '<h3>' . htmlspecialchars($evento['Título']) . '</h3>';
-            echo '<p>' . htmlspecialchars($evento['Fecha_Inicio']) . ' - ' . htmlspecialchars($evento['Hora']) . '</p>';
-            echo '<p>' . htmlspecialchars($evento['categoria']) . '</p>';
-            echo '<a href="evento.php?id=' . urlencode($evento['ID_Evento']) . '" class="boton-ver-detalles">Ver Detalles</a>';
-            echo '</div>';
-            echo '</div>';
+            while ($evento = $resultado_eventos->fetch_assoc()) {
+                echo '<div class="evento">';
+                echo '<div class="img-evento">';
+                echo '<img src="' . htmlspecialchars($evento['imagen']) . '" alt="Imagen Evento" />';
+                echo '</div>';
+                echo '<div class="info-evento">';
+                echo '<h3>' . htmlspecialchars($evento['Título']) . '</h3>';
+                echo '<p>' . htmlspecialchars($evento['Fecha_Inicio']) . ' - ' . htmlspecialchars($evento['Hora']) . '</p>';
+                echo '<p>' . htmlspecialchars($evento['categoria']) . '</p>';
+                
+                // Botón Ver Detalles
+                echo '<a href="evento.php?id=' . urlencode($evento['ID_Evento']) . '" class="boton-ver-detalles">Ver Detalles</a>';
+                
+                // Botón Editar
+                echo '<a href="EditarEvento.php?id=' . intval($evento['ID_Evento']) . '" class="boton-ver-detalles" style="background-color: #ffa500;">Editar</a>';
+                
+                // Formulario Eliminar
+                echo '<form action="../backend/eventos/eliminarevento.php" method="POST" style="display:inline-block; margin-top:10px;" onsubmit="return confirm(\'¿Estás seguro de que quieres eliminar este evento?\');">';
+                echo '<input type="hidden" name="id" value="' . intval($evento['ID_Evento']) . '">';
+                echo '<button type="submit" style="background-color: #ff4444; width: 100%;">Eliminar</button>';
+                echo '</form>';
+                
+                echo '</div>';
+                echo '</div>';
+            }
+
+        } else {
+            echo "<p style='text-align: center; color: #999;'>No tienes eventos publicados aún.</p>";
+            echo "<a href='crear_eventos.php' style='display: inline-block; margin-top: 20px; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 4px;'>Crear primer evento</a>";
         }
 
-    }else {
-        echo "<p style='text-align: center; color: #999;'>No tienes eventos publicados aún.</p>";
-        echo "<a href='crear_eventos.php' style='display: inline-block; margin-top: 20px; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 4px;'>Crear primer evento</a>";
-    }
-
         $stmt_eventos->close();
-    ?>
-    </section>
-        <?php
-        include("footer.html");
         ?>
-    
+    </section>
+    <?php
+    include("footer.html");
+    ?>
+
 </body>
 
 </html>

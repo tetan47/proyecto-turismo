@@ -82,8 +82,6 @@ $esAdmin = $usuarioLogueado ? esAdmin($conn) : false;
                     <?php if ($esAdmin): ?>
                         <!-- Opciones de ADMINISTRADOR -->
                         <a href="panel-administracion.php">🛡️ Panel de Administración</a>
-                        <a href="gestionar-usuarios.php">👥 Gestionar Usuarios</a>
-                        <a href="gestionar-eventos.php">📅 Gestionar Eventos</a>
                         
                     <?php elseif ($esOrganizador): ?>
                         <!-- Opciones de ORGANIZADOR -->
@@ -98,7 +96,7 @@ $esAdmin = $usuarioLogueado ? esAdmin($conn) : false;
                     <!-- Opciones comunes para todos los usuarios logueados -->
                     <hr style="margin: 10px 0; border: none; border-top: 1px solid #ccc;">
                     <a href="configuracion.php?tab=perfil">👤 Mi Perfil</a>
-                    <a href="configuracion.php?tab=cuenta">⚙️ Configuración</a>
+                    <a href="configuracion.php?tab=cuenta">- ⚙️ Configuración</a>
                     <button type="button" class="btn-cerrar" onclick="cerrarSesion()">🚪 Cerrar Sesión</button>
                 </div>    
             </div>

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-11-2025 a las 16:19:13
+-- Tiempo de generación: 13-11-2025 a las 03:51:57
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -92,10 +92,11 @@ INSERT INTO `cliente` (`ID_Cliente`, `Nombre`, `Apellido`, `Correo`, `Contraseñ
 (1, 'Lucía', 'Pérez', 'lucia.perez@gmail.com', 'lucia123', '2025-06-01', 'https://images.pexels.com/photos/29026195/pexels-photo-29026195/free-photo-of-mujer-serena-relajandose-junto-al-rio.jpeg', 0),
 (2, 'Carlos', 'Gómez', 'carlos.gomez@gmail.com', 'carlos456', '2025-06-02', NULL, 0),
 (4, 'Keylor', 'Navarro', 'keylornava23@gmail.com', 'keylor123', '2025-10-03', 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png', 0),
-(5, 'Cristian', 'Castro', 'crisgoku@gmail.com', 'cristian123', '2025-10-03', 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png', 0),
-(6, 'Anna', 'López', 'ana.lopez@gmail.com', 'adminana', '2025-10-03', 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png', 0),
+(5, 'Cristian', 'Castro', 'crisgoku@gmail.com', 'cristian123', '2025-10-03', 'https://www.angrybirds.com/wp-content/uploads/2022/05/optimized-ABCOM_202203_CharacterDimensio_Bomb_Movie.png', 0),
+(6, 'Anna', 'López', 'ana.lopez@gmail.com', 'adminana', '2025-10-03', 'https://pbs.twimg.com/media/Elms009X0AIUSsd.jpg', 0),
 (7, 'pedro', 'gallino', 'pedrogallino@gmail.com', 'pedrogallino', '2025-10-03', 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png', 0),
-(8, 'Jorge', 'Martinez', 'jorge.martinez@gmail.com', 'adminjorge', '2025-10-20', 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png', 0);
+(8, 'Jorge', 'Martinez', 'jorge.martinez@gmail.com', 'adminjorge', '2025-10-20', 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png', 0),
+(9, 'luis', 'pascal', 'coso@gmail.com', 'coso1234', '2025-11-12', 'https://cdn-icons-png.flaticon.com/512/6378/6378141.png', 0);
 
 -- --------------------------------------------------------
 
@@ -128,8 +129,7 @@ INSERT INTO `comentarios` (`ID_Comentario`, `ID_Cliente`, `ID_Evento`, `ID_Sitio
 (10, 1, 1, NULL, 1, 'me gustó mucho xd .', '2025-09-15 16:33:19', NULL, '1'),
 (12, 1, 1, NULL, 0, 'pruebas', '2025-09-17 10:55:35', NULL, NULL),
 (14, 5, 1, NULL, 0, 'Así era ella', '2025-10-03 11:14:29', NULL, ''),
-(15, 5, NULL, 2, 1, 'Fui con mi perra y me corrieron 😞', '2025-10-09 10:59:42', NULL, '5'),
-(17, 5, NULL, 5, 0, 'Qué se hace?', '2025-10-09 12:29:27', NULL, NULL);
+(15, 5, NULL, 2, 1, 'Fui con mi perra y me corrieron 😞', '2025-10-09 10:59:42', NULL, '5');
 
 -- --------------------------------------------------------
 
@@ -200,6 +200,7 @@ CREATE TABLE `organizadores` (
 
 INSERT INTO `organizadores` (`Cedula`, `Teléfono`, `Aprobado`, `ID_Cliente`) VALUES
 ('12345678', '099111222', 1, 1),
+('36130360', '098095757', 0, 9),
 ('87654321', '098222111', 1, 2),
 ('87654351', '098222111', 0, 5);
 
@@ -355,7 +356,7 @@ ALTER TABLE `administradores`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `ID_Cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID_Cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `comentarios`
@@ -367,7 +368,7 @@ ALTER TABLE `comentarios`
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
-  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `ID_Evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT de la tabla `respondercomentario`

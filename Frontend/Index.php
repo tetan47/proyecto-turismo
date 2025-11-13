@@ -16,6 +16,33 @@
   <!-- HEADER -->
   <?php
     include('header.php');
+    include('../backend/Conexion.php');
+
+    $totalEventos = 0;
+    $totalSitios = 0;
+    $totalUsuarios = 0;
+    
+    // Consulta a la bd para contar eventos
+    $resultEventos = $conn->query("SELECT COUNT(*) as total FROM eventos");
+    if ($resultEventos) {
+        $rowEventos = $resultEventos->fetch_assoc();
+        $totalEventos = $rowEventos['total'];
+    }
+    
+    // Consulta a la bd para contar sitios turísticos
+    $resultSitios = $conn->query("SELECT COUNT(*) as total FROM sitioturistico");
+    if ($resultSitios) {
+        $rowSitios = $resultSitios->fetch_assoc();
+        $totalSitios = $rowSitios['total'];
+    }
+    
+    // Consulta ala bd para contar usuarios (clientes no bloqueados)
+    $resultUsuarios = $conn->query("SELECT COUNT(*) as total FROM cliente WHERE bloquear = 0");
+    if ($resultUsuarios) {
+        $rowUsuarios = $resultUsuarios->fetch_assoc();
+        $totalUsuarios = $rowUsuarios['total'];
+    }
+
   ?>
 
   <section class="hero">
@@ -32,15 +59,15 @@
       </div>
       <div class="hero-stats">
         <div class="stat">
-          <span class="stat-number">0</span>
+          <span class="stat-number"><?php echo $totalEventos; ?></span>
           <span class="stat-label">Eventos publicados</span>
         </div>
         <div class="stat">
-          <span class="stat-number">30+</span>
+          <span class="stat-number"><?php echo $totalSitios; ?>+</span>
           <span class="stat-label">Lugares turísticos</span>
         </div>
         <div class="stat">
-          <span class="stat-number">0</span>
+          <span class="stat-number"><?php echo $totalUsuarios; ?></span>
           <span class="stat-label">Usuarios activos</span>
         </div>
       </div>

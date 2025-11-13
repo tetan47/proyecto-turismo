@@ -82,8 +82,6 @@ $esAdmin = $usuarioLogueado ? esAdmin($conn) : false;
                     <?php if ($esAdmin): ?>
                         <!-- Opciones de ADMINISTRADOR -->
                         <a href="panel-administracion.php">🛡️ Panel de Administración</a>
-                        <a href="gestionar-usuarios.php">- 👥 Gestionar Usuarios</a>
-                        <a href="gestionar-eventos.php">- 📅 Gestionar Eventos</a>
                         
                     <?php elseif ($esOrganizador): ?>
                         <!-- Opciones de ORGANIZADOR -->

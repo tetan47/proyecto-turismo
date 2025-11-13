@@ -424,72 +424,6 @@ body {
   font-size: 0.95rem;
 }
 
-/* TESTIMONIOS - CORREGIDO */
-.testimonios {
-  padding: 80px 20px;
-  background: #1E293B;
-}
-
-.testimonios h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 50px;
-}
-
-.testimonios-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  max-width: 1200px;
-  margin: 10px;
-  margin: 0 auto;
-}
-
-.testimonio {
-  background: rgba(28, 28, 28, 0.85);
-  margin: 15px;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
-  border: 2px solid rgba(157, 77, 248, 0.3);
-}
-
-.testimonio:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(157, 77, 248, 0.4);
-}
-
-.testimonio-header {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
-.testimonio-header img {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.testimonio-header h4 {
-  margin: 0;
-  font-size: 1.1rem;
-}
-
-.testimonio-rol {
-  font-size: 0.9rem;
-  display: block;
-}
-
-.testimonio p {
-  line-height: 1.6;
-  font-style: italic;
-  margin-bottom: 15px;
-}
-
 /* CTA SECTION */
 .cta {
   padding: 80px 20px;
@@ -550,6 +484,7 @@ body {
 /* PRÓXIMOS EVENTOS */
 .proximos-eventos {
   padding: 80px 20px;
+  background-color:rgb(38, 37, 64);
 }
 
 .proximos-eventos h2 {

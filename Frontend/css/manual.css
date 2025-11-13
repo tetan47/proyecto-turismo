@@ -9,6 +9,11 @@ body {
     font-family: Arial, sans-serif;
     color: #ffffff;
     min-height: 100vh;
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 /* Header centrado y contenido alineado */
@@ -35,12 +40,13 @@ body {
     color: #9d4df8;
 }
 
-.manual-actions {
+/* Botones del header */
+.header-buttons {
     display: flex;
-    gap: 12px;
+    gap: 10px;
 }
 
-.manual-back, .manual-translate {
+.manual-back, .language-toggle {
     color: #ffffff;
     background: rgba(255,255,255,0.06);
     padding: 8px 12px;
@@ -49,17 +55,17 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    text-decoration: none;
     cursor: pointer;
+    text-decoration: none;
     transition: all 0.3s ease;
 }
 
-.manual-back:hover, .manual-translate:hover {
+.manual-back:hover, .language-toggle:hover {
     background: rgba(157, 77, 248, 0.2);
-    transform: translateY(-2px);
+    border-color: rgba(157, 77, 248, 0.3);
 }
 
-.manual-back i, .manual-translate i {
+.manual-back i, .language-toggle i {
     font-size: 0.95rem;
 }
 
@@ -70,6 +76,8 @@ body {
     margin: 0 auto;
     padding: 20px;
     gap: 30px;
+    position: relative;
+    min-height: calc(100vh - 100px);
 }
 
 /* BARRA LATERAL - SCROLL ARREGLADO */
@@ -84,6 +92,7 @@ body {
     align-self: flex-start;
     max-height: calc(100vh - 40px);
     overflow-y: auto;
+    z-index: 10;
 }
 
 .barra-lateral::-webkit-scrollbar {
@@ -165,6 +174,17 @@ body {
     border: 2px solid rgba(157, 77, 248, 0.3);
     border-radius: 10px;
     padding: 40px;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: visible;
+}
+
+.contenido section {
+    margin-bottom: 40px;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 .contenido h2 {
@@ -214,6 +234,10 @@ body {
     padding: 15px;
     margin: 20px 0;
     border-radius: 8px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
 }
 
 .caja-info.advertencia {
@@ -235,6 +259,10 @@ body {
     color: #9d4df8;
     display: block;
     margin-bottom: 5px;
+}
+
+.caja-info p {
+    margin: 0;
 }
 
 /* PASOS */
@@ -268,8 +296,12 @@ body {
 /* TABLA */
 table {
     width: 100%;
+    max-width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
+    display: table;
+    table-layout: fixed;
+    word-wrap: break-word;
 }
 
 table th,
@@ -277,6 +309,8 @@ table td {
     border: 1px solid rgba(157, 77, 248, 0.3);
     padding: 12px;
     text-align: left;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 table th {
@@ -287,6 +321,43 @@ table th {
 
 table tr:hover {
     background: rgba(157, 77, 248, 0.1);
+}
+
+/* SISTEMA DE IDIOMAS */
+.lang-es, .lang-en {
+    display: none !important;
+}
+
+.lang-es.active, .lang-en.active {
+    display: block !important;
+}
+
+span.lang-es, span.lang-en {
+    display: none !important;
+}
+
+span.lang-es.active, span.lang-en.active {
+    display: inline !important;
+}
+
+strong.lang-es, strong.lang-en {
+    display: none !important;
+}
+
+strong.lang-es.active, strong.lang-en.active {
+    display: block !important;
+}
+
+h2 span.lang-es, h2 span.lang-en,
+h3 span.lang-es, h3 span.lang-en,
+h4 span.lang-es, h4 span.lang-en {
+    display: none !important;
+}
+
+h2 span.lang-es.active, h2 span.lang-en.active,
+h3 span.lang-es.active, h3 span.lang-en.active,
+h4 span.lang-es.active, h4 span.lang-en.active {
+    display: inline !important;
 }
 
 /* BOTÓN MENÚ MÓVIL */
@@ -363,18 +434,11 @@ table tr:hover {
         align-items: flex-start;
         gap: 10px;
     }
-    
-    .manual-actions {
-        width: 100%;
-        justify-content: space-between;
-    }
-    
     .barra-lateral {
         position: relative;
         width: 100%;
         max-height: none;
     }
-    
     .contenedor-manual {
         flex-direction: column;
         padding: 12px;
@@ -398,8 +462,14 @@ table tr:hover {
         font-size: 1.1rem;
     }
     
-    .manual-back, .manual-translate {
+    .header-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .manual-back, .language-toggle {
         padding: 6px 10px;
-        font-size: 0.9rem;
+        width: 100%;
+        justify-content: center;
     }
 }
